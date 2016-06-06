@@ -7,10 +7,44 @@ module.exports = function (db) {
 
     db.define('user', {
         email: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        first_name: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        last_name: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        gender: {
+            type: Sequelize.ENUM("F", "M")
+        },
+        address1: {
             type: Sequelize.STRING
         },
-        password: {
+        address2: {
             type: Sequelize.STRING
+        },
+        city: {
+            type: Sequelize.STRING
+        },
+        state: {
+            type: Sequelize.STRING
+        },
+        zip: {
+            type: Sequelize.STRING
+        },
+        country: {
+            type: Sequelize.STRING
+        },
+        phone: {
+            type: Sequelize.STRING
+        },
+        profile_pic: {
+            type: Sequelize.STRING,
+            defaultValue: "http://api.randomuser.me/portraits/men/59.jpg"
         },
         salt: {
             type: Sequelize.STRING
@@ -23,6 +57,10 @@ module.exports = function (db) {
         },
         google_id: {
             type: Sequelize.STRING
+        },
+        isAdmin : {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     }, {
         instanceMethods: {
