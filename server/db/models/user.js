@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('user', {
+    return db.define('user', {
         email: {
             type: Sequelize.STRING
         },
@@ -57,4 +57,3 @@ module.exports = function (db) {
 
 
 };
-
