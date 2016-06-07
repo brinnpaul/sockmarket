@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
 	$stateProvider.state('user', {
-		url: '/user/:userId',
+		url: 'user/:userId',
 		templateUrl: '/js/user/user-profile.html',
 		controller: 'UserCtrl',
 		resolve: {
