@@ -4,12 +4,15 @@ var _ = require('lodash');
 var Sequelize = require('sequelize');
 
 module.exports = function (db) {
-  db.define('sock', {
+  return db.define('sock', {
     complete: {
       type: Sequelize.BOOLEAN
     },
+    image: {
+      type: Sequelize.STRING
+    },
     tags: {
-      type: Sequelize.ARRAY // define values allowed in array
+      type: Sequelize.ARRAY(Sequelize.TEXT) // define values allowed in array
     },
     description: {
       type: Sequelize.STRING // How to limit char length

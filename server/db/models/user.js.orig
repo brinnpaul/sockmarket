@@ -6,9 +6,11 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-
+<<<<<<< HEAD
     return db.define('user', {
-
+=======
+     db.define('user', {
+>>>>>>> master
         email: {
             type: Sequelize.STRING,
             allowNull: false

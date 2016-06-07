@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Sequelize = require('sequelize');
 
 module.exports = function (db) {
-  db.define('review', {
+  return db.define('review', {
     date: {
       type: Sequelize.DATE
     },
