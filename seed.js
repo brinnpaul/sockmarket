@@ -27,12 +27,17 @@ var seedUsers = function () {
     var users = [
         {
             email: 'testing@fsa.com',
-            password: 'password'
+            password: 'password',
+            first_name: "first",
+            last_name: "test"
         },
         {
             email: 'obama@gmail.com',
-            password: 'potus'
+            password: 'potus',
+            first_name: "barack",
+            last_name: "obama"
         }
+
     ];
 
     var creatingUsers = users.map(function (userObj) {
