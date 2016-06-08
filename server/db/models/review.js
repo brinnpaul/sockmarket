@@ -9,7 +9,7 @@ module.exports = function (db) {
       type: Sequelize.DATE
     },
     text: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING(2000)
     }
   })
 }
