@@ -8,6 +8,7 @@ router.use('/review', require('./review/review'))
 
 router.use('/user', require('./user.js'));
 
+router.use('/search', require('./search/search'))
 
 // Make sure this is after all of
 // the registered routes!

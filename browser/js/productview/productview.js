@@ -16,10 +16,12 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('sockViewController', function ($scope, ProductViewFactory, ReviewFactory) {
+app.controller('sockViewController', function ($scope, SockFactory, ReviewFactory, mostRecentSocks) {
+
+  $scope.mostRecentSocks = mostRecentSocks
 
   $scope.setSock = function(sockId) {
-    return ProductViewFactory.singleSock(sockId) // return?
+    return SockFactory.singleSock(sockId) // return?
     .then(function(sock) {
       $scope.sock = sock
     })
@@ -62,10 +64,10 @@ app.controller('sockViewController', function ($scope, ProductViewFactory, Revie
 
 });
 
-app.controller('sockIdController', function ($scope, $stateParams, ProductViewFactory) {
+app.controller('sockIdController', function ($scope, $stateParams, SockFactory) {
 
   $scope.setSock = function(sockId) {
-    return ProductViewFactory.singleSock(sockId) // return?
+    return SockFactory.singleSock(sockId) // return?
     .then(function(sock) {
       $scope.sock = sock
       console.log(sock);
@@ -73,7 +75,7 @@ app.controller('sockIdController', function ($scope, $stateParams, ProductViewFa
   }
 
   // $scope.setReviews = function(sockId) {
-  //   return ProductViewFactory.productReviews(sockId)
+  //   return SockFactory.productReviews(sockId)
   //   .then(function(reviews) {
   //     $scope.reviews = reviews
   //   })
