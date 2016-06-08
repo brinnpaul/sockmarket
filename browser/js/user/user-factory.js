@@ -2,8 +2,9 @@ app.factory('UserFactory', function ($http) {
 	var UserFactory = {};
 
 	UserFactory.fetchById = function (id) {
-		$http.get('/api/user/' + id)
+		return $http.get('/api/user/' + id)
 		.then(function (response) {
+            console.log("factory", response.data)
 			return response.data
 		})
 	}
@@ -14,4 +15,6 @@ app.factory('UserFactory', function ($http) {
 			return response.data
 		})
 	}
+
+	return UserFactory;
 })

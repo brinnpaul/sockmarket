@@ -1,7 +1,79 @@
-<div>
+		<div class="container">
+			<div class="user-name-background">
+			<h1>{{user.first_name}} {{user.last_name}}</h1>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="user-info">
+					<img ng-src="{{ user.profile_pic }}" alt="{{user.first_name}} {{user.last_name}}" id="profile-pic">
+					<hr>
+					<ul>
+						<li id="username-text">@Ben</li>
+						<li>Member since {{user.createdAt}}</li>
+						<li>Hometown: {{user.city}}, {{user.state}}, {{user.country}}</li>
+						<li>0 socks posted</li>
+					</ul>
+					<hr>
+					</div>
+
+				</div>
+				<div class="col-md-9">
+					<!-- <h2>Socks</h2> -->
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+					<div class="sock-thumbnail">
+						<img src="socks.jpg">
+					</div>
+				</div>
+			</div>
+			<hr>
+		</div>
+
+
+
+
+
+
+
+
+
+<!-- <div>
 
 	<div>
+        <img height="300" ng-src="{{ user.profile_pic }}" />
+        {{user.first_na}}
 		profile picture + basic info
+	</div>
+
+	<div>
+        {{user.first_name}}
+        {{user.last_name}}
 	</div>
 
 	<div>
@@ -13,3 +85,4 @@
 	</div>
 
 </div>
+ -->
