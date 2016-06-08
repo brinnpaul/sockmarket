@@ -31,3 +31,10 @@ router.get('/:userId', function (req, res, next) {
 	res.send(req.userById);
 })
 
+router.post('/', function(req, res, next) {
+  User.create(req.body)
+  .then(function(newUser) {
+    res.send(newUser)
+  })
+  .catch(next)
+})

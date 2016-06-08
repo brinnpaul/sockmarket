@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>{{Title}}</h1>
+  <h1>{{sock.title}}</h1>
   <hr>
   <div class="row">
     <div class="col-md-8">
@@ -7,9 +7,10 @@
     </div>
     <div class="col-md-4">
       <div class="info-box">
-        <h3>Price: $4.99</h3>
-        <p><span>Designed by:</span></p>
-        <p><span>Description:</span></p>
+        <h3>Price: {{sock.price}}</h3>
+        <p><span>Designed by</span> {{sock.user.username}}</p>
+        <p><span>Description:</span> {{sock.description}}</p>
+        <!-- !!! add tags to sock view !!!!-->
         <hr>
         <button class="btn">Add to Cart</button>
         <div>
@@ -26,68 +27,32 @@
   <hr>
   <div class="review-container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" ng-repeat="review in reviews">
         <div class="review">
           <div class="title-bar">
             <div>
-            <img src="http://placehold.it/38x38">
+            <img src="{{review.user.profile_pic}}">
             </div>
             <div>
               <ul>
-                <li>Henry Socks</li>
-                <li>@mrsocks</li>
+                <li>{{review.user.first_name}} {{review.user.last_name}}</li>
+                <li>{{review.user.username}}</li>
               </ul>
             </div>
           </div>
           <div class="review-body">
-            <p>I think these are great socks. I would definitely pay 3.99 to buy them, but 4.99 is too expensive for me, personally.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="review">
-          <div class="title-bar">
-            <div>
-            <img src="http://placehold.it/38x38">
-            </div>
-            <div>
-              <ul>
-                <li>John Lorem</li>
-                <li>@dummytext</li>
-              </ul>
-            </div>
-          </div>
-          <div class="review-body">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="review">
-          <div class="title-bar">
-            <div>
-            <img src="http://placehold.it/38x38">
-            </div>
-            <div>
-              <ul>
-                <li>Todd Ipsum</li>
-                <li>@whatever</li>
-              </ul>
-            </div>
-          </div>
-          <div class="review-body">
-            <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>{{review.text}}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="new-review">
-    <form>
-    <textarea placeholder="Have an opinion about these cool socks? Share it!"></textarea>
-    <button>Submit</button>
+    <form method="post">
+      <textarea ng-model="reviewText" placeholder="Have an opinion about these cool socks? Share it!"></textarea>
+<!-- when button pressed, should execute the postReview function -->
+    <button ng-click="newReview()">Submit</button>
     </form>
   </div>
 </div>
