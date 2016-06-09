@@ -5,8 +5,6 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports = function (app, db) {
 
     var User = db.model('user');
-    var Order = db.model('order')
-    var OrderDetail = db.model('order_detail')
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
@@ -32,9 +30,9 @@ module.exports = function (app, db) {
 
     // A POST /login route is created to handle login.
     app.post('/login', function (req, res, next) {
-
+        // console.log("here is the req obj", req);
         var authCb = function (err, user) {
-            console.log("USER", user)
+            // console.log("USER", user)
             if (err) return next(err);
 
             if (!user) {
@@ -43,25 +41,13 @@ module.exports = function (app, db) {
                 return next(error);
             }
 
-
+            // could possibly add session in or around here
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
+
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 // add these all to non-local authentication
-                Order.findOne({where:{userId:user.id, paid_date: null}})
-                .then(function(previous) {
-                  if(previous) {
-                    Order.findOne({where: {sessionId: req.session.passport.user, paid_date: null}})
-                    .then(function(current){
-                      OrderDetail.updateAttribute({orderId:current.id}, {where:{orderId:previous.id}})
-                    })
-                  }else {
-                    Order.update({userId: user.id}, {where: {sessionId: req.session.passport.user, paid_date: null}})          
-                  }
-                })
-                .catch(next)
-                // .then(function() {})
                 res.status(200).send({
                     user: user.sanitize()
                 });
