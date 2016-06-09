@@ -12,14 +12,15 @@ app.factory('OrderFactory', function($http) {
         return order.data
       })
     },
-    updateItem: function() {
-      return $http.put('/api/order')
+    updateItem: function(obj) {
+      console.log(obj)
+      return $http.put('/api/order', obj)
       .then(function(item) {
         return item.data
       })
     },
     deleteItem: function() {
-      return $http.delete('/api/delete')
+      return $http.delete('/api/order')
       .then(function(item) {
         return item.data
       })
