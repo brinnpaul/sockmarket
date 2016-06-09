@@ -19,8 +19,8 @@ app.factory('OrderFactory', function($http) {
         return item.data
       })
     },
-    deleteItem: function() {
-      return $http.delete('/api/order')
+    deleteItem: function(itemId) {
+      return $http.delete('/api/order/'+itemId)
       .then(function(item) {
         return item.data
       })

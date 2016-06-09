@@ -2,20 +2,25 @@ app.controller('cartCurrent', function ($scope, OrderFactory, currentCart) {
 
   $scope.currentCart = currentCart
 
-  $scope.update = function(item, quantity) {
+  $scope.update = function(item, amount) {
     var sock = {
-      quantity: quantity,
+      quantity: amount,
       id: item.id
     }
     return OrderFactory.updateItem(sock)
     .then(function(res){
       console.log("herere", res)
-      item.quantity = quantity;
+      item.quantity = amount;
+      $scope.amount = null
     })
   }
 
-  $scope.delete = function() {
-    return OrderFactory.deleteItem
+  $scope.delete = function(item) {
+
+    return OrderFactory.deleteItem(item.id)
+    .then(function(item_deleted) {
+      console.log(item_deleted)
+    })
   }
 
 })
