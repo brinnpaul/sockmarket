@@ -1,0 +1,56 @@
+
+<style>
+
+.title-background {
+	background-color: #E3CF57;
+/*	background-color: #00EE00;*/
+	border-radius: 5px;
+}
+
+.title-background h1 {
+	color: white;
+	/*margin-left: 20px;*/
+	text-align: center;
+	padding: 4px;
+}
+
+.results-content {
+	background-color: #FAFAFA;
+	min-height: 100px;
+}
+
+.sock-thumbnail {
+	background-color: #F0F0F0;
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+}
+
+.sock-thumbnail:hover {
+	background-color: #C6E2FF;
+	cursor: pointer;
+}
+
+.sock-thumbnail img {
+	border-radius: 5px;
+	height: 180px;
+	width: 180px;
+	display: block;
+	margin: 10px auto auto auto;
+}
+
+</style>
+
+<div class="container">
+  <div class="results-content" ng-repeat="item in currentCart">
+    <h3>{{item.sock.title}}</h3>
+    <!-- <img src="{{item.sock.image}}"/> -->
+    <img src="http://placehold.it/90x90"/>
+    <div>{{item.sock.description}}</div>
+    <div>{{item.sock.price}}</div>
+    <form>
+      <input type="text" ng-model="quantity"/>
+      <button type="submit" class="btn" ng-click="update(item, quantity)">Change Order Quantity</button>
+    </form>
+  </div>
+</div>
