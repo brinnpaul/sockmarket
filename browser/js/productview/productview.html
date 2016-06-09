@@ -12,7 +12,9 @@
         <p><span>Description:</span> {{sock.description}}</p>
         <!-- !!! add tags to sock view !!!!-->
         <hr>
-        <button class="btn">Add to Cart</button>
+        <input ng-model="quantity" placeholder="Always buy more than you need"/>
+        <div ng-show="alerting">You have to add at least one!</div>
+        <button ng-click="addItem()" >Add to Cart</button>
         <div>
           <button>Thumbs Up</button>
           <button>Thumbs Down</button>

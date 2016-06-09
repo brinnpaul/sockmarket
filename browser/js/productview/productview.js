@@ -48,7 +48,18 @@ app.controller('sockIdController', function ($scope, $stateParams, theSock, theR
 
   $scope.sock = theSock;
   $scope.reviews = theReviews;
+  $scope.alert = function() {
+    $scope.alerting = !$scope.alerting
+  }
 
+  $scope.addItem = function() {
+    var item = {}
+    item.sockId = $scope.sock.id
+    item.quantity = +$scope.quantity
+    console.log(item)
+    if (item.quantity > 0) return OrderFactory.addToCart(item)
+    //else $scope.alert()
+  }
 
   $scope.newReview = function() {
     var newReview = {

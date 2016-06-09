@@ -4,6 +4,7 @@ var session = require('express-session');
 var passport = require('passport');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+
 var ENABLED_AUTH_STRATEGIES = [
     'local',
     //'twitter',
@@ -18,6 +19,8 @@ module.exports = function (app, db) {
     });
 
     var User = db.model('user');
+    var Order = db.model('order')
+    var OrderDetail = db.model('order_detail')
 
     dbStore.sync();
 
@@ -34,10 +37,30 @@ module.exports = function (app, db) {
     // Initialize passport and also allow it to read
     // the request session information.
     app.use(passport.initialize());
-    app.use(passport.session());
+
+    var sessionId
+
+    app.use(passport.session(), function(req, res, next) {
+      sessionId = req.session.id
+      next()
+    });
 
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
     passport.serializeUser(function (user, done) {
+
+        Order.findOne({where:{userId:user.id, paid_date: null}})
+        .then(function(previous) {
+          if(previous) {
+            Order.findOne({where: {sessionId: sessionId, paid_date: null}})
+            .then(function(current){
+              OrderDetail.updateAttribute({orderId:current.id}, {where:{orderId:previous.id}})
+            })
+          }else {
+            Order.update({userId: user.id}, {where: {sessionId: sessionId, paid_date: null}})
+          }
+        })
+        .catch(done)
+
         done(null, user.id);
     });
 
