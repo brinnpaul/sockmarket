@@ -16,7 +16,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('sockViewController', function ($scope, ProductViewFactory, ReviewFactory) {
+app.controller('sockViewController', function ($scope, ProductViewFactory, ReviewFactory, OrderFactory) {
 
   $scope.setSock = function(sockId) {
     return ProductViewFactory.singleSock(sockId) // return?
@@ -34,6 +34,19 @@ app.controller('sockViewController', function ($scope, ProductViewFactory, Revie
 
   $scope.setSock(1);
   $scope.setReviews(1);
+
+  $scope.alert = function() {
+    $scope.alerting = !$scope.alerting
+  }
+
+  $scope.addItem = function() {
+    var item = {}
+    item.sockId = $scope.sock.id
+    item.quantity = +$scope.quantity
+    console.log(item)
+    if (item.quantity > 0) return OrderFactory.addToCart(item)
+    //else $scope.alert()
+  }
 
   $scope.newReview = function() {
     var newReview = {

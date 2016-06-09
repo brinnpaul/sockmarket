@@ -20,6 +20,7 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
+var Sock = db.model('sock')
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -28,12 +29,14 @@ var seedUsers = function () {
         {
             email: 'testing@fsa.com',
             password: 'password',
+            username: '@test',
             first_name: "first",
             last_name: "test"
         },
         {
             email: 'obama@gmail.com',
             password: 'potus',
+            username: '@obama',
             first_name: "barack",
             last_name: "obama"
         }
@@ -48,9 +51,35 @@ var seedUsers = function () {
 
 };
 
+var seedSocks = function () {
+  var socks = [
+    {
+        title: 'socks',
+        description: 'great socks',
+        tags: 'awesome affordable',
+        userId: 1
+    },
+    {
+      title: 'sockz: return of the socks',
+      description: 'crazy drama about socks wearing socks',
+      tags: 'drama sockz',
+      userId: 2
+    }
+  ]
+
+  var creatingSocks = socks.map(function(sockObj) {
+    return Sock.create(sockObj)
+  })
+
+  return Promise.all(creatingSocks)
+}
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
+    })
+    .then(function() {
+      return seedSocks()
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
