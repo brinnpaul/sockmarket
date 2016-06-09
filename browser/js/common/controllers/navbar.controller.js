@@ -5,14 +5,14 @@ app.controller('navbarCtrl', function ($scope, $state, SearchFactory) {
 		// .then(function(results){
 		// 	$scope.results = results;
 		// 	console.log(results);
-			$state.go('searchResults', {searchTerms: searchTerms});
+			return $state.go('searchResults', {searchTerms: searchTerms});
 		// })
 	}
 })
 
-app.controller('searchCtrl', function ($scope, $state, allResults) {
+app.controller('searchCtrl', function ($scope, $state, allResults, $stateParams) {
 	$scope.results = allResults;
-	$scope.logResults = function(){
-		console.log(allResults);
+	$scope.seeSock = function (id) {
+		$state.go('singleSockView', {id: id})
 	}
 })

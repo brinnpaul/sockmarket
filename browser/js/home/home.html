@@ -56,6 +56,7 @@
 
 .sock-thumbnail:hover {
 	background-color: #C6E2FF;
+	cursor: pointer;
 }
 
 .sock-thumbnail img {
@@ -87,29 +88,8 @@
 						<div class="col-md-9">
 							<div class="content">
 								<!-- hardcoded -->
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
+								<div class="sock-thumbnail"ng-repeat="sock in mostRecentSocks" ng-click="seeSock(sock.id)">
+									<img src="{{sock.image}}">
 								</div>
 							</div>
 						</div>

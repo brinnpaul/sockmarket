@@ -29,6 +29,7 @@
 
 .sock-thumbnail:hover {
 	background-color: #C6E2FF;
+	cursor: pointer;
 }
 
 .sock-thumbnail img {
@@ -46,14 +47,14 @@
 	</div>
 
 	<hr>
-	<h2 ng-click="logResults()">Search Results: {{results[0]}}</h2>
+	<h2>Search Results: {{results.length}} Found</h2>
 	<hr>
 
 	<div class="results-content" ng-repeat="result in results">
 	<!-- <p>{{result}}</p> -->
 
-		<div class="sock-thumbnail">
-			<img src="{{result.image}}">
+		<div ng-click="seeSock(result.id)" class="sock-thumbnail">
+			<img ng-src="{{result.image}}">
 		</div>
 <!-- 		<div class="sock-thumbnail">
 			<img src="socks.jpg">
