@@ -1,4 +1,4 @@
-app.factory('ProductViewFactory', function ($http) {
+app.factory('SockFactory', function ($http) {
 
   return {
     singleSock: function(sockId) {
@@ -6,6 +6,13 @@ app.factory('ProductViewFactory', function ($http) {
       .then(function(res) {
         return res.data
       })
+    },
+
+    mostRecentSocks: function () {
+    	return $http.get('/api/sock/recent')
+    	.then(function(res) {
+    		return res.data
+    	})
     }
 
   }

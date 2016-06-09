@@ -1,18 +1,28 @@
-<nav class="navbar navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
+<div ng-controller="navbarCtrl">
+    <nav class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <fullstack-logo></fullstack-logo>
+            </div>
+            <ul class="nav navbar-nav">
+                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                    <div></div>
+                </li>
+            </ul>
+            <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+            <div class="panel input-group">
+              <input type="text" class="form-control" placeholder="by name" ng-model="searchText">
+              <button ng-click="search(searchText)">Submit</button>
+            </div>
+    <!--         <div class="list-group">
+              <div class="list-group-item" ng-repeat="artist in artists | filter: { name: nameSearch }">
+              <a ui-sref="artist({artistId: artist.id})">{{ artist.name }}</a>
+            </div>  -->       
+            <div ng-show="user" class="welcome">
+                <span>Welcome, {{ user.username }}!</span>
+                <a ng-click="logout()">Logout</a>
+            </div>
         </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-                <div></div>
-            </li>
-        </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}! user id{{user.id}}</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
-    </div>
-</nav>
+    </nav>
+</div>

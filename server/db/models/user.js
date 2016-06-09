@@ -21,6 +21,10 @@ module.exports = function (db) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        username: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         first_name: {
             type: Sequelize.STRING,
             allowNull: false
@@ -55,7 +59,7 @@ module.exports = function (db) {
         },
         profile_pic: {
             type: Sequelize.STRING,
-            defaultValue: "http://api.randomuser.me/portraits/men/59.jpg"
+            defaultValue: "http://api.randomuser.me/portraits/men/62.jpg"
         },
         salt: {
             type: Sequelize.STRING
