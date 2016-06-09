@@ -13,6 +13,14 @@ app.factory('SockFactory', function ($http) {
     	.then(function(res) {
     		return res.data
     	})
+    },
+
+    saveDesign: function (newSockDataObj) {
+      return $http.post('/api/sock/', newSockDataObj)
+    },
+
+    prepareTags: function (tagInput) {
+      return tagInput.split(',');
     }
 
   }

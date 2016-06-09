@@ -35,8 +35,6 @@ router.get('/:id', function(req, res, next) {
   .catch(next)
 })
 
-
-
 router.post('/', function(req, res, next) {
   Sock.create(req.body)
   .then(function(newSock) {
