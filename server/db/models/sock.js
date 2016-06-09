@@ -38,5 +38,18 @@ module.exports = function (db) {
 
       }
     }
-  })
+  },
+
+  {
+    hooks: {
+
+      beforeCreate: function () {
+        var titleTerms = this.title.split(' ')
+        this.tags.push(titleTerms)
+      }
+
+    }
+  }
+
+  )
 }

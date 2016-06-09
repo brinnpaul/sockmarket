@@ -1,0 +1,76 @@
+<div class="container">
+	
+<style>
+
+.title-background {
+	background-color: #E3CF57; 
+/*	background-color: #00EE00;*/
+	border-radius: 5px;
+}
+
+.title-background h1 {
+	color: white;
+	/*margin-left: 20px;*/
+	text-align: center;
+	padding: 4px;
+}
+
+.results-content {
+	background-color: #FAFAFA;
+	min-height: 600px;
+}
+
+.sock-thumbnail {
+	background-color: #F0F0F0;
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+}
+
+.sock-thumbnail:hover {
+	background-color: #C6E2FF;
+	cursor: pointer;
+}
+
+.sock-thumbnail img {
+	border-radius: 5px;
+	height: 180px;
+	width: 180px;
+	display: block;
+	margin: 10px auto auto auto;
+}
+
+</style>
+
+	<div class="title-background">
+		<h1>The Sock Market</h1>
+	</div>
+
+	<hr>
+	<h2>Search Results: {{results.length}} Found</h2>
+	<hr>
+
+	<div class="results-content" ng-repeat="result in results">
+	<!-- <p>{{result}}</p> -->
+
+		<div ng-click="seeSock(result.id)" class="sock-thumbnail">
+			<img ng-src="{{result.image}}">
+		</div>
+<!-- 		<div class="sock-thumbnail">
+			<img src="socks.jpg">
+		</div>
+		<div class="sock-thumbnail">
+			<img src="socks.jpg">
+		</div>
+		<div class="sock-thumbnail">
+			<img src="socks.jpg">
+		</div>
+		<div class="sock-thumbnail">
+			<img src="socks.jpg">
+		</div> -->
+	</div>
+
+	<hr>
+
+
+</div>

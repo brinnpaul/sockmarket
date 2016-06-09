@@ -1,39 +1,54 @@
-app.config(function ($stateProvider) {
+// app.controller('sockViewController', function ($scope, SockFactory, ReviewFactory) {
 
-    // Register our *about* state.
-    $stateProvider.state('socks', {
-        url: '/socks',
-        controller: 'sockViewController',
-        templateUrl: 'js/productview/productview.html'
-    });
+//   $scope.setSock = function(sockId) {
+//     return SockFactory.singleSock(sockId) // return?
+//     .then(function(sock) {
+//       $scope.sock = sock
+//     })
+//   }
 
-    $stateProvider.state('socks.sockId', {
-      url:'/socks/:id',
-      controller: 'sockIdController',
-      templateUrl: 'js/productview/productview.html'
+//   $scope.setReviews = function(sockId) {
+//     return ReviewFactory.productReviews(sockId)
+//     .then(function(reviews) {
+//       $scope.reviews = reviews
+//     })
+//   }
 
-    })
+//   $scope.setSock(1);
+//   $scope.setReviews(1);
 
-});
+//   $scope.newReview = function() {
+//     var newReview = {
+//       text: $scope.reviewText,
+//       sockId: $scope.sock.id
+//     }
+//     return ReviewFactory.postReview(newReview)
+//     .then(function(newReview){
+//       var review = {};
+//       review.user = {};
 
-app.controller('sockViewController', function ($scope, ProductViewFactory, ReviewFactory) {
+//         review.user.first_name = newReview.user.first_name;
+//         review.user.last_name = newReview.user.last_name;
+//         review.user.profile_pic = newReview.user.profile_pic;
+//         review.user.username = newReview.user.username;
+//         review.text = newReview.review.text;
 
-  $scope.setSock = function(sockId) {
-    return ProductViewFactory.singleSock(sockId) // return?
-    .then(function(sock) {
-      $scope.sock = sock
-    })
-  }
+//       $scope.reviews.push(review);
+//       $scope.reviewText = null;
+//     })
+//   }
 
-  $scope.setReviews = function(sockId) {
-    return ReviewFactory.productReviews(sockId)
-    .then(function(reviews) {
-      $scope.reviews = reviews
-    })
-  }
+//   $scope.alreadyPosted = function() {
+//     // add in after finishing other stuff
+//   }
 
-  $scope.setSock(1);
-  $scope.setReviews(1);
+// });
+
+app.controller('sockIdController', function ($scope, $stateParams, theSock, theReviews, ReviewFactory) {
+
+  $scope.sock = theSock;
+  $scope.reviews = theReviews;
+
 
   $scope.newReview = function() {
     var newReview = {
@@ -62,24 +77,27 @@ app.controller('sockViewController', function ($scope, ProductViewFactory, Revie
 
 });
 
-app.controller('sockIdController', function ($scope, $stateParams, ProductViewFactory) {
+app.config(function ($stateProvider) {
 
-  $scope.setSock = function(sockId) {
-    return ProductViewFactory.singleSock(sockId) // return?
-    .then(function(sock) {
-      $scope.sock = sock
-      console.log(sock);
+    // Register our *about* state.
+    // $stateProvider.state('socks', {
+    //     url: '/socks',
+    //     controller: 'sockViewController',
+    //     templateUrl: 'js/productview/productview.html'
+    // });
+
+    $stateProvider.state('singleSockView', {
+      url:'/socks/:id',
+      controller: 'sockIdController',
+      templateUrl: 'js/productview/productview.html',
+      resolve: {
+        theSock: function ($stateParams, SockFactory) {
+          return SockFactory.singleSock($stateParams.id)
+        },
+        theReviews: function ($stateParams, ReviewFactory) {
+          return ReviewFactory.productReviews($stateParams.id)
+        }
+      }
     })
-  }
-
-  // $scope.setReviews = function(sockId) {
-  //   return ProductViewFactory.productReviews(sockId)
-  //   .then(function(reviews) {
-  //     $scope.reviews = reviews
-  //   })
-  // }
-
-  $scope.setSock($stateParams.id);
-  // $scope.setReviews(3);
 
 });

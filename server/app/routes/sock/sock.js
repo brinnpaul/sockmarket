@@ -7,6 +7,20 @@ var User = db.model("user")
 
 module.exports = router;
 
+router.get('/recent', function(req, res, next) {
+  return Sock.findAll({
+    limit: 10,
+    order: [
+      ['updatedAt', 'DESC']
+    ]
+    }
+  )
+  .then(function(sock) {
+    res.json(sock)
+  })
+  .catch(next)
+})
+
 router.get('/:id', function(req, res, next) {
   var sockId = req.params.id
   return Sock.findById(sockId
@@ -20,6 +34,8 @@ router.get('/:id', function(req, res, next) {
   })
   .catch(next)
 })
+
+
 
 router.post('/', function(req, res, next) {
   Sock.create(req.body)
