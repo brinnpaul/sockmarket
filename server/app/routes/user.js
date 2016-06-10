@@ -26,8 +26,6 @@ router.get('/all', function (req, res, next) {
 
 
 router.get('/:userId', function (req, res, next) {
-	console.log('------->WE ARE HERE')
-	//res.send('hello')
 	res.send(req.userById);
 })
 
