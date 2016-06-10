@@ -8,6 +8,14 @@ app.factory('SockFactory', function ($http) {
       })
     },
 
+    sockByUserId: function(userId) {
+      return $http.get('/api/sock/byUser/' + userId)
+      .then(function(res) {
+        console.log('fetched', res.data)
+        return res.data
+      })
+    },
+
     mostRecentSocks: function () {
     	return $http.get('/api/sock/recent')
     	.then(function(res) {
@@ -20,7 +28,11 @@ app.factory('SockFactory', function ($http) {
     },
 
     prepareTags: function (tagInput) {
-      return tagInput.split(',');
+      return tagInput.split(' ').map(function(e) {
+        e = e.replace(/,/i, "");
+        e = e.substring(1);
+        return e
+      });
     }
 
   }

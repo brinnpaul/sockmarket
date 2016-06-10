@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
   // var id = 2
   Order.findOne({where:{userId:id, date_paid:null}})
   .then(function(order) {
-    console.log(order)
+    // console.log(order)
     return OrderDetail.findAll({where:{orderId:order.id}})
   })
   .then(function(items) {

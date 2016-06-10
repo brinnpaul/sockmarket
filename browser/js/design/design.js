@@ -11,8 +11,8 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('designViewCtrl', function ($scope) {
-	// $scope.description;
-	$scope.tags;
-	$scope.title;
+	// // $scope.description;
+	// $scope.tags;
+	// $scope.title;
 	// console.log($scope.description);
 })

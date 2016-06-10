@@ -3,7 +3,8 @@ var router = require('express').Router();
 
 var db = require("../../../db")
 var Sock = db.model("sock");
-var User = db.model("user")
+var User = db.model("user");
+var fs = require('fs');
 
 module.exports = router;
 
@@ -35,10 +36,50 @@ router.get('/:id', function(req, res, next) {
   .catch(next)
 })
 
+router.get('/byUser/:id', function(req, res, next) {
+  return Sock.findAll({ where: {
+    userId: req.params.id
+  }
+  })
+  .then(function(sock) {
+    console.log('FACTORY', sock)
+    res.json(sock)
+  })
+  .catch(next)
+})
+
 router.post('/', function(req, res, next) {
+  
+  function generateFileName() {
+    var key = "z1234567890QWERTYUIOPASDFGHJKLZXCVBNM123456789qwertyuiopasdfghjklzxcvbnm";
+    var output = '';
+
+    for (var i = 0; i < 25; i++) {
+     var random = Math.random() * key.length;
+     var atIndex = Math.floor(random) + 1;
+     output += key[atIndex];
+    }
+    return output;
+  }
+
+  var base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
+
+  var imageFileName = generateFileName() + '-' + generateFileName() + '.png';
+
+  fs.writeFileSync('public/sock-images/' + imageFileName, base64Data, 'base64', function(err){
+    console.log(err);
+  })
+  
+  req.body.image = "/sock-images/" + imageFileName;
+  req.body.userId = req.user.id;
   Sock.create(req.body)
   .then(function(newSock) {
     res.json(newSock);
   })
   .catch(next);
+
 })
+
+
+
+
