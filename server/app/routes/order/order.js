@@ -3,7 +3,6 @@ var router = require('express').Router();
 
 var db = require("../../../db")
 var Sock = db.model("sock")
-var User = db.model("user")
 var Order = db.model('order')
 var OrderDetail = db.model('order_detail')
 
@@ -25,20 +24,52 @@ router.post('/', function(req, res, next) {
   .catch(next)
 })
 
-router.get('/', function(req, res, next) {
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+''} : {userId:req.session.passport.user+''}
+router.get('/current', function(req, res, next) {
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
   // temp variable for postman
   // var id = 2
-  Order.findOne({where:{userId:id, date_paid:null}})
+  Order.findOne({where:id})
   .then(function(order) {
-    // console.log(order)
-    return OrderDetail.findAll({where:{orderId:order.id}})
+    if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
+    else return "No Current Orders"
   })
   .then(function(items) {
     res.json(items)
   })
+  .catch(next)
 })
-// 
-// router.delete('/', function(req, res, next) {
-//
-// })
+
+router.get('/history', function(req, res, next) {
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: {$ne:null}} : {userId:req.session.passport.user+'', date_paid: {$ne:null}};
+  // temp variable for postman
+  // var id = 2
+  Order.findOne({where:id})
+  .then(function(order) {
+    if (order) return OrderDetail.findAll({where:{orderId:order.id}})
+    else return "No Order History"
+  })
+  .then(function(items) {
+    res.json(items)
+  })
+  .catch(next)
+})
+
+
+router.put('/', function(req, res, next) {
+  var itemId = req.body.id
+  var quant= req.body.quantity
+  OrderDetail.update({quantity:quant}, {where:{id:itemId}})
+  .then(function(item_changed) {
+    res.json(item_changed)
+  })
+  .catch(next)
+})
+
+router.delete('/:id', function(req, res, next) {
+  var itemId = req.params.id
+  OrderDetail.destroy({where:{id:itemId}})
+  .then(function(item_removed) {
+    res.json(item_removed)
+  })
+  .catch(next)
+})
