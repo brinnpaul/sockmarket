@@ -2,16 +2,16 @@ app.controller('cartCurrent', function ($scope, OrderFactory, currentCart) {
 
   $scope.currentCart = currentCart
 
-  $scope.update = function(item, amount) {
+  $scope.update = function(item) {
     var sock = {
-      quantity: amount,
+      quantity: item.newAmount,
       id: item.id
     }
     return OrderFactory.updateItem(sock)
     .then(function(res){
       console.log("herere", res)
-      item.quantity = amount;
-      $scope.amount = null
+      item.quantity = item.newAmount;
+      item.newAmount = null;
     })
   }
 

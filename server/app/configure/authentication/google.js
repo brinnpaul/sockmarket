@@ -18,7 +18,6 @@ module.exports = function (app, db) {
     };
 
     var verifyCallback = function (req, accessToken, refreshToken, profile, done) {
-
         User.findOne({
                 where: {
                     google_id: profile.id

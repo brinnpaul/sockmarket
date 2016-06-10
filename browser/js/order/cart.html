@@ -62,8 +62,8 @@
 		    <div>Price: {{item.sock.price}}</div>
 				<div>Pairs: {{item.quantity}}</div>
 		    <form>
-		      <input type="text" ng-model="amount"/>
-		      <button type="submit" class="btn" ng-click="update(item, amount)">Change Item Quantity</button>
+		      <input type="text" ng-model="item.newAmount"/>
+		      <button type="submit" class="btn" ng-click="update(item)">Change Item Quantity</button>
 					<button type="submit" class="btn" ng-click="delete(item)">Delete Item</button>
 		    </form>
 			</div>
