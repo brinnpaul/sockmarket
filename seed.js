@@ -55,15 +55,27 @@ var seedUsers = function () {
 var seedSocks = function () {
   var socks = [
     {
-        title: 'socks',
+        title: 'socks by obama',
         description: 'great socks',
-        tags: 'awesome affordable',
-        userId: 1
+        tags: 'change',
+        userId: 2
     },
     {
       title: 'sockz: return of the socks',
       description: 'crazy drama about socks wearing socks',
       tags: 'drama sockz',
+      userId: 2
+    },
+    {
+      title: 'hello socks!',
+      description: 'crazy drama about socks wearing socks',
+      tags: 'drama sockz',
+      userId: 2
+    },
+    {
+      title: 'socks socks socks',
+      description: 'made in usa',
+      tags: 'blue red white',
       userId: 2
     }
   ]

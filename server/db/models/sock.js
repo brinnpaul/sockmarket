@@ -19,6 +19,10 @@ module.exports = function (db) {
       type: Sequelize.FLOAT,
       defaultValue: 4.99
     },
+    inventory: {
+      type: Sequelize.INTEGER,
+      defaultValue: 10
+    },
     tags: {
       type: Sequelize.ARRAY(Sequelize.STRING),
       defaultValue: [],
@@ -33,6 +37,15 @@ module.exports = function (db) {
       }
     }
   },{
+    classMethods: {
+      increasePrice: function(sockId, newPrice){
+        return this.update({price: newPrice},{
+          where: {
+            id: sockId
+          }
+        });
+      }
+    },
     hooks: {
       beforeCreate: function (sock) {
         sock.title.split(' ').forEach(function(word) {
