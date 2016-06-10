@@ -5,7 +5,6 @@ var User = db.model("user");
 //var User = models.user
 
  router.param('userId', function (req, res, next, id) {
-     console.log("HERERERERERE",User);
  	User.findById(id)
  	.then(function (user) {
  		if (!user) res.status(404).send();
@@ -29,7 +28,7 @@ router.get('/:userId', function (req, res, next) {
 	res.send(req.userById);
 })
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   User.create(req.body)
   .then(function(newUser) {
     res.send(newUser)

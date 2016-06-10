@@ -21,10 +21,6 @@ module.exports = function (db) {
             type: Sequelize.STRING,
             allowNull: false
         },
-        username: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
         first_name: {
             type: Sequelize.STRING,
             allowNull: false
@@ -32,9 +28,6 @@ module.exports = function (db) {
         last_name: {
             type: Sequelize.STRING,
             allowNull: false
-        },
-        gender: {
-            type: Sequelize.ENUM("F", "M")
         },
         address1: {
             type: Sequelize.STRING
@@ -59,7 +52,7 @@ module.exports = function (db) {
         },
         profile_pic: {
             type: Sequelize.STRING,
-            defaultValue: "http://api.randomuser.me/portraits/men/62.jpg"
+            defaultValue: "http://api.randomuser.me/portraits/men/59.jpg"
         },
         salt: {
             type: Sequelize.STRING
@@ -77,6 +70,7 @@ module.exports = function (db) {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         }
+
     }, {
         instanceMethods: {
             sanitize: function () {
