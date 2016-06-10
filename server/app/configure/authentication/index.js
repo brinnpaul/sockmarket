@@ -47,6 +47,7 @@ module.exports = function (app, db) {
 
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
     passport.serializeUser(function (user, done) {
+      // console.log("USER", user.sessionId, "REALUSER", user)
 
         // Order.findOne({where:{userId:user.id, paid_date: null}})
         // .then(function(previous) {

@@ -3,15 +3,22 @@
 var Sequelize = require('sequelize');
 
 module.exports = function (db) {
-  return db.define('order', {
+  var Order = db.define('order', {
     date_shipped: {
       type: Sequelize.DATE
     },
     date_paid: {
       type: Sequelize.DATE
-    }, 
+    },
     sessionId: {
       type: Sequelize.STRING
     }
+  }, {
+    classMethods: {
+      allOrders: function() {
+        return Order.findAll()
+      }
+    }
   })
+  return Order
 }

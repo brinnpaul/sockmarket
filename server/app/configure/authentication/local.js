@@ -43,8 +43,8 @@ module.exports = function (app, db) {
 
             // could possibly add session in or around here
             // req.logIn will establish our session.
+            user.sessionId = req.session.id
             req.logIn(user, function (loginErr) {
-
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 // add these all to non-local authentication
