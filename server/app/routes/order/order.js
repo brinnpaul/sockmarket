@@ -70,8 +70,9 @@ console.log(req.body, "itemid", itemId, "quant : ", quant)
   .catch(next)
 })
 
-router.delete('/', function(req, res, next) {
-  var itemId = req.body.item.id
+router.delete('/:id', function(req, res, next) {
+  var itemId = req.params.id
+  console.log("DELETEING", req.params.id)
 
   OrderDetail.destroy({where:{id:itemId}})
   .then(function(item_removed) {
