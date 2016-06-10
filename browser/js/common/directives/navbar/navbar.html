@@ -10,29 +10,21 @@
                     <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                 </li>
             </ul>
-            <div class="form-inline">
-                <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="  search-query form-control" placeholder="Search"
-                               onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
-                        <span class="input-group-btn">
-                            <button id="btnSearch" class="btn btn-danger" type="button" ng-click="search(searchText)">
-                                <span class=" glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-    <!--         <div class="list-group">
-              <div class="list-group-item" ng-repeat="artist in artists | filter: { name: nameSearch }">
-              <a ui-sref="artist({artistId: artist.id})">{{ artist.name }}</a>
-            </div>  -->
-            <div ng-show="user" class="welcome">
-                <span>Welcome, {{ user.username }}!</span>
-                <a ng-click="logout()">Logout</a>
+            <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+            <button ng-show="user" class="btn login-button" ng-click="logout()">Logout</button>
+        </div>
+    </nav>
+    <div class="form-inline">
+        <div id="custom-search-input">
+            <div class="input-group col-md-12">
+                <input type="text" class="  search-query form-control" placeholder="Search"
+                       onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
+                <span class="input-group-btn">
+                    <button id="btnSearch" class="btn btn-danger" type="button" ng-click="search(searchText)">
+                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
         </div>
-
-    </nav>
+    </div>
 </div>
