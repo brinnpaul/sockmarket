@@ -33,8 +33,8 @@ router.get('/user/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   // You need to make a session id first
-  console.log("BODY", req.body)
-  console.log("USERID", req.session.passport.user)
+  // console.log("BODY", req.body)
+  // console.log("USERID", req.session.passport.user)
   // res.sendStatus(200)
 
 

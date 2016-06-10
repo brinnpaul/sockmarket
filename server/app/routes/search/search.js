@@ -10,7 +10,6 @@ module.exports = router;
 router.get('/', function(req, res, next) {
   var SearchText = req.query.q;
   var SearchTextArr = req.query.q.split(' ');
-  console.log(SearchTextArr);
   return Sock.findAll({
   	where: {
   		tags: {
@@ -19,7 +18,6 @@ router.get('/', function(req, res, next) {
   	}
   })
   .then(function(searchResults) {
-    console.log('HERE', searchResults)
     res.json(searchResults)
   })
   .catch(next)

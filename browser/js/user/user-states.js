@@ -6,6 +6,9 @@ app.config(function ($stateProvider) {
 		resolve: {
 			theUser: function (UserFactory, $stateParams) {
 				return UserFactory.fetchById($stateParams.userId);
+			},
+			theUserSocks: function (SockFactory, $stateParams) {
+				return SockFactory.sockByUserId($stateParams.userId);
 			}
 		}
 	})

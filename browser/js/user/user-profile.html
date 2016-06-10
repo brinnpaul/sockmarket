@@ -22,8 +22,8 @@
 				</div>
 				<div class="col-md-9" >
 					<!-- <h2>Socks</h2> -->
-					<div class="sock-thumbnail" ng-repeat="i in [1, 2, 3, 4, 5, 6]">
-						<img src="socks.jpg">
+					<div class="sock-thumbnail" ng-repeat="sock in socks">
+						<img ng-click="toSockView(sock.id)" ng-src="{{sock.image}}">
 					</div>
 				</div>
 			</div>

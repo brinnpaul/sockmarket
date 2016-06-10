@@ -65,6 +65,7 @@
 	width: 210px;
 	display: block;
 	margin: 10px auto auto auto;
+	background-color: white;
 }
 
 </style>
@@ -89,7 +90,7 @@
 							<div class="content">
 								<!-- hardcoded -->
 								<div class="sock-thumbnail"ng-repeat="sock in mostRecentSocks" ng-click="seeSock(sock.id)">
-									<img src="{{sock.image}}">
+									<img ng-src="{{sock.image}}">
 								</div>
 							</div>
 						</div>
