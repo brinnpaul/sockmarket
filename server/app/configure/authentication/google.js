@@ -12,11 +12,12 @@ module.exports = function (app, db) {
     var googleCredentials = {
         clientID: googleConfig.clientID,
         clientSecret: googleConfig.clientSecret,
-        callbackURL: googleConfig.callbackURL
+        callbackURL: googleConfig.callbackURL,
+        passReqToCallback: true
+
     };
 
-    var verifyCallback = function (accessToken, refreshToken, profile, done) {
-
+    var verifyCallback = function (req, accessToken, refreshToken, profile, done) {
         User.findOne({
                 where: {
                     google_id: profile.id
@@ -24,16 +25,29 @@ module.exports = function (app, db) {
             })
             .then(function (user) {
                 if (user) {
+                    user.sessionId = req.session.id
+                    console.log("PROFILE", profile)
+                    console.log("USER", user)
                     return user;
                 } else {
+                  console.log("PROFILE", profile)
+
                     return User.create({
-                        google_id: profile.id
-                    });
+                        google_id: profile.id,
+                        first_name: profile.name.givenName,
+                        last_name: profile.name.familyName,
+                        username: profile.emails[0].value,
+                        password: 'not important',
+                        email: profile.emails[0].value
+                    })
+                    .then(function(newUser) {
+                      user.sessionId = req.session.id
+                      return newUser
+                    })
                 }
             })
             .then(function (userToLogin) {
-
-                done(null, userToLogin); //TODO {user: userToLogin, session: session}
+                done(null, userToLogin);
             })
             .catch(function (err) {
                 console.error('Error creating user from Google authentication', err);

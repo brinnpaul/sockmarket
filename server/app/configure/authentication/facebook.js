@@ -11,11 +11,14 @@ module.exports = function (app, db) {
     var facebookCredentials = {
         clientID: facebookConfig.clientID,
         clientSecret: facebookConfig.clientSecret,
-        callbackURL: facebookConfig.callbackURL
+        callbackURL: facebookConfig.callbackURL,
+        profileFields: ['id', 'displayName', 'email', 'photos'],
+        passReqToCallback: true
     };
 
-    var verifyCallback = function (accessToken, refreshToken, profile, done) {
-
+    var verifyCallback = function (req, accessToken, refreshToken, profile, done) {
+        console.log("PROFILLLLEEEE", profile)
+        console.log("REQUEST SEESSSSIONNN", req.session)
         User.findOne({
                 where: {
                     facebook_id: profile.id
@@ -25,12 +28,23 @@ module.exports = function (app, db) {
                 if (user) {
                     return user;
                 } else {
+                    console.log("EEEEEEEMMMMMMMAAAAIIIIILLLLLLL", profile.emails[0].value,
+                                 '\n', profile.displayName.split(' ')[0],
+                                 '\n', profile.displayName.split(' ')[1],
+                                 '\n' )
                     return User.create({
-                        facebook_id: profile.id
+                        facebook_id: profile.id,
+                        email: 'not@available.com',
+                        profile_pic: profile.photos[0].value,
+                        first_name: profile.displayName.split(' ')[0],
+                        last_name: profile.displayName.split(' ')[1] || 'not available',
+                        password: 'not important',
+                        username: '@'+profile.displayName.split[0]
                     });
                 }
             })
             .then(function (userToLogin) {
+              console.log("AM I RUNNNING")
                 done(null, userToLogin);
             })
             .catch(function (err) {
@@ -42,7 +56,7 @@ module.exports = function (app, db) {
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {failureRedirect: '/login'}),
