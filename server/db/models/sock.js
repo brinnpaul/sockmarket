@@ -41,15 +41,14 @@ module.exports = function (db) {
   },
 
   {
-      // TODO
-    //hooks: {
-    //  beforeCreate: function () {
-    //    var titleTerms = this.title.split(' ')
-    //    this.tags.push(titleTerms)
-    //  }
-    //
-    //}
+    hooks: {
 
+      beforeCreate: function () {
+        var titleTerms = this.title.split(' ')
+        this.tags.push(titleTerms)
+      }
+
+    }
   }
 
   )
