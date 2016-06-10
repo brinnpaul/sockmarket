@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
     templateUrl: '/js/order/history.html',
     controller: 'cartHistory',
     resolve: {
-      orderHistory: function (OrderFactory) {
+      cartHistory: function (OrderFactory) {
         return OrderFactory.showCart('history');
       }
     }
