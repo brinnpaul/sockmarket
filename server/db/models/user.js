@@ -69,9 +69,6 @@ module.exports = function (db) {
         isAdmin : {
             type: Sequelize.BOOLEAN,
             defaultValue: false
-        },
-        newUser : {
-            type: Sequelize.BOOLEAN
         }
 
     }, {
