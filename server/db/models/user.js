@@ -29,9 +29,6 @@ module.exports = function (db) {
             type: Sequelize.STRING,
             allowNull: false
         },
-        gender: {
-            type: Sequelize.ENUM("F", "M")
-        },
         address1: {
             type: Sequelize.STRING
         },
@@ -55,7 +52,7 @@ module.exports = function (db) {
         },
         profile_pic: {
             type: Sequelize.STRING,
-            defaultValue: "http://api.randomuser.me/portraits/men/62.jpg"
+            defaultValue: "http://api.randomuser.me/portraits/men/59.jpg"
         },
         salt: {
             type: Sequelize.STRING
@@ -72,7 +69,11 @@ module.exports = function (db) {
         isAdmin : {
             type: Sequelize.BOOLEAN,
             defaultValue: false
+        },
+        newUser : {
+            type: Sequelize.BOOLEAN
         }
+
     }, {
         instanceMethods: {
             sanitize: function () {
