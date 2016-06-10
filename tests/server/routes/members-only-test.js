@@ -3,7 +3,9 @@ var expect = require('chai').expect;
 
 var Sequelize = require('sequelize');
 var dbURI = 'postgres://localhost:5432/testing-fsg';
-var db = new Sequelize(dbURI, {
+var db = new Sequelize('testing-fsg', 'bpr', 'sunshine', {
+    dialect: 'postgres',
+    port: 5432,
     logging: false
 });
 require('../../../server/db/models/user')(db);
@@ -45,7 +47,10 @@ describe('Members Route', function () {
 
 		var userInfo = {
 			email: 'joe@gmail.com',
-			password: 'shoopdawoop'
+			password: 'shoopdawoop',
+      username: '@shoop',
+      first_name: 'Joe',
+      last_name: 'Pesci'
 		};
 
 		beforeEach('Create a user', function (done) {

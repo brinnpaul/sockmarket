@@ -1,9 +1,10 @@
 <div class="container">
   <h1>{{sock.title}}</h1>
+  <button ui-sref='designView({sockId: sock.id})'>Design</button>
   <hr>
   <div class="row">
     <div class="col-md-8">
-    <img src="http://placehold.it/500x500">
+    <img ng-src="{{sock.image}}">
     </div>
     <div class="col-md-4">
       <div class="info-box">
@@ -12,7 +13,9 @@
         <p><span>Description:</span> {{sock.description}}</p>
         <!-- !!! add tags to sock view !!!!-->
         <hr>
-        <button class="btn">Add to Cart</button>
+        <input ng-model="quantity" placeholder="Always buy more than you need"/>
+        <div ng-show="alerting">You have to add at least one!</div>
+        <button ng-click="addItem()" >Add to Cart</button>
         <div>
           <button>Thumbs Up</button>
           <button>Thumbs Down</button>

@@ -3,13 +3,20 @@ var expect = require('chai').expect;
 
 var Sequelize = require('sequelize');
 var dbURI = 'postgres://localhost:5432/testing-fsg';
-var db = new Sequelize(dbURI, {
+var db = new Sequelize('testing-fsg', 'bpr', 'sunshine', {
+    dialect: 'postgres',
+    port: 5432,
     logging: false
 });
 
 require('../../../server/db/models/user')(db);
 
+require('../../../server/db/models/sock')(db);
+
+// var db = require("../../../db")
+
 var User = db.model('user');
+var Sock = db.model('sock');
 
 describe('User model', function () {
 
@@ -95,7 +102,7 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({ email: 'obama@gmail.com', password: 'potus', username:'@Obama', first_name:'Barrack', last_name:'Obama' });
             };
 
             beforeEach(function () {
@@ -137,7 +144,7 @@ describe('User model', function () {
         describe('sanitize method', function () {
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({ email: 'obama@gmail.com', password: 'potus', username:'@Obama', first_name:'Barrack', last_name:'Obama' });
             };
 
             it('should remove sensitive information from a user object', function () {
@@ -150,6 +157,45 @@ describe('User model', function () {
                 });
             });
         });
+
+        describe('sock product creation', function () {
+
+            var newSock = {
+                title: 'bestSock',
+                description: 'this is the best',
+                tags: ['bestest', 'yeah'],
+                image: "http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Carlton-2.jpg?1431093530"
+            }
+
+            var saveSock = function () {
+                return Sock.create(newSock);
+            }
+
+            var currentUser = 
+            
+            it('should save canvas design as sock image in the sock model', function () {
+
+                saveSock().then(function(sock) {
+                    expect(sock.title).to.be.equal(newSock.title);
+                    expect(sock.description).to.be.equal(newSock.description);
+                    expect(sock.tags).to.be.equal(newSock.tags);
+                    expect(sock.image).to.be.equal(newSock.image);
+                })
+
+            })
+
+        //     it('should save logged in user id as a userId value of the sock in the model', function () {
+
+        //         saveSock().then(function(sock) {
+        //             expect(sock.userId).to.exist;
+        //             expect(sock.userId).to.be.equal()
+        //         })
+
+        //     })
+
+        // })
+
+
 
     });
 

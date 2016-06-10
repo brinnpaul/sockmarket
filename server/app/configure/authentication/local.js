@@ -30,9 +30,9 @@ module.exports = function (app, db) {
 
     // A POST /login route is created to handle login.
     app.post('/login', function (req, res, next) {
-
+        // console.log("here is the req obj", req);
         var authCb = function (err, user) {
-
+            // console.log("USER", user)
             if (err) return next(err);
 
             if (!user) {
@@ -41,10 +41,13 @@ module.exports = function (app, db) {
                 return next(error);
             }
 
+            // could possibly add session in or around here
             // req.logIn will establish our session.
+            user.sessionId = req.session.id
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
+                // add these all to non-local authentication
                 res.status(200).send({
                     user: user.sanitize()
                 });

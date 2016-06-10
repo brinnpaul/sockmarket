@@ -5,9 +5,11 @@ module.exports = router;
 router.use('/members', require('./members'));
 router.use('/sock', require('./sock/sock'))
 router.use('/review', require('./review/review'))
+router.use('/order', require('./order/order'))
 
 router.use('/user', require('./user.js'));
 
+router.use('/search', require('./search/search'))
 
 // Make sure this is after all of
 // the registered routes!

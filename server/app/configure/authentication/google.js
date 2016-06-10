@@ -32,7 +32,8 @@ module.exports = function (app, db) {
                 }
             })
             .then(function (userToLogin) {
-                done(null, userToLogin);
+
+                done(null, userToLogin); //TODO {user: userToLogin, session: session}
             })
             .catch(function (err) {
                 console.error('Error creating user from Google authentication', err);
