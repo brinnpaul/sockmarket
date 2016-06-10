@@ -44,7 +44,7 @@
 
 // });
 
-app.controller('sockIdController', function ($scope, $stateParams, theSock, theReviews, ReviewFactory) {
+app.controller('sockIdController', function ($scope, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
 
   $scope.sock = theSock;
   $scope.reviews = theReviews;

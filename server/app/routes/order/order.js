@@ -3,7 +3,6 @@ var router = require('express').Router();
 
 var db = require("../../../db")
 var Sock = db.model("sock")
-var User = db.model("user")
 var Order = db.model('order')
 var OrderDetail = db.model('order_detail')
 
@@ -29,10 +28,8 @@ router.get('/current', function(req, res, next) {
   var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
   // temp variable for postman
   // var id = 2
-  console.log("IDDDDD", id)
   Order.findOne({where:id})
   .then(function(order) {
-    console.log("ORDER", order)
     if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
     else return "No Current Orders"
   })
@@ -48,7 +45,6 @@ router.get('/history', function(req, res, next) {
   // var id = 2
   Order.findOne({where:id})
   .then(function(order) {
-    console.log(order)
     if (order) return OrderDetail.findAll({where:{orderId:order.id}})
     else return "No Order History"
   })
@@ -62,7 +58,6 @@ router.get('/history', function(req, res, next) {
 router.put('/', function(req, res, next) {
   var itemId = req.body.id
   var quant= req.body.quantity
-console.log(req.body, "itemid", itemId, "quant : ", quant)
   OrderDetail.update({quantity:quant}, {where:{id:itemId}})
   .then(function(item_changed) {
     res.json(item_changed)
@@ -70,9 +65,8 @@ console.log(req.body, "itemid", itemId, "quant : ", quant)
   .catch(next)
 })
 
-router.delete('/', function(req, res, next) {
-  var itemId = req.body.item.id
-
+router.delete('/:id', function(req, res, next) {
+  var itemId = req.params.id
   OrderDetail.destroy({where:{id:itemId}})
   .then(function(item_removed) {
     res.json(item_removed)
