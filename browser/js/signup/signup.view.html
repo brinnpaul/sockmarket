@@ -25,7 +25,7 @@
 	font-size: 18px;
 }
 
-#signup .content {
+fieldset {
 	width: 90%;
 	display: block;
 	margin: 0 auto 0 auto;
@@ -36,33 +36,34 @@
 }
 
 #signup button {
-	margin: 10px auto 10px auto;
+	margin: 20px auto 20px auto;
 	display: block;
-	width: 50%;
+	width: 100%;
 }
 </style>
 
 <div class="container">
 	<div class="title-background">
-		<h1>Create Account</h1>
+		<h1 ng-click-"working()">Create Account</h1>
 	</div>
 	<div id="signup">
-		<form method="post">
-			<div class="content">
+		<form method="post" novalidate name="newUserForm">
+			<fieldset>
 				<label>E-mail:</label>
-				<input type="email" ng-model="email"><br>
+				<input type="email" name="email" ng-model="email" required><br>
 				<label>Username:</label>
-				<input type="text" ng-model="username"><br>
+				<input type="text" ng-model="username" required><br>
 				<label>First name:</label><br>
-				<input type="text" ng-model="firstname"><br>
+				<input type="text" ng-model="firstname" required><br>
 				<label>Last name:</label><br>
-				<input type="text" ng-model="lastname"><br>
+				<input type="text" ng-model="lastname" required><br>
 				<label>Password:</label><br>
-				<input type="password" ng-model="pw1"><br>
+				<input type="password" ng-model="password" required><br>
 				<label>Password (again!):</label><br>
-				<input type="password" ng-model="pw2"><br>
-			</div>
+				<input type="password" ng-model="pw2" required><br>
+				<hr>
+				<button type="submit" class="btn btn-primary" ng-disabled="newUserForm.$invalid" ng-click="submitSignup()">Sign up!</button>
+			</fieldset>
 		</form>
-		<button class="btn btn-primary">Sign up!</button>
 	</div>
 </div>
