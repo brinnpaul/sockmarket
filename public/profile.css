@@ -1,0 +1,51 @@
+.user-name-background {
+	background-color: #F8A055;
+	border-radius: 5px;
+}
+​
+.user-name-background h1 {
+	color: white;
+	/*margin-left: 20px;*/
+	text-align: center;
+	padding: 4px;
+}
+​
+#profile-pic {
+	width: 220px;
+	height: 220px;
+	border-radius: 5px;
+	display: block;
+	margin: 20px auto;
+}
+​
+.user-info {
+	background-color: #F8F8F8;
+}
+​
+.user-info li {
+	list-style-type: none;
+}
+​
+#username-text {
+	font-weight: bold;
+	color: #696969;
+}
+​
+.sock-thumbnail {
+	background-color: #F0F0F0;
+	display: inline-block;
+	width: 230px;
+	height: 230px;
+}
+​
+.sock-thumbnail:hover {
+	background-color: #C6E2FF;
+}
+​
+.sock-thumbnail img {
+	border-radius: 5px;
+	height: 210px;
+	width: 210px;
+	display: block;
+	margin: 10px auto auto auto;
+}
