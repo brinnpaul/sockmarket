@@ -4,7 +4,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function (app, db) {
 
-    var User = db.define('user');
+    var User = db.model('user');
 
     var facebookConfig = app.getValue('env').FACEBOOK;
 
@@ -40,7 +40,10 @@ module.exports = function (app, db) {
                         last_name: profile.displayName.split(' ')[1] || 'not available',
                         password: 'not important',
                         username: '@'+profile.displayName.split[0]
-                    });
+                    })
+                    .then(function(user) {
+                      return user
+                    })
                 }
             })
             .then(function (userToLogin) {

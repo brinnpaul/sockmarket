@@ -41,7 +41,7 @@ module.exports = function (app, db) {
                         email: profile.emails[0].value
                     })
                     .then(function(newUser) {
-                      user.sessionId = req.session.id
+                      newUser.sessionId = req.session.id
                       return newUser
                     })
                 }

@@ -42,9 +42,6 @@ module.exports = function (app, db) {
     passport.serializeUser(function (user, done) {
 
         Order.updateCartOnLogin(user.id, user.sessionId)
-        // .then(function(login) {
-        //   console.log("Did I return anything?", login)
-        // })
         .catch(done)
 
         done(null, user.id);
