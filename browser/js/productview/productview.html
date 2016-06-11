@@ -38,12 +38,15 @@
 
 
 #sock-designed-by-box {
-  background-color: #F8A055;
+  /*background-color: #F8A055;*/
+  padding: 0;
   border-radius: 5px;
-  color: white;
+  /*color: white;*/  
   width: 100%;
   min-height: 48px;
 }
+
+
 
 #sock-designed-by-box:hover {
   cursor: pointer;
@@ -60,6 +63,10 @@
 #socked-designed-by-text {
   margin-left: 4px;
   vertical-align: center;
+}
+
+#socked-designed-by-text span {
+  font-size: 18px;
 }
 
 #socked-designed-by-profile-pic {
@@ -274,7 +281,7 @@
           <table>
             <tr class="designed-by-text-cell">
             <td class="designed-by-text-cell">
-                <p id="socked-designed-by-text"><span>Designed by:</span> {{sock.user.username}}</p>
+                <p id="socked-designed-by-text"><span>Designed by:</span><br> {{sock.user.username}}</p>
             </td>
             <td>
                <img id="socked-designed-by-profile-pic" ng-src="{{sock.user.profile_pic}}">

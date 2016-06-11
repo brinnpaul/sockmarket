@@ -67,8 +67,6 @@ app.controller('sockIdController', function ($scope, $state, $stateParams, theSo
       '12': "December"
     }
 
-    return monthObj[date.slice(5,7)] + ' ' + date.slice(8,10) + ', ' + date.slice(0, 4);
-
   }
 
 
