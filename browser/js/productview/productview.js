@@ -44,21 +44,33 @@
 
 // });
 
-app.controller('sockIdController', function ($scope, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
+app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
 
   $scope.sock = theSock;
   $scope.reviews = theReviews;
-  $scope.alert = function() {
+
+  $scope.alert = function(message) {
+    $scope.message = message
     $scope.alerting = !$scope.alerting
+    setTimeout(function() {
+      $scope.alerting = !$scope.alerting
+      $scope.$digest()
+    }, 3000)
+    // if (!$scope.alerting) $scope.message === null
   }
 
   $scope.addItem = function() {
     var item = {}
     item.sockId = $scope.sock.id
     item.quantity = +$scope.quantity
-    console.log(item)
-    if (item.quantity > 0) return OrderFactory.addToCart(item)
-    //else $scope.alert()
+    if (item.quantity > 0) {
+      OrderFactory.addToCart(item)
+      .then(function(response) {
+        if (typeof response !== "object") $scope.alert(response)
+        else $state.go('currentCart')
+      })
+    }
+    else $scope.alert('You have to add at least one sock!')
   }
 
   $scope.newReview = function() {
