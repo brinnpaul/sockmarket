@@ -36,13 +36,16 @@ module.exports = function (db) {
         var endDate = new Date();
         var startDate = new Date(endDate.setDate(endDate.getDate() - 7));
 
-        var numOfOrders = this.numberOfOrders(orderDet.sockId, startDate).then(function(sum){
-          return sum;
+        var Sock = db.model('sock');
+
+        this.numberOfOrders(orderDet.sockId, startDate).then(function(numOfOrders){
+          if ((+numOfOrders > 40 || +numOfOrders < 5)&& orderDet.originalPrice > 3) {
+              Sock.increasePrice(orderDet.sockId, Math.ceil((orderDet.originalPrice - orderDet.originalPrice * 0.1),2)).then(function (smth) {
+            })
+          }
         });
 
-        if (numOfOrders > 20 )
-          Sock.increasePrice(orderDet.sockId, orderDet.originalPrice + 5).then(function(smth){
-        })
+
       }
     }
   })

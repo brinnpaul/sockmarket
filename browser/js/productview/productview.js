@@ -44,39 +44,48 @@
 
 // });
 
-app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, AuthService) {
+// app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, AuthService) {
 
-  $scope.dateParser = function(date){
+//   // $scope.dateParser = function(date){
 
-    //return to this later. Would be good if socks and reviews stated when they were posted
+//   //   //return to this later. Would be good if socks and reviews stated when they were posted
 
-    //should add it to a factory, because many pages can make use of it
+  //   //should add it to a factory, because many pages can make use of it
 
-    var monthObj = {
-      '01': "January",
-      '02': "February",
-      '03': "March",
-      '04': "April",
-      '05': "May",
-      '06': "June",
-      '07': "July",
-      '08': "August",
-      '09': "September",
-      '10': "October",
-      '11': "November",
-      '12': "December"
-    }
+  //   var monthObj = {
+  //     '01': "January",
+  //     '02': "February",
+  //     '03': "March",
+  //     '04': "April",
+  //     '05': "May",
+  //     '06': "June",
+  //     '07': "July",
+  //     '08': "August",
+  //     '09': "September",
+  //     '10': "October",
+  //     '11': "November",
+  //     '12': "December"
+  //   }
 
-  }
+  // }
+
+app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
+
 
 
   $scope.reviewNotAllowed = false;
   $scope.sock = theSock;
   $scope.reviews = theReviews;
-  console.log($scope.sock);
 
-  $scope.alert = function() {
-    $scope.alerting = !$scope.alerting
+
+  $scope.alert = function(message) {
+    $scope.message = message;
+    $scope.alerting = !$scope.alerting;
+    setTimeout(function() {
+      $scope.alerting = !$scope.alerting
+      $scope.$digest()
+    }, 3000)
+    // if (!$scope.alerting) $scope.message === null
   }
 
   $scope.goToUserPage = function(userId) {
@@ -84,12 +93,18 @@ app.controller('sockIdController', function ($scope, $state, $stateParams, theSo
   }
 
   $scope.addItem = function() {
-    var item = {}
-    item.sockId = $scope.sock.id
-    item.quantity = +$scope.quantity
-    console.log(item)
-    if (item.quantity > 0) return OrderFactory.addToCart(item)
-    //else $scope.alert()
+    var item = {};
+    item.sockId = $scope.sock.id;
+    item.quantity = +$scope.quantity;
+    item.originalPrice = +$scope.sock.price;
+    if (item.quantity > 0) {
+      OrderFactory.addToCart(item)
+      .then(function(response) {
+        if (typeof response !== "object") $scope.alert(response);
+        else $state.go('currentCart');
+      })
+    }
+    else $scope.alert('You have to add at least one sock!');
   }
 
   $scope.displayTags = function() {

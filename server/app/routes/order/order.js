@@ -4,7 +4,26 @@ var router = require('express').Router();
 var db = require("../../../db");
 var Sock = db.model("sock");
 var Order = db.model('order');
+var User = db.model('user')
 var OrderDetail = db.model('order_detail');
+
+var splitItemsByOrderId = function(cartHistory) {
+  var orderIds = []
+  var orderId = null
+  cartHistory.forEach(function(item) {
+    if(item.orderId !== orderId) {
+      var order = {}
+      order.orderId = item.orderId
+      order.orderDate = item.order.date_paid
+      order.items = [item]
+      orderIds.push(order)
+      orderId = item.orderId
+    } else {
+      orderIds[orderIds.length-1].items.push(item)
+    }
+  })
+  return orderIds
+}
 
 module.exports = router;
 // CLICK ON ADD TO CART
@@ -15,8 +34,8 @@ router.post('/', function(req, res, next) {
   Order.findOrCreate({where:id})
   .then(function(order) {
     req.body.orderId = order[0].id+'';
+    console.log("BODYyyy", req.body);
     return OrderDetail.create(req.body);
-    // make sure that req.body has order_detail info on front end
   })
   .then(function(newItem) {
     res.json(newItem)
@@ -26,8 +45,6 @@ router.post('/', function(req, res, next) {
 
 router.get('/current', function(req, res, next) {
   var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
-  // temp variable for postman
-  // var id = 2
   Order.findOne({where:id})
   .then(function(order) {
     if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
@@ -41,11 +58,13 @@ router.get('/current', function(req, res, next) {
 
 router.get('/history', function(req, res, next) {
   var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: {$ne:null}} : {userId:req.session.passport.user+'', date_paid: {$ne:null}};
-  // temp variable for postman
-  // var id = 2
-  Order.findOne({where:id})
+  Order.findAll({where:id})
   .then(function(order) {
-    if (order) return OrderDetail.findAll({where:{orderId:order.id}})
+    var ids = order.map(function(ord) { return ord.id })
+    if (order) {
+      return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
+      .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
+    }
     else return "No Order History"
   })
   .then(function(items) {

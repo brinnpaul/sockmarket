@@ -1,0 +1,71 @@
+
+<style>
+
+.title-background {
+	background-color: #E3CF57;
+/*	background-color: #00EE00;*/
+	border-radius: 5px;
+}
+
+.title-background h1 {
+	color: white;
+	/*margin-left: 20px;*/
+	text-align: center;
+	padding: 4px;
+}
+
+.results-content {
+	background-color: #FAFAFA;
+	min-height: 100px;
+	padding: 4px;
+	margin: 4px;
+	border: 1px solid black;
+	border-radius: 5px;
+	border-color: #000000;
+}
+
+.thumbnail {
+	background-color: #F0F0F0;
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+}
+
+.thumbnail:hover {
+	background-color: #C6E2FF;
+	cursor: pointer;
+}
+
+.thumbnail img {
+	border-radius: 5px;
+	display: block;
+	margin: 10px auto auto auto;
+}
+
+.sock-title {
+	padding-left: 20px;
+}
+
+</style>
+
+<div class="container">
+  <div ng-repeat="item in currentCart">
+		<div class="row results-content">
+	    <h3 class="sock-title">{{item.sock.title}}</h3>
+			<div class="col-md-4">
+		    <img src="{{item.sock.image}}" class="thumbnail" ng-click="singleSockView(item.sock.id)"/>
+			</div>
+			<div class="col-md-8">
+		    <div>Description: {{item.sock.description}}</div>
+				<div>Pairs: {{item.quantity}}</div>
+				<div>Price/Pair: {{item.sock.price}}</div>
+				<div>Item Total: {{item.sock.price * item.quantity}}
+		    <form>
+		      <input type="text" ng-model="item.newAmount"/>
+		      <button type="submit" class="btn" ng-click="update(item)">Change Item Quantity</button>
+					<button type="submit" class="btn" ng-click="delete(item)">Delete Item</button>
+		    </form>
+			</div>
+		</div>
+	</div>
+</div>

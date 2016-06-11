@@ -11,7 +11,6 @@ app.factory('SockFactory', function ($http) {
     sockByUserId: function(userId) {
       return $http.get('/api/sock/byUser/' + userId)
       .then(function(res) {
-        console.log('fetched', res.data)
         return res.data
       })
     },
