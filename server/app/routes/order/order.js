@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
   Order.findOrCreate({where:id})
   .then(function(order) {
     req.body.orderId = order[0].id+'';
+    console.log("BODYyyy", req.body);
     return OrderDetail.create(req.body);
     // make sure that req.body has order_detail info on front end
   })

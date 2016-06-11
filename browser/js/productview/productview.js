@@ -56,6 +56,7 @@ app.controller('sockIdController', function ($scope, $stateParams, theSock, theR
     var item = {}
     item.sockId = $scope.sock.id
     item.quantity = +$scope.quantity
+    item.originalPrice = +$scope.sock.price
     console.log(item)
     if (item.quantity > 0) return OrderFactory.addToCart(item)
     //else $scope.alert()

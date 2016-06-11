@@ -28,7 +28,7 @@ module.exports = function (app, db) {
                 if (user) {
                     return user;
                 } else {
-                    console.log("EEEEEEEMMMMMMMAAAAIIIIILLLLLLL", profile.emails[0].value,
+                    console.log("EEEEEEEMMMMMMMAAAAIIIIILLLLLLL",
                                  '\n', profile.displayName.split(' ')[0],
                                  '\n', profile.displayName.split(' ')[1],
                                  '\n' )
