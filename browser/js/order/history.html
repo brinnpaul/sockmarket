@@ -15,16 +15,20 @@
 }
 
 .results-content {
-	background-color: #FAFAFB;
+	background-color: #FAFAFA;
 	min-height: 100px;
 	padding: 4px;
+	margin: 4px;
+	border: 1px solid black;
+	border-radius: 5px;
+	border-color: #000000;
 }
 
 .thumbnail {
 	background-color: #F0F0F0;
 	display: inline-block;
-	/*width: 200px;
-	height: 200px;*/
+	width: 90px;
+	height: 90px;
 }
 
 .thumbnail:hover {
@@ -34,33 +38,33 @@
 
 .thumbnail img {
 	border-radius: 5px;
-	/*height: 180px;
-	width: 180px;*/
 	display: block;
 	margin: 10px auto auto auto;
 }
-.row {
-	margin: 4px;
-	padding: 10px;
+
+.sock-title {
+	padding-left: 20px;
 }
 
 </style>
 
 <div class="container">
-  <div class="results-content" ng-repeat="item in cartHistory">
-		<div class="row">
-	    <h3>{{item.sock.title}}</h3>
-			<div class="col-md-4">
-		    <img src="http://placehold.it/100x100" class="thumbnail"/>
-			</div>
-			<div class="col-md-8">
-		    <div>Description: {{item.sock.description}}</div>
-		    <div>Price: {{item.sock.price}}</div>
-				<div>Pairs: {{item.quantity}}</div>
-		    <form>
-		      <input type="text" ng-model="amount"/>
-		      <button type="submit" class="btn" ng-click="update(item, amount)">Change Order Quantity</button>
-		    </form>
+	<div ng-repeat="order in cartHistory">
+		<div>Order# {{order.orderId}}<div>
+		<div>Date Ordered: {{order.orderDate}}
+	  <div class="results-content" ng-repeat="item in order.items">
+			<div class="row">
+		    <h3 class="sock-title">{{item.sock.title}}</h3>
+				<!-- <div>{{item}}</div> -->
+				<div class="col-md-4">
+			    <img src="{{item.sock.image}}" class="thumbnail"/>
+				</div>
+				<div class="col-md-8">
+			    <div>Description: {{item.sock.description}}</div>
+					<div>Pairs: {{item.quantity}}</div>
+					<div>Price/Pair: {{item.sock.price}}</div>
+					<div>Item Total: {{item.sock.price * item.quantity}}
+				</div>
 			</div>
 		</div>
 	</div>
