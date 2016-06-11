@@ -14,7 +14,9 @@
         <!-- !!! add tags to sock view !!!!-->
         <hr>
         <input ng-model="quantity" placeholder="Always buy more than you need"/>
-        <div ng-show="alerting">You have to add at least one!</div>
+        <div>
+          <div ng-show="alerting" ng-model="message">{{message}}</div>
+        </div>
         <button ng-click="addItem()" >Add to Cart</button>
         <div>
           <button>Thumbs Up</button>
