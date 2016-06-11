@@ -26,6 +26,7 @@ module.exports = function (app, db) {
             })
             .then(function (user) {
                 if (user) {
+                  user.sessionId = req.session.id
                     return user;
                 } else {
                     console.log("EEEEEEEMMMMMMMAAAAIIIIILLLLLLL",
@@ -42,6 +43,7 @@ module.exports = function (app, db) {
                         username: '@'+profile.displayName.split[0]
                     })
                     .then(function(user) {
+                      user.sessionId = req.session.id
                       return user
                     })
                 }

@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
 
   $stateProvider.state('cartHistory', {
     url: '/cart/history',
-    templateUrl: '/js/order/history.html',
+    templateUrl: '/js/order/cart.html',
     controller: 'cartHistory',
     resolve: {
       cartHistory: function (OrderFactory) {
