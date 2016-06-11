@@ -2,11 +2,6 @@
 
 var Sequelize = require('sequelize');
 var db = require('../_db');
-//var User = require('./models/user')(db);
-var Sock = require('./sock')(db);
-//var Review = require('./models/review')(db)
-//var Order = require('./models/order')(db)
-//var OrderDetail = require('./models/orderDetail')(db)
 
 module.exports = function (db) {
   return db.define('order_detail', {
@@ -19,6 +14,7 @@ module.exports = function (db) {
     },{
     classMethods: {
       numberOfOrders: function(currSockId, dateStart){
+        var Sock = db.model('sock');
         var today = new Date();
 
         return this.findAll({ where:
