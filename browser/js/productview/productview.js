@@ -69,7 +69,7 @@
 
   // }
 
-app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
+app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
 
 
 
@@ -77,6 +77,8 @@ app.controller('sockIdController', function ($scope, $state, $stateParams, theSo
   $scope.sock = theSock;
   $scope.reviews = theReviews;
 
+  console.log($scope.sock);
+  console.log($scope.reviews);
 
   $scope.alert = function(message) {
     $scope.message = message;
