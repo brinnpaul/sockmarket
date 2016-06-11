@@ -44,7 +44,7 @@
 
 // });
 
-app.controller('sockIdController', function ($scope, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, AuthService) {
+app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, AuthService) {
 
   $scope.dateParser = function(date){
 
@@ -75,9 +75,14 @@ app.controller('sockIdController', function ($scope, $stateParams, theSock, theR
   $scope.reviewNotAllowed = false;
   $scope.sock = theSock;
   $scope.reviews = theReviews;
-  console.log($scope.reviews);
+  console.log($scope.sock);
+
   $scope.alert = function() {
     $scope.alerting = !$scope.alerting
+  }
+
+  $scope.goToUserPage = function(userId) {
+    $state.go('user', {userId: userId});
   }
 
   $scope.addItem = function() {
@@ -116,8 +121,6 @@ app.controller('sockIdController', function ($scope, $stateParams, theSock, theR
   }
 
   $scope.userCannotPostReview();
-
-  console.log($scope.reviews);
 
   $scope.newReview = function() {
   

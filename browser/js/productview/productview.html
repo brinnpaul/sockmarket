@@ -9,6 +9,8 @@
 
 <style>
 
+/*the big sock in a big box and the smaller box next to it on the single sock page*/
+
 #sock-on-product-container {
   height: 620px;
   width: 620px;
@@ -32,6 +34,50 @@
   margin: 0 auto;
   position: relative;
   top: 10px;
+}
+
+
+#sock-designed-by-box {
+  background-color: #F8A055;
+  border-radius: 5px;
+  color: white;
+  width: 100%;
+  min-height: 48px;
+}
+
+#sock-designed-by-box:hover {
+  cursor: pointer;
+}
+
+.sock-designed-by-box table {
+  width: 100%;
+}
+
+.designed-by-text-cell {
+  width: 87.5%;
+} 
+
+#socked-designed-by-text {
+  margin-left: 4px;
+  vertical-align: center;
+}
+
+#socked-designed-by-profile-pic {
+  height: 38px;
+  width: 38px;
+  border-radius: 5px;
+  border: 3px solid white;
+  text-align: right;
+  margin-left: auto;
+  display: block;
+}
+
+#socked-designed-by-profile-pic:hover {
+  border: 3px solid #C6E2FF;
+}
+
+#sock-info-stats {
+  margin-top: 10px;
 }
 
 #cart-info-box {
@@ -58,7 +104,7 @@
   display: block;
 }
 
-/*.voting-table class styles are universal*/
+/*.voting-table class styles are universal -- once we add functionality for upvoting/downvoting, */
 
 .voting-table {
   text-align: center;
@@ -118,6 +164,11 @@
   border: 3px solid white;
 }
 
+#review-profile-pic:hover {
+  border: 3px solid #C6E2FF;
+  cursor: pointer;
+}
+
 .review-header-content ul {
   display: inline-block;
   list-style-type: none;
@@ -133,6 +184,11 @@
   position: relative;
   left: -40px;
   top: 10px;
+}
+
+.review-header-content:hover ul li {
+  color: #C6E2FF;
+  cursor: pointer;
 }
 
 .review-body {
@@ -213,16 +269,24 @@
       <div id="cart-info-box">
         <fieldset>
         <h3>Price: <span id="sockview-price">${{sock.price}}</span></h3>
-        <div id="sock-designed-by">
-          <div class="socked-designed-by-text">
-            <p><span>Designed by</span> {{sock.user.username}}</p>
-          </div>
-          <div class="socked-designed-by-profile-pic">
-          </div>
+        
+        <div ng-click="goToUserPage(sock.user.id)" id="sock-designed-by-box">
+          <table>
+            <tr class="designed-by-text-cell">
+            <td class="designed-by-text-cell">
+                <p id="socked-designed-by-text"><span>Designed by:</span> {{sock.user.username}}</p>
+            </td>
+            <td>
+               <img id="socked-designed-by-profile-pic" ng-src="{{sock.user.profile_pic}}">
+            </td>
+            </tr>
+          </table>
         </div>
-        <p><span>Description:</span> {{sock.description}}</p>
-        <p><span>Tags:</span> {{displayTags()}}</p>
-        <p><span>Posted on:</span> {{sock.createdAt}}</p>
+        <div id="sock-info-stats">
+          <p><span>Description:</span> {{sock.description}}</p>
+          <p><span>Tags:</span> {{displayTags()}}</p>
+          <p><span>Posted on:</span> {{sock.createdAt}}</p>
+        </div>
         </fieldset>
         <hr>
         <label>Quantity:</label>
@@ -251,10 +315,10 @@
         <div class="review-sockview">
           <div class="review-header">
             <div class="review-header-content">
-            <img id="review-profile-pic" src="{{review.user.profile_pic}}">
+            <img ng-click="goToUserPage(review.user.id)" id="review-profile-pic" src="{{review.user.profile_pic}}">
             <ul>
-              <li>{{review.user.first_name}} {{review.user.last_name}}</li>
-              <li>{{review.user.username}}</li>
+              <li ng-click="goToUserPage(review.user.id)">{{review.user.first_name}} {{review.user.last_name}}</li>
+              <li ng-click="goToUserPage(review.user.id)">{{review.user.username}}</li>
             </ul>
             </div>
           </div>
