@@ -2,6 +2,7 @@
 
 var Sequelize = require('sequelize');
 var db = require('../_db');
+var math = require('math');
 
 module.exports = function (db) {
   return db.define('order_detail', {
@@ -39,13 +40,14 @@ module.exports = function (db) {
         var Sock = db.model('sock');
 
         this.numberOfOrders(orderDet.sockId, startDate).then(function(numOfOrders){
-          if ((+numOfOrders > 40 || +numOfOrders < 5)&& orderDet.originalPrice > 3) {
-              Sock.increasePrice(orderDet.sockId, Math.ceil((orderDet.originalPrice - orderDet.originalPrice * 0.1),2)).then(function (smth) {
+          if ((+numOfOrders > 40 || +numOfOrders < 5) && orderDet.originalPrice > 3) {
+            console.log("orderdet", orderDet.sockId)
+              Sock.increasePrice(orderDet.sockId, math.round((orderDet.originalPrice * 0.9),2))
+                .then(function (res) {
+                  console.log("hereree!!!!!!---->", res)
             })
           }
         });
-
-
       }
     }
   })
