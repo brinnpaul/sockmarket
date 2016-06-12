@@ -1,28 +1,117 @@
 
 <div ng-controller="navbarCtrl">
-    <nav class="navbar navbar-static-top">
-        <div class="container">
-            <!--<div class="navbar-header">-->
-                <!--<fullstack-logo></fullstack-logo>-->
-            <!--</div>-->
-            <ul class="nav navbar-nav">
-                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-                </li>
-            </ul>
+
+    <style>
+
+    .navbar {
+        height: 40px;
+        /*border-bottom: 3px solid #CFCFCF;*/
+        position: fixed;
+        z-index: 1;
+        border-radius: 0px;
+        background-color: white;
+        width: 100%;
+        -webkit-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .nav li {
+        background: white;
+        font-weight: bold;
+    }
+
+    .nav-right-side-buttons {
+        text-align: right;
+    }
+
+    .nav li:hover {
+        background: white;
+    }
+
+    .navbar button {
+        text-align: right;
+        display: inline;
+        margin-top: 7px;
+    }
+
+    .nav-items {
+        display: inline-block;
+        margin-left: 0px;
+    }
+
+    .nav-items li {
+        display: inline-block;
+        color: black;
+        /*font-weight: bold;*/
+        background-color: white;
+        height: 49px;
+        padding-top: 14px;
+        padding-bottom: 10px;
+        margin-right: 15px;
+    }
+
+    .nav-items li:hover {
+        border-bottom: 3px solid #1E90FF; 
+    }
+
+    .nav-items a {
+        display: block;
+        color: black;
+
+    }
+
+    .nav-items li a:hover {
+        text-decoration: none;
+        color: #1E90FF;
+    }
+
+    .navbar input {
+        margin-top: 8px;
+        width: 80%;
+    }
+
+    </style>
+
+    <!-- originally had class navbar-static-top -->
+
+    <nav class="navbar">
+        <div class="container nav-classes">
+            <div class="row nav-classes">
+                <div class="col-md-6 nav-classes">
+                    <!-- original code : <ul class="nav navbar-nav"> -->
+                    <ul div class="nav-items">
+                        <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                            <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- let's move the login with fb/google buttons to the login page -->
 
 
-            <button ng-show="!user" class"btn login-button"><oauth-button provider-name="Google"></oauth-button></button>
-            <button ng-show="!user" class"btn login-button"><oauth-button provider-name="Facebook"></oauth-button></button>
-            <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-            <button ng-show="user" class="btn login-button" ng-click="logout()">Logout</button>
+                <div class="col-md-3">
+                    <input type="text" class="search-query form-control" placeholder="search by hashtags" ng-model="searchText" onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
+                    <span class="input-group-btn">
+                        <button id="btnSearch" class="btn btn-danger" type="button" ng-click="search(searchText)">
+                            <span class=" glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="col-md-3 nav-right-side-buttons">
+                    <button ui-sref="currentCart" class="btn btn-success">My Cart</button>
+                    <button ng-show="!user" ui-sref="signup" class="btn btn-warning">Sign up</button>
+                    <button ng-show="!user" ui-sref="login" class="btn btn-info">Login</button>
+                    <button ng-show="user" class="btn btn-info" ng-click="logout()">Logout</button>
+                </div>
+            </div>
         </div>
     </nav>
-    <div class="form-inline">
+    <!-- <div class="form-inline">
         <div id="custom-search-input">
-            <div class="input-group col-md-12">
-                <input type="text" class="  search-query form-control" ng-model="searchText"
-                       onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
+            <div class="input-group col-md-2">
+                <input type="text" class="search-query form-control" ng-model="searchText"
+                       onkeydown = "if (event.keyCode == 13) document.getElementById('btnSeasxrch').click()"/>
                 <span class="input-group-btn">
                     <button id="btnSearch" class="btn btn-danger" type="button" ng-click="search(searchText)">
                         <span class=" glyphicon glyphicon-search"></span>
@@ -30,5 +119,5 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
