@@ -5,7 +5,8 @@ app.directive('designView', function (SockFactory, $state) {
 		// scope: {
 		// 	theSock: '='
 		// },
-		link: function (scope, element, attrs) {
+		link: function (scope, element, attrs, designViewCtrl) {
+			
 			var title = scope.title;
 			var description = scope.description;
 			var tags = scope.tags;

@@ -23,6 +23,14 @@ router.get('/all', function (req, res, next) {
         .catch(next);
 })
 
+router.post('/matchId', function (req, res, next) {
+    User.findById(req.user.id)
+    .then(function (user) {
+      if (user) res.send(true)
+        else res.send(false)
+    })
+    .catch(next);
+})
 
 router.get('/:userId', function (req, res, next) {
 	res.send(req.userById);
