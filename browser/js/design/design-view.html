@@ -218,7 +218,11 @@ ul li {
 
 </style>
 
-<div class="container">
+<div ng-hide="showView">
+	Please <a ui-sref="signup"> sign up </a>for an account so we can save your designs for you!
+</div>
+
+<div class="container" ng-show="showView">
 		<div class="title-background">
 			<h1 ng-click-"working()">Design a Sock</h1>
 		</div>
