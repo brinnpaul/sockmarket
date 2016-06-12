@@ -298,7 +298,17 @@
         <hr>
         <label>Quantity:</label>
         <!-- replace quantity input with a dropdown menu -->
-        <input ng-model="quantity" placeholder="Always buy more than you need!"/>
+        <!-- <input ng-model="quantity" placeholder="Always buy more than you need!"/> -->
+        <select ng-model="quantity">
+          <option ng-repeat="i in 1 .. 15" value="{{i}}">{{i}}</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
         <div ng-show="alerting" ng-model="message">{{message}}</div>
         <br><button class="btn btn-primary" id="add-to-cart-button" ng-click="addItem()" >Add Socks to Cart</button>
         <table class="voting-table" id="voting-cart">
