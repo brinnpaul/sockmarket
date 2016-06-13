@@ -16,6 +16,9 @@ app.directive('currentCart', function ($state, OrderFactory) {
             item.quantity = item.newAmount;
             item.newAmount = null;
           })
+          .then(function() {
+            scope.calcTotal()
+          })
         }
 
         scope.delete = function(item) {
@@ -26,6 +29,16 @@ app.directive('currentCart', function ($state, OrderFactory) {
         scope.singleSockView = function(id) {
           $state.go('singleSockView', {id: id})
         }
+
+        scope.calcTotal = function() {
+          return OrderFactory.calculateTotal('current')
+          .then(function(cartTotal) { scope.total = cartTotal })
+        }
+
+        scope.calcTotal()
+        .then(function() {
+          console.log(scope.total)
+        })
 
         return OrderFactory.showCart('current')
         .then(function(current) { scope.currentCart = current })
@@ -40,10 +53,17 @@ app.directive('cartHistory', function($state, OrderFactory) {
     scope: {},
     templateUrl: 'js/order/history.html',
     link: function (scope) {
+
+      scope.calcTotal = function() {
+        return OrderFactory.calculateTotal('history')
+        .then(function(cartTotal) { scope.totalSpent = cartTotal })
+      }
+
+      scope.calcTotal()
+      .then(function() { console.log(scope.totalSpent) })
+
       return OrderFactory.showCart('history')
-      .then(function(history) {
-        console.log(history)
-        scope.cartHistory = history })
+      .then(function(history) { scope.cartHistory = history })
     }
   }
 

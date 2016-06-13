@@ -77,8 +77,6 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   $scope.sock = theSock;
   $scope.reviews = theReviews;
 
-  console.log($scope.sock);
-  console.log($scope.reviews);
 
   $scope.alert = function(message) {
     $scope.message = message;
@@ -138,7 +136,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   $scope.userCannotPostReview();
 
   $scope.newReview = function() {
-  
+
   //if user has already review sock, don't allow user to review it again
     var usersWhoReviewedSock = $scope.reviews.map(function(review){
       return review.userId;
@@ -176,9 +174,9 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       })
     }
   }
-
   $scope.upvote = SockFactory.upvote
   $scope.downvote = SockFactory.downvote
+
 
 });
 

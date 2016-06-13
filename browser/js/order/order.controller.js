@@ -1,5 +1,5 @@
 app.controller('cartCurrent', function ($scope, OrderFactory, currentCart) {
-
+  $scope.current = currentCart
 })
 
 

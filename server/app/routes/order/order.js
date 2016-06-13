@@ -25,11 +25,16 @@ var splitItemsByOrderId = function(cartHistory) {
   return orderIds
 }
 
+var determineId = function(req) {
+  return req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+''} : {userId:req.session.passport.user+''}
+}
+
 module.exports = router;
 // CLICK ON ADD TO CART
 router.post('/', function(req, res, next) {
   //find or create order based on userId or sessionId.
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+''} : {userId:req.session.passport.user+''}
+  // this can be changed to find -> need a route to always assure a cart exist -> /createcart
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid:null} : {userId:req.session.passport.user+'', date_paid:null}
 
   Order.findOrCreate({where:id})
   .then(function(order) {
@@ -43,14 +48,25 @@ router.post('/', function(req, res, next) {
   .catch(next)
 })
 
+router.get('/createcart', function(req, res, next) {
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid:null} : {userId:req.session.passport.user+'', date_paid:null}
+  Order.findOrCreate({where:id})
+  .then(function(order) {
+    res.json(order)
+  })
+  .catch(next)
+})
+
 router.get('/current', function(req, res, next) {
   var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
+  console.log("IIIIIIIIIIDDDDDDDD", id)
   Order.findOne({where:id})
   .then(function(order) {
     if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
     else return "No Current Orders"
   })
   .then(function(items) {
+    // console.log()
     res.json(items)
   })
   .catch(next)
