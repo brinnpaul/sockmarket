@@ -49,7 +49,24 @@ router.put('/:id', function (req, res, next) {
 
   User.findById(id)
   .then(function(user){
-    return user.update(req.body)
+    if (user.id == req.user.id) return user.update(req.body)
+    else throw error
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+})
+
+
+router.post('/delete/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  User.findById(id)
+  .then(function(user){
+    // console.log('ISADMIN', req.user.isAdmin)
+    if (user.id == req.user.id || req.user.isAdmin) return user.destroy()
+    else throw error
   })
   .then(function(response){
     res.send(response);

@@ -1,4 +1,4 @@
-app.controller('UserCtrl', function ($scope, $state, theUser, theUserSocks, AuthService) {
+app.controller('UserCtrl', function ($scope, $state, theUser, theUserSocks, AuthService, UserFactory) {
     console.log("controller", theUserSocks);
 	$scope.user = theUser;
 	$scope.socks = theUserSocks;
@@ -11,12 +11,13 @@ app.controller('UserCtrl', function ($scope, $state, theUser, theUserSocks, Auth
 		$state.go('singleSockView', {id: id})
 	};
 
-    $scope.verifyUser = function () {
-        if(AuthService.isAuthenticated()) {
-        return AuthService.getLoggedInUser().then(function (user) {
-            return user == $scope.user;
-        });
-    	}
-    };
+	AuthService.getLoggedInUser().then(function (user) {
+        return user.id == $scope.user.id || user.isAdmin ? true : false
+    })
+    .then(function (result) {
+    	console.log(result)
+    	$scope.verifyUser = result
+    });
 
+    $scope.delete = UserFactory.delete
 })

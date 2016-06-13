@@ -1,4 +1,4 @@
-app.factory('SockFactory', function ($http) {
+app.factory('SockFactory', function ($http, $state) {
 
   return {
     singleSock: function(sockId) {
@@ -47,6 +47,11 @@ app.factory('SockFactory', function ($http) {
       .then(function(res) {
         return res.data;
       })
+    },
+
+    delete: function (id) {
+      return $http.post('/api/sock/delete/' + id)
+      .then($state.go('home'))
     }
 
   }
