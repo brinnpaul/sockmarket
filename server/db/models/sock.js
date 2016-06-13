@@ -45,13 +45,9 @@ module.exports = function (db) {
       }
     }
   },{
-    classMethods: {
-      increasePrice: function(sockId, newPrice){
-        return this.update({price: newPrice},{
-          where: {
-            id: sockId
-          }
-        });
+    instanceMethod: {
+      changePrice: function(newPrice){
+        this.setDataValue('price', 10)
       }
     },
     hooks: {
