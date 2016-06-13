@@ -23,6 +23,14 @@ router.get('/all', function (req, res, next) {
         .catch(next);
 })
 
+router.post('/matchId', function (req, res, next) {
+    User.findById(req.user.id)
+    .then(function (user) {
+      if (user) res.send(true)
+        else res.send(false)
+    })
+    .catch(next);
+})
 
 router.get('/:userId', function (req, res, next) {
 	res.send(req.userById);
@@ -35,3 +43,18 @@ router.post('/', function (req, res, next) {
   })
   .catch(next)
 })
+
+router.put('/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  User.findById(id)
+  .then(function(user){
+    return user.update(req.body)
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+})
+
+

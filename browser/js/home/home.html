@@ -16,7 +16,10 @@
 }
 
 .sock-section {
-	background-color: #FAFAFA;
+	/*background-color: #FAFAFA;*/ /* gray 98*/
+	background-color: #F5F5F5;
+	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 .sock-section .row {
@@ -71,207 +74,211 @@
 </style>
 
 <div class="container">
-			<div class="title-background">
-				<h1>The Sock Market</h1>
+	<div class="title-background">
+		<h1>The Sock Market</h1>
+	</div>
+
+	<hr>
+
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>Most Recent Socks</h3>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<!-- hardcoded -->
+						<div class="sock-thumbnail"ng-repeat="sock in mostRecentSocks" ng-click="seeSock(sock.id)">
+							<img ng-src="{{sock.image}}">
+						</div>
+					</div>
+				</div>
 			</div>
-
-			<hr>
-
-			<div class="sock-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="titlebar">
-								<h3>Most Recent Socks</h3>
-								<!-- <hr> -->
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="content">
-								<!-- hardcoded -->
-								<div class="sock-thumbnail"ng-repeat="sock in mostRecentSocks" ng-click="seeSock(sock.id)">
-									<img ng-src="{{sock.image}}">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<div>
-
-			<hr>
-
-			<div class="sock-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="titlebar">
-								<h3>Most Purchased Socks</h3>
-								<!-- <hr> -->
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="content">
-								<!-- hardcoded -->
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<div>
-
-			<hr>
-
-			<div class="sock-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="titlebar">
-								<h3>Political Socks</h3>
-								<!-- <hr> -->
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="content">
-								<!-- hardcoded -->
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<div>
-			<hr>
-			<div class="sock-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="titlebar">
-								<h3>Humorous Socks</h3>
-								<!-- <hr> -->
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="content">
-								<!-- hardcoded -->
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<div>
-			<hr>
-			<div class="sock-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="titlebar">
-								<h3>90s Socks</h3>
-								<!-- <hr> -->
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="content">
-								<!-- hardcoded -->
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-								<div class="sock-thumbnail">
-									<img src="socks.jpg">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<div>
 		</div>
-		<hr>
-		<hr>
+	</div>
+
+	<hr>
+
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>Most Purchased Socks</h3>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<!-- hardcoded -->
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>Political Socks</h3>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<!-- hardcoded -->
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>Humorous Socks</h3>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<!-- hardcoded -->
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>90s Socks</h3>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<!-- hardcoded -->
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+						<div class="sock-thumbnail">
+							<img src="socks.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<hr>
+	<hr>
+	<br>
+</div>
+
 <!-- 
 
     <div ng-repeat="mostRecentSock in mostRecentSocks">	

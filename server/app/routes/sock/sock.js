@@ -1,5 +1,6 @@
 'use strict';
 var router = require('express').Router();
+var Sequelize = require('sequelize');
 
 var db = require("../../../db")
 var Sock = db.model("sock");
@@ -46,6 +47,26 @@ router.get('/byUser/:id', function(req, res, next) {
     res.json(sock)
   })
   .catch(next)
+})
+
+router.post('/upvote', function (req, res, next) {
+  return Sock.update(
+    {upvotes: Sequelize.literal('upvotes +1')},
+    {
+    where: {
+      id: req.body.id
+    }
+  })
+})
+
+router.post('/downvote', function (req, res, next) {
+  return Sock.update(
+    {downvotes: Sequelize.literal('downvotes +1')},
+    {
+    where: {
+      id: req.body.id
+    }
+  })
 })
 
 router.post('/', function(req, res, next) {

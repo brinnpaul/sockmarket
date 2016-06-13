@@ -9,4 +9,9 @@ dialect: 'postgres',
 port: 5432
 })
 
+//var db = new Sequelize('fsg', 'ani', 'sunshine', {
+//  dialect: 'postgres',
+//  port: 5432
+//})
+
 module.exports = db;

@@ -10,7 +10,13 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('designViewCtrl', function ($scope) {
+app.controller('designViewCtrl', function ($scope, $http) {
+
+  $http.post('/api/user/matchId')
+    .then(function (res) {
+      return $scope.showView = res
+    })
+
 	// // $scope.description;
 	// $scope.tags;
 	// $scope.title;
