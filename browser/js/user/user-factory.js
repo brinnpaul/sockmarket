@@ -1,4 +1,4 @@
-app.factory('UserFactory', function ($http) {
+app.factory('UserFactory', function ($http, $state) {
 	var UserFactory = {};
 
 	UserFactory.fetchById = function (id) {
@@ -14,6 +14,11 @@ app.factory('UserFactory', function ($http) {
 		.then(function (response) {
 			return response.data
 		})
+	}
+
+	UserFactory.delete = function (id) {
+		return $http.post('/api/user/delete/' + id)
+		.then($state.go('home'))
 	}
 
 	return UserFactory;

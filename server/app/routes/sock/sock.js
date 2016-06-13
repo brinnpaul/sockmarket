@@ -75,6 +75,21 @@ router.post('/downvote', function (req, res, next) {
   })
 })
 
+router.post('/delete/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  Sock.findById(id)
+  .then(function(sock){
+    // console.log('ISADMIN', req.user.isAdmin)
+    if (sock.UserId == req.user.id || req.user.isAdmin) return sock.destroy()
+    else throw error
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+});
+
 router.post('/', function(req, res, next) {
   
   function generateFileName() {

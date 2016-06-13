@@ -13,7 +13,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 { label: 'My Profile', state: 'user({userId:user.id})', auth: true },
                 // { label: 'About', state: 'about' },
                 { label: 'Design a Sock', state: 'designView' },
-                { label: 'Admin Dashboard', state: 'admin'}
+                // { label: 'Admin Dashboard', state: 'admin'}
+            ];
+
+            scope.adminItems = [
+                {label: 'Admin Dashboard', state: 'admin'}
             ];
 
             scope.user = null;
@@ -23,22 +27,22 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             };
 
             scope.logout = function () {
-                AuthService.logout().then(function () {
+                return AuthService.logout().then(function () {
                    $state.go('home');
                 });
             };
 
             var setUser = function () {
-                AuthService.getLoggedInUser().then(function (user) {
+                return AuthService.getLoggedInUser().then(function (user) {
                     scope.user = user;
-                });
+                })
             };
+
+            setUser()
 
             var removeUser = function () {
                 scope.user = null;
             };
-
-            setUser();
 
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
