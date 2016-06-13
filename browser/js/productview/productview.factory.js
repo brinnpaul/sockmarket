@@ -32,6 +32,14 @@ app.factory('SockFactory', function ($http) {
         e = e.substring(1);
         return e
       });
+    },
+
+    upvote: function (sockId) {
+      return $http.post('/api/sock/upvote', {id: sockId})
+    },
+
+    downvote: function (sockId) {
+      return $http.post('/api/sock/downvote', {id: sockId})
     }
 
   }
