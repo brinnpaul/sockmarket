@@ -99,12 +99,20 @@ router.post('/', function(req, res, next) {
   
   req.body.image = "/sock-images/" + imageFileName;
   req.body.userId = req.user.id;
-  Sock.create(req.body)
+  
+  User.findOne({
+    where: {
+      id: req.user.id
+    }
+  })
+  .then(function (result) {
+    console.log(result)
+    return Sock.create(req.body)
+   })
   .then(function(newSock) {
-    res.json(newSock);
+      res.json(newSock);
   })
   .catch(next);
-
 })
 
 
