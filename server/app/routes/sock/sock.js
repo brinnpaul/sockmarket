@@ -57,6 +57,9 @@ router.post('/upvote', function (req, res, next) {
       id: req.body.id
     }
   })
+  .then(function(result) {
+    res.send(result)
+  })
 })
 
 router.post('/downvote', function (req, res, next) {
@@ -66,6 +69,9 @@ router.post('/downvote', function (req, res, next) {
     where: {
       id: req.body.id
     }
+  })
+  .then(function(result) {
+    res.send(result)
   })
 })
 
