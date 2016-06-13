@@ -293,6 +293,9 @@
           <p><span>Description:</span> {{sock.description}}</p>
           <p><span>Tags:</span> {{displayTags()}}</p>
           <p><span>Posted on:</span> {{sock.createdAt}}</p>
+          <p><span>Upvotes:</span> {{sock.upvotes}}</p>
+          <p><span>Downvotes:</span> {{sock.downvotes}}</p>
+
         </div>
         </fieldset>
         <hr>
@@ -313,8 +316,8 @@
         <br><button class="btn btn-primary" id="add-to-cart-button" ng-click="addItem()" >Add Socks to Cart</button>
         <table class="voting-table" id="voting-cart">
           <tr>
-            <td ng-click="upvote()" class="upvote-cell">&#x1f44d;</td>
-            <td ng-click="downvote()" class="downvote-cell">&#x1F44E;</td>
+            <td ng-click="upvote(sock.id)" class="upvote-cell">&#x1f44d;</td>
+            <td ng-click="downvote(sock.id)" class="downvote-cell">&#x1F44E;</td>
           </tr>
         </table>
       </div>

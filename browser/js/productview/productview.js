@@ -69,7 +69,7 @@
 
   // }
 
-app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory) {
+app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory) {
 
 
 
@@ -176,6 +176,9 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       })
     }
   }
+
+  $scope.upvote = SockFactory.upvote
+  $scope.downvote = SockFactory.downvote
 
 });
 
