@@ -2,13 +2,10 @@
 var router = require('express').Router();
 module.exports = router;
 
-<<<<<<< HEAD
 router.use('/members', require('./members'));
 router.use('/sock', require('./sock/sock'))
 router.use('/sock', require('./review/review'))
-=======
 router.use('/user', require('./user.js'));
->>>>>>> master
 
 // Make sure this is after all of
 // the registered routes!
