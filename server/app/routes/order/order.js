@@ -7,7 +7,7 @@ var Order = db.model('order');
 var User = db.model('user')
 var OrderDetail = db.model('order_detail');
 
-var splitItemsByOrderId = function(cartHistory) {
+var splitItemsByOrderId = function(cartHistory) { //should this be an instance method?
   var orderIds = []
   var orderId = null
   cartHistory.forEach(function(item) {
@@ -27,11 +27,11 @@ var splitItemsByOrderId = function(cartHistory) {
 
 module.exports = router;
 // CLICK ON ADD TO CART
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) { // is this route for just orders? or just cart? CLOB
   //find or create order based on userId or sessionId.
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+''} : {userId:req.session.passport.user+''}
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+''} : {userId:req.session.passport.user+''} //req.user... to string? CLOB
 
-  Order.findOrCreate({where:id})
+  Order.findOrCreate({where:id}) // this should be cart middleware? CLOB
   .then(function(order) {
     req.body.orderId = order[0].id+'';
     console.log("BODYyyy", req.body);
@@ -44,11 +44,11 @@ router.post('/', function(req, res, next) {
 })
 
 router.get('/current', function(req, res, next) {
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
+  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null}; // repetitive CLOB
   Order.findOne({where:id})
   .then(function(order) {
     if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
-    else return "No Current Orders"
+    else return "No Current Orders" //returning a string for no results? maybe {} CLOB
   })
   .then(function(items) {
     res.json(items)
@@ -59,13 +59,13 @@ router.get('/current', function(req, res, next) {
 router.get('/history', function(req, res, next) {
   var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: {$ne:null}} : {userId:req.session.passport.user+'', date_paid: {$ne:null}};
   Order.findAll({where:id})
-  .then(function(order) {
+  .then(function(order) { 
     var ids = order.map(function(ord) { return ord.id })
-    if (order) {
+    if (order) { // [] === true CLOB
       return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
-      .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
+      .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) }) //make linear CLOB
     }
-    else return "No Order History"
+    else return "No Order History" //maybe return [] ? CLOB
   })
   .then(function(items) {
     res.json(items)

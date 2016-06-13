@@ -7,16 +7,16 @@ module.exports = function (db) {
       type: Sequelize.BOOLEAN
     },
     title: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING //should this be unique?
     },
     image: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING //url validator CLOB
     },
     description: {
       type: Sequelize.STRING // How to limit char length
     },
     price: {
-      type: Sequelize.FLOAT,
+      type: Sequelize.FLOAT, //cents, INT
       defaultValue: 4.99
     },
     inventory: {
@@ -46,7 +46,7 @@ module.exports = function (db) {
     }
   },{
     classMethods: {
-      increasePrice: function(sockId, newPrice){
+      increasePrice: function(sockId, newPrice){ //instance method?
         return this.update({price: newPrice},{
           where: {
             id: sockId

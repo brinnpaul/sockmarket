@@ -1,11 +1,11 @@
 'use strict';
-var crypto = require('crypto');
-var _ = require('lodash');
+var crypto = require('crypto'); // why?
+var _ = require('lodash'); // why?
 var Sequelize = require('sequelize');
 
 module.exports = function (db) {
   return db.define('review', {
-    date: {
+    date: { //createdAt default CLOB
       type: Sequelize.DATE
     },
     text: {

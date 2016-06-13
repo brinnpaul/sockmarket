@@ -9,7 +9,7 @@ router.use('/order', require('./order/order'))
 
 router.use('/user', require('./user.js'));
 
-router.use('/search', require('./search/search'))
+router.use('/search', require('./search/search')) // ?
 
 // Make sure this is after all of
 // the registered routes!
