@@ -9,7 +9,7 @@ var db = new Sequelize('testing-fsg', 'bpr', 'sunshine', {
     logging: false
 });
 
-require('../../../server/db/models/sock')(db)
+require('../../../server/db/models/sock')(db) // watch out for re requiring files CLOB
 
 var Sock = db.model('sock')
 

@@ -40,12 +40,12 @@ router.post('/', function(req, res, next) {
 
   Review.create({
     text: req.body.text,
-    userId: req.session.passport.user,
+    userId: req.session.passport.user, //req.user.id CLOB
     // userId: req.body.userId,
     sockId: req.body.sockId
   }).then(function(review){
     User.findOne({where: {id: req.session.passport.user}})
-    .then(function(user){
+    .then(function(user){ // nested .then CLOB
       //review.user = user
       res.json({review: review, user: user});
     })

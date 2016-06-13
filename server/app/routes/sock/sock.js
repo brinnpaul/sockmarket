@@ -7,7 +7,7 @@ var Sock = db.model("sock");
 var User = db.model("user");
 var fs = require('fs');
 
-module.exports = router;
+module.exports = router; //make a router.param! CLOB
 
 router.get('/recent', function(req, res, next) {
   return Sock.findAll({
@@ -37,7 +37,7 @@ router.get('/:id', function(req, res, next) {
   .catch(next)
 })
 
-router.get('/byUser/:id', function(req, res, next) {
+router.get('/byUser/:id', function(req, res, next) { //put this on the user router CLOB
   return Sock.findAll({ where: {
     userId: req.params.id
   }
@@ -49,7 +49,7 @@ router.get('/byUser/:id', function(req, res, next) {
   .catch(next)
 })
 
-router.post('/upvote', function (req, res, next) {
+router.post('/upvote', function (req, res, next) { //put request, rather than post
   return Sock.update(
     {upvotes: Sequelize.literal('upvotes +1')},
     {
@@ -64,14 +64,14 @@ router.post('/downvote', function (req, res, next) {
     {downvotes: Sequelize.literal('downvotes +1')},
     {
     where: {
-      id: req.body.id
+      id: req.body.id //parameter! CLOB
     }
   })
 })
 
 router.post('/', function(req, res, next) {
   
-  function generateFileName() {
+  function generateFileName() { //model logic should be class/instance method CLOB
     var key = "z1234567890QWERTYUIOPASDFGHJKLZXCVBNM123456789qwertyuiopasdfghjklzxcvbnm";
     var output = '';
 

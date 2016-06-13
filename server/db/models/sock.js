@@ -46,7 +46,7 @@ module.exports = function (db) {
     }
   },{
     classMethods: {
-      increasePrice: function(sockId, newPrice){ //instance method?
+      increasePrice: function(sockId, newPrice){ //instance method? CLOB
         return this.update({price: newPrice},{
           where: {
             id: sockId

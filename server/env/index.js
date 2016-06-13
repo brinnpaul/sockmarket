@@ -7,3 +7,5 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     module.exports = require(devConfigPath);
 }
+
+//maybe add a testing environment as well. CLOB
