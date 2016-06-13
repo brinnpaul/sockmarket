@@ -23,6 +23,14 @@ module.exports = function (db) {
       type: Sequelize.INTEGER,
       defaultValue: 10
     },
+    upvotes: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0
+    },
+    downvotes: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0
+    },
     tags: {
       type: Sequelize.ARRAY(Sequelize.STRING),
       defaultValue: [],

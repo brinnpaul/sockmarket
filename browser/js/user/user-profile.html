@@ -1,31 +1,45 @@
-		<div class="container">
-			<div class="user-name-background">
-			<h1>{{user.first_name}} {{user.last_name}}</h1>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="user-info">
-					<img ng-src="{{ user.profile_pic }}" alt="{{user.first_name}} {{user.last_name}}" id="profile-pic">
-					<hr>
-					<ul>
-						<li id="username-text">@{{user.first_name}}</li>
-						<li>Member since {{user.createdAt}}</li>
-						<li>Hometown: {{user.city}}, {{user.state}}, {{user.country}}</li>
-						<li>0 socks posted</li>
-                        <li>Order History</li>
-                        <li>My Cart</li>
-					</ul>
-					<hr>
-					</div>
+<style>
 
-				</div>
-				<div class="col-md-9" >
-					<!-- <h2>Socks</h2> -->
-					<div class="sock-thumbnail" ng-repeat="sock in socks">
-						<img ng-click="toSockView(sock.id)" ng-src="{{sock.image}}">
-					</div>
-				</div>
-			</div>
+.btn-shipping {
+  color: white;
+  background-color: #FF9912;
+}
+
+.btn-shipping:hover {
+  color: white;
+}
+
+</style>
+
+<div class="container">
+	<div class="user-name-background">
+	<h1>{{user.first_name}} {{user.last_name}}</h1>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="user-info">
+			<img ng-src="{{ user.profile_pic }}" alt="{{user.first_name}} {{user.last_name}}" id="profile-pic">
 			<hr>
+			<ul>
+				<li id="username-text">@{{user.first_name}}</li>
+				<li>Member since {{user.createdAt}}</li>
+				<li>Hometown: {{user.city}}, {{user.state}}, {{user.country}}</li>
+				<li>{{socks.length}} socks posted</li>
+                <li>Order History</li>
+                <li><button ng-click="toShippingInfo(user.id)" class="btn btn-shipping">Edit Shipping Info</button></li>
+                <li><button ui-sref="currentCart" class="btn btn-success">My Cart</button></li>
+			</ul>
+			<hr>
+			</div>
+
 		</div>
+		<div class="col-md-9" >
+			<!-- <h2>Socks</h2> -->
+			<div class="sock-thumbnail" ng-repeat="sock in socks">
+				<img ng-click="toSockView(sock.id)" ng-src="{{sock.image}}">
+			</div>
+		</div>
+	</div>
+	<hr>
+</div>

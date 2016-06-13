@@ -43,3 +43,18 @@ router.post('/', function (req, res, next) {
   })
   .catch(next)
 })
+
+router.put('/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  User.findById(id)
+  .then(function(user){
+    return user.update(req.body)
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+})
+
+
