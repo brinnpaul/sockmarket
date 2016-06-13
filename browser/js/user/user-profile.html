@@ -27,7 +27,7 @@
 				<li>Hometown: {{user.city}}, {{user.state}}, {{user.country}}</li>
 				<li>{{socks.length}} socks posted</li>
                 <li>Order History</li>
-                <li><button ng-click="toShippingInfo(user.id)" class="btn btn-shipping">Edit Shipping Info</button></li>
+                <li><button ng-show="verifyUser()" ng-click="toShippingInfo(user.id)" class="btn btn-shipping">Edit Shipping Info</button></li>
                 <li><button ui-sref="currentCart" class="btn btn-success">My Cart</button></li>
 			</ul>
 			<hr>
