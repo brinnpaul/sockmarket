@@ -49,6 +49,7 @@ app.controller('sockIdController', function ($scope, $state, $stateParams, theSo
   $scope.sock = theSock;
   $scope.reviews = theReviews;
 
+
   $scope.alert = function(message) {
     $scope.message = message
     $scope.alerting = !$scope.alerting
@@ -98,6 +99,7 @@ app.controller('sockIdController', function ($scope, $state, $stateParams, theSo
     // add in after finishing other stuff
   }
 
+  return OrderFactory.ensureCart()
 });
 
 app.config(function ($stateProvider) {

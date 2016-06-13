@@ -59,7 +59,7 @@
 		    <div>Description: {{item.sock.description}}</div>
 				<div>Pairs: {{item.quantity}}</div>
 				<div>Price/Pair: {{item.sock.price}}</div>
-				<div>Item Total: {{item.sock.price * item.quantity}}
+				<div>Item Total: {{item.sock.price * item.quantity}}</div>
 		    <form>
 		      <input type="text" ng-model="item.newAmount"/>
 		      <button type="submit" class="btn" ng-click="update(item)">Change Item Quantity</button>
@@ -67,5 +67,9 @@
 		    </form>
 			</div>
 		</div>
+	</div>
+	<div class="results-content">
+		<div>Order Total: {{total}}</div>
+		<button class="btn" ng-click"toCheckout()">Check Out</button>
 	</div>
 </div>

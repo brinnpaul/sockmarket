@@ -50,8 +50,8 @@
 
 <div class="container">
 	<div ng-repeat="order in cartHistory">
-		<div>Order# {{order.orderId}}<div>
-		<div>Date Ordered: {{order.orderDate}}
+		<div>Order# {{order.orderId}}</div>
+		<div>Date Ordered: {{order.orderDate}}</div>
 	  <div class="results-content" ng-repeat="item in order.items">
 			<div class="row">
 		    <h3 class="sock-title">{{item.sock.title}}</h3>
@@ -63,9 +63,13 @@
 			    <div>Description: {{item.sock.description}}</div>
 					<div>Pairs: {{item.quantity}}</div>
 					<div>Price/Pair: {{item.sock.price}}</div>
-					<div>Item Total: {{item.sock.price * item.quantity}}
+					<div>Item Total: {{item.sock.price * item.quantity}}</div>
 				</div>
 			</div>
+		</div>
+		<div class="results-content">
+			<div>Order Total: {{order.total}}</div>
+			<button class="btn">Check Out</button>
 		</div>
 	</div>
 </div>
