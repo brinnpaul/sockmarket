@@ -35,10 +35,9 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state) {
        last_name: $scope.lastname,
        isAdmin: false,
        newUser: true
-     }).then(function(res){
-        res.newUser = true;
-        console.log(res);
-        return $state.go('personal', {id: res.id});
+     }).then(function(response){
+        // response.newUser = true;
+        return $state.go('personal', {id: response.id});
      })
     } else {
       return;
