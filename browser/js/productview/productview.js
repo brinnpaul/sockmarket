@@ -177,8 +177,19 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
     }
   }
 
-  $scope.upvote = SockFactory.upvote
-  $scope.downvote = SockFactory.downvote
+  $scope.upvote = function(sockId) {
+    return SockFactory.upvote(sockId)
+    .then(function (res) {
+      $scope.sock.upvotes++
+    })
+  }
+  
+  $scope.downvote = function (sockId) {
+    return SockFactory.downvote(sockId)
+    .then(function (res) {
+      $scope.sock.downvotes++
+    })
+  }
 
 });
 

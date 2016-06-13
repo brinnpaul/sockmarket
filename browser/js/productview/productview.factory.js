@@ -36,10 +36,17 @@ app.factory('SockFactory', function ($http) {
 
     upvote: function (sockId) {
       return $http.post('/api/sock/upvote', {id: sockId})
+      .then(function(res) {
+        console.log(res.data)
+        return res.data;
+      })
     },
 
     downvote: function (sockId) {
       return $http.post('/api/sock/downvote', {id: sockId})
+      .then(function(res) {
+        return res.data;
+      })
     }
 
   }
