@@ -49,3 +49,8 @@
 	display: block;
 	margin: 10px auto auto auto;
 }
+
+.btn-shipping {
+	color: white;
+	background-color: #FF9912;
+}
