@@ -58,25 +58,29 @@ var seedSocks = function () {
         title: 'socks by obama',
         description: 'great socks',
         tags: 'change',
-        userId: 2
+        userId: 2,
+        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
     },
     {
       title: 'sockz: return of the socks',
       description: 'crazy drama about socks wearing socks',
       tags: 'drama sockz',
-      userId: 2
+      userId: 2,
+      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
     },
     {
       title: 'hello socks!',
       description: 'crazy drama about socks wearing socks',
       tags: 'drama sockz',
-      userId: 2
+      userId: 2,
+      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
     },
     {
       title: 'socks socks socks',
       description: 'made in usa',
       tags: 'blue red white',
-      userId: 2
+      userId: 2,
+      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
     }
   ]
 
