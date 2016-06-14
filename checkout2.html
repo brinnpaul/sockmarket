@@ -1,0 +1,19 @@
+<button class="btn btn-primary" data-toggle="modal" data-target="#checkout">Dolla dolla bill y'all</button>
+
+<div class="modal fade" id="checkout">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form" action="/charge" method="POST" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card"></span></span>
+                                <input id="card-num" class="form-control" type="text" size="16" placeholder="Card number" autofocus="autofocus" />
+                            </div>
+                        </div>
+                    </div>
