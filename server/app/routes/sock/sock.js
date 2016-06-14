@@ -57,6 +57,9 @@ router.post('/upvote', function (req, res, next) {
       id: req.body.id
     }
   })
+  .then(function(result) {
+    res.send(result)
+  })
 })
 
 router.post('/downvote', function (req, res, next) {
@@ -67,7 +70,25 @@ router.post('/downvote', function (req, res, next) {
       id: req.body.id
     }
   })
+  .then(function(result) {
+    res.send(result)
+  })
 })
+
+router.post('/delete/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  Sock.findById(id)
+  .then(function(sock){
+    // console.log('ISADMIN', req.user.isAdmin)
+    if (sock.UserId == req.user.id || req.user.isAdmin) return sock.destroy()
+    else throw error
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+});
 
 router.post('/', function(req, res, next) {
   
@@ -93,12 +114,20 @@ router.post('/', function(req, res, next) {
   
   req.body.image = "/sock-images/" + imageFileName;
   req.body.userId = req.user.id;
-  Sock.create(req.body)
+  
+  User.findOne({
+    where: {
+      id: req.user.id
+    }
+  })
+  .then(function (result) {
+    console.log(result)
+    return Sock.create(req.body)
+   })
   .then(function(newSock) {
-    res.json(newSock);
+      res.json(newSock);
   })
   .catch(next);
-
 })
 
 

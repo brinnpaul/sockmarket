@@ -24,7 +24,7 @@ app.directive('designView', function (SockFactory, $state) {
 				};
 				return SockFactory.saveDesign(newSockDataObj)
 				.then(function (result) {
-					$state.go('user', {userId: result.data.userId})
+					if (result) $state.go('user', {userId: result.data.userId})
 				})
 			};
 

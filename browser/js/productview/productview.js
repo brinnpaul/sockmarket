@@ -69,14 +69,13 @@
 
   // }
 
-app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory) {
+app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory, UserFactory) {
 
 
 
   $scope.reviewNotAllowed = false;
   $scope.sock = theSock;
   $scope.reviews = theReviews;
-
 
   $scope.alert = function(message) {
     $scope.message = message;
@@ -174,9 +173,30 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       })
     }
   }
-  $scope.upvote = SockFactory.upvote
-  $scope.downvote = SockFactory.downvote
 
+  $scope.upvote = function(sockId) {
+    return SockFactory.upvote(sockId)
+    .then(function (res) {
+      $scope.sock.upvotes++
+    })
+  }
+  
+  $scope.downvote = function (sockId) {
+    return SockFactory.downvote(sockId)
+    .then(function (res) {
+      $scope.sock.downvotes++
+    })
+  }
+
+  AuthService.getLoggedInUser().then(function (user) {
+        return user.id == $scope.sock.UserId || user.isAdmin? true : false
+    })
+    .then(function (result) {
+      console.log(result)
+      $scope.verifyUser = result
+    });
+
+  $scope.delete = SockFactory.delete
 
 });
 
