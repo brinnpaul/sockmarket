@@ -21,5 +21,9 @@ app.factory('UserFactory', function ($http, $state) {
 		.then($state.go('home'))
 	}
 
+	UserFactory.makeAdmin = function (id) {
+		return $http.put('/api/user/makeAdmin/' + id)
+	}
+
 	return UserFactory;
 })

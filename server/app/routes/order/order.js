@@ -4,7 +4,7 @@ var router = require('express').Router();
 var db = require("../../../db");
 var Sock = db.model("sock");
 var Order = db.model('order');
-var User = db.model('user')
+var User = db.model('user');
 var OrderDetail = db.model('order_detail');
 
 var splitItemsByOrderId = function(cartHistory) {
