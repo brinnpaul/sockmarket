@@ -48,12 +48,15 @@ router.post('/', function(req, res, next) {
 })
 
 router.get('/createcart', function(req, res, next) {
-  var id = req.user.id === undefined ? {sessionId:req.session.id, date_paid:null} : {userId:req.user.id, date_paid:null}
+  var id = req.user === undefined ? {sessionId:req.session.id, date_paid:null} : {userId:req.session.passport.user, date_paid:null}
+  console.log('ROUTEHANDLER')
+  console.log('ROUTEHANDLER')
   Order.findOrCreate({where:id})
   .then(function(order) {
     res.json(order)
   })
   .catch(next)
+  res.send("Hello")
 })
 
 router.get('/current', function(req, res, next) {

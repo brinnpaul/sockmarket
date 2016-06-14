@@ -40,7 +40,7 @@ module.exports = function (app, db) {
 
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
     passport.serializeUser(function (user, done) {
-
+      console.log("UUUUUUUUUUUSERIDS", user.id, user.sessionId)
         Order.updateCartOnLogin(user.id, user.sessionId)
         .catch(done)
 

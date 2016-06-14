@@ -1,0 +1,20 @@
+{
+  "name": "FullstackGeneratedApp",
+  "description": "A generated project at Fullstack Academy",
+  "main": "server/start.js",
+  "authors": [
+    "Brinn Riordan <brinn.riordan@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/brinnpaul/sockmarket",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "stripe-angular": "^1.0.2"
+  }
+}

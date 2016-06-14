@@ -46,7 +46,25 @@
 	padding-left: 20px;
 }
 
+  /*body {
+      margin: 8px;
+  }*/
+  .modal-dialog {
+      width: 350px;
+  }
+  .modal-header {
+      border: none;
+      padding: 0;
+  }
+  .modal-content {
+      padding: 10px;
+  }
+
 </style>
+
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
+<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 
 <div class="container">
   <div ng-repeat="item in currentCart">
@@ -67,66 +85,20 @@
       <div>{{total}}</div>
     </div>
   </div>
-  <div class="row results-content-checkout">
-    <div class="col-md-4">
-      <!-- <form action="" method="POST"> -->
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-          data-amount="999"
-          data-name="Stripe.com"
-          data-description="Widget"
-          data-image="/img/documentation/checkout/marketplace.png"
-          data-locale="auto">
 
-          $(function() {
-            var $form = $('#payment-form')
-            $form.submit(function(event) {
-              // Disable the submit button to prevent repeated clicks:
-              $form.find('.submit').prop('disabled', true)
-              // Request a token from Stripe:
-              function stripeResponseHandler(status, response) {
-                if (response.error) {
-                  $('#charge-error').show();
-                  $('.payment-errors').text(response.error.message);
-                  $('.submit-button').removeAttr('disabled');
-                  console.log(status)
-                  console.log(response)
-                } else {
-                  var form$ = $('#payment-form');
-                  var token = response.id;
-                  form$.append('<input type="hidden" name="stripeToken" value="' + token + '"/>');
-                  form$.get(0).submit();
-                  console.log(status)
-                  console.log(response)
-                }
-              }
-              Stripe.card.createToken($form, stripeResponseHandler)
-              // Prevent the form from being submitted:
-              return false
-            })
-          })
-        </script>
-      
-			<form id="payment-form" role="form" autocomplete="on" action="/stripe" method="POST" style="max-width: 300px;">
-				<div id="charge-error" class="alert alert-danger payment-errors"></div>
-				<div class="form-group">
-					<label>Credit Card Info</label>
-					<input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
-				</div>
-				<div class="form-group">
-					<input type="tel" class="form-control cc-cvc card-cvc" data-stripe="cvc" autocomplete="off" placeholder="CVC" required>
-				</div>
-				<div class="form-group">
-					<label>Card Expiration Date</label>
-					<input type="text" data-stripe="exp-month" placeholder="MM" class="card-expiry-month form-control" required>
-					<input type="text" data-stripe="exp-year" placeholder="YYYY" class="card-expiry-year form-control" required>
-				</div>
-				<!-- <input style="display:none" name="productAmount" value="{{product.amount}}">
-				<input style="display:none" name="productName" value="{{product.name}}">
-				<input style="display:none" name="productID" value="{{product._id.toString()}}"> -->
-				<button type="submit" class="btn btn-default submit-button btn-block">Submit</button>
-			</form>
-    </div>
-  </div>
+		<form id="form" stripe:form="charge">
+				<fieldset>
+			    <label>Card #: <input type="text" size="16" data-stripe="number" placeholder="Card number" /></label>
+			    <label>Expiry month: <input type="text" size="2" data-stripe="exp-month" placeholder="MM" /></label>
+			    <label>year: <input type="text" size="2" data-stripe="exp-year" placeholder="YY" /></label>
+			    <label>CVC: <input type="text" size="4" data-stripe="cvc" placeholder="CVC" /></label>
+				</fieldset>
+		    <button type="submit">Pay</button>
+		</form>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://js.stripe.com/v2/"></script>
+
+
+  <!-- </div> -->
 </div>
