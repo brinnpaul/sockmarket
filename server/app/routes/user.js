@@ -58,6 +58,33 @@ router.put('/:id', function (req, res, next) {
   .catch(next);
 })
 
+router.put('/makeAdmin/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  User.findById(id)
+  .then(function(user){
+    console.log('THE USER', user.isAdmin)
+    if (req.user.isAdmin && !user.isAdmin) {
+      return user.update({isAdmin: true})
+      .then(function (result) {
+        console.log('RESULT1', result)
+        return user
+      })
+    } else if (req.user.isAdmin && user.isAdmin) {
+      return user.update({isAdmin: false})
+      .then(function (result) {
+        console.log('RESULT2', result)
+        return user
+      })
+    }
+  })
+  .then(function(updatedUser){
+    console.log('UPDATED USER', updatedUser)
+    res.send();
+    return updatedUser.isAdmin
+  })
+  .catch(next);
+})
 
 router.post('/delete/:id', function (req, res, next) {
   var id = req.params.id;
