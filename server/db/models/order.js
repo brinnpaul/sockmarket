@@ -5,8 +5,7 @@ var Sequelize = require('sequelize')
 // var d = require("../../db/")
 
 module.exports = function (db) {
-  var OrderDetail = require('./orderDetail')
-  var Sock = db.model('sock')
+
   // db.initVirtualFields()
   return db.define('order', {
     date_shipped: {
@@ -22,6 +21,8 @@ module.exports = function (db) {
     order_total: {
       type: Sequelize.VIRTUAL,
       get: function() {
+        var OrderDetail = db.model('order_detail')
+        var Sock = db.model('sock')       
         return OrderDetail.findAll({where:{orderId:this.id}, include: [{model:Sock}]})
         .then(function(order) {
           return order.reduce(function(o, item) {return o + (
@@ -32,6 +33,8 @@ module.exports = function (db) {
   }, {
     getterMethods: {
       total: function() {
+        var OrderDetail = db.model('order_detail')
+        var Sock = db.model('sock')       
         return OrderDetail.findAll({where:{orderId:this.id}, include: [{model:Sock}]})
         .then(function(order) {
           return order.reduce(function(o, item) {return o + (
