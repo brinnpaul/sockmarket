@@ -17,8 +17,6 @@ module.exports = function (app, db) {
     };
 
     var verifyCallback = function (req, accessToken, refreshToken, profile, done) {
-        console.log("PROFILLLLEEEE", profile)
-        console.log("REQUEST SEESSSSIONNN", req.session)
         User.findOne({
                 where: {
                     facebook_id: profile.id
@@ -29,10 +27,6 @@ module.exports = function (app, db) {
                   user.sessionId = req.session.id
                     return user;
                 } else {
-                    console.log("EEEEEEEMMMMMMMAAAAIIIIILLLLLLL",
-                                 '\n', profile.displayName.split(' ')[0],
-                                 '\n', profile.displayName.split(' ')[1],
-                                 '\n' )
                     return User.create({
                         facebook_id: profile.id,
                         email: 'not@available.com',
@@ -49,11 +43,9 @@ module.exports = function (app, db) {
                 }
             })
             .then(function (userToLogin) {
-              console.log("AM I RUNNNING")
                 done(null, userToLogin);
             })
             .catch(function (err) {
-                console.error('Error creating user from Facebook authentication', err);
                 done(err);
             })
 

@@ -39,7 +39,6 @@ router.post('/', function(req, res, next) {
   Order.findOrCreate({where:id})
   .then(function(order) {
     req.body.orderId = order[0].id+'';
-    console.log("BODYyyy", req.body);
     return OrderDetail.create(req.body);
   })
   .then(function(newItem) {
@@ -49,7 +48,7 @@ router.post('/', function(req, res, next) {
 })
 
 router.get('/createcart', function(req, res, next) {
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid:null} : {userId:req.session.passport.user+'', date_paid:null}
+  var id = req.user.id === undefined ? {sessionId:req.session.id, date_paid:null} : {userId:req.user.id, date_paid:null}
   Order.findOrCreate({where:id})
   .then(function(order) {
     res.json(order)
@@ -58,12 +57,10 @@ router.get('/createcart', function(req, res, next) {
 })
 
 router.get('/current', function(req, res, next) {
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: null} : {userId:req.session.passport.user+'', date_paid: null};
-  console.log("IIIIIIIIIIDDDDDDDD", id)
+  var id = req.user.id === undefined ? {sessionId:req.session.id, date_paid: null} : {userId:req.user.id, date_paid: null};
   Order.findOne({where:id})
   .then(function(order) {
-    if (order) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
-    else return "No Current Orders"
+    return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
   })
   .then(function(items) {
     // console.log()
