@@ -47,6 +47,13 @@ app.factory('SockFactory', function ($http) {
       .then(function(res) {
         return res.data;
       })
+    },
+
+    getUnsignedURL: function (){
+      return $http.get('/api/sock/unsignedURL')
+        .then(function(res){
+          return res.data;
+        })
     }
 
   }
