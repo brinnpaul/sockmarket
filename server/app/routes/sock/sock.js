@@ -101,17 +101,38 @@ router.post('/downvote', function (req, res, next) {
   })
 })
 
+router.post('/delete/:id', function (req, res, next) {
+  var id = req.params.id;
 
-router.post('/', function(req, res, next) {
-
-  req.body.userId = req.user.id;
-  console.log("req bodey for the sock creation", req.body);
-  Sock.create(req.body)
-  .then(function(newSock) {
-    res.json(newSock);
+  Sock.findById(id)
+  .then(function(sock){
+    // console.log('ISADMIN', req.user.isAdmin)
+    if (sock.UserId == req.user.id || req.user.isAdmin) return sock.destroy()
+    else throw error
+  })
+  .then(function(response){
+    res.send(response);
   })
   .catch(next);
+});
 
+
+router.post('/', function(req, res, next) {
+  req.body.userId = req.user.id;
+
+  User.findOne({
+    where: {
+      id: req.user.id
+    }
+  })
+  .then(function (result) {
+    console.log(result)
+    return Sock.create(req.body)
+   })
+  .then(function(newSock) {
+      res.json(newSock);
+  })
+  .catch(next);
 })
 
 

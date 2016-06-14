@@ -314,6 +314,7 @@
         </select>
         <div ng-show="alerting" ng-model="message">{{message}}</div>
         <br><button class="btn btn-primary" id="add-to-cart-button" ng-click="addItem()" >Add Socks to Cart</button>
+        <button ng-show="verifyUser" class="btn btn-primary" id="add-to-cart-button" ng-click="delete(sock.id)" >Delete Product</button>
         <table class="voting-table" id="voting-cart">
           <tr>
             <td ng-click="upvote(sock.id)" class="upvote-cell">&#x1f44d;</td>

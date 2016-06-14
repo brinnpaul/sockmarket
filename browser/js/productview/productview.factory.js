@@ -1,4 +1,4 @@
-app.factory('SockFactory', function ($http) {
+app.factory('SockFactory', function ($http, $state) {
 
   return {
     singleSock: function(sockId) {
@@ -49,11 +49,15 @@ app.factory('SockFactory', function ($http) {
       })
     },
 
-    getUnsignedURL: function (){
+    getUnsignedURL: function () {
       return $http.get('/api/sock/unsignedURL')
-        .then(function(res){
+        .then(function (res) {
           return res.data;
         })
+    },
+    delete: function (id) {
+      return $http.post('/api/sock/delete/' + id)
+      .then($state.go('home'))
     }
 
   }

@@ -9,18 +9,8 @@ app.directive('designView', function (SockFactory, $state, $http) {
 			var tags = scope.tags;
 			var canvas = element.find('canvas')[0];
 
-
-      function dataURItoBlob(dataURI) {
-        var binary = atob(dataURI.split(',')[1]);
-        var array = [];
-        for(var i = 0; i < binary.length; i++) {
-          array.push(binary.charCodeAt(i));
-        }
-        return new Blob([new Uint8Array(array)], {type: 'image/png'});
-      }
-
-
 			scope.saveDesign = function (title, description, tags) {
+
 				var tagsArr = SockFactory.prepareTags(tags);
 
         var newSockDataObj = {
@@ -37,7 +27,6 @@ app.directive('designView', function (SockFactory, $state, $http) {
           }
           return new Blob([new Uint8Array(array)], {type: 'image/png'});
         }
-
 
         var dataUrl = canvas.toDataURL("image/png");
         var blobData = dataURItoBlob(dataUrl);

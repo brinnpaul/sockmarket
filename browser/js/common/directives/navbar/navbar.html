@@ -7,9 +7,12 @@
                 <div class="col-md-6 nav-classes">
                     <!-- original code : <ul class="nav navbar-nav"> -->
                     <ul div class="nav-items">
-                        <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                        <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn() || user.isAdmin">
                             <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                         </li>
+                        <li ng-repeat="item in adminItems" ng-show="user.isAdmin">
+                            <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                        </li>                        
                     </ul>
                 </div>
             <!-- let's move the login with fb/google buttons to the login page -->

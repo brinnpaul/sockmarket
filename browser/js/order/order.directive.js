@@ -12,7 +12,7 @@ app.directive('currentCart', function ($state, OrderFactory) {
             id: item.id
           }
           return OrderFactory.updateItem(sock)
-          .then(function(update){
+          .then(function(){
             item.quantity = item.newAmount;
             item.newAmount = null;
           })
@@ -24,21 +24,22 @@ app.directive('currentCart', function ($state, OrderFactory) {
         scope.delete = function(item) {
           var todelete = { item: item }
           OrderFactory.deleteItem(todelete.item.id)
+          .then(function() { return scope.calcTotal() })
+          .then(function(newTotal) { scope.total = newTotal })
         }
 
-        scope.singleSockView = function(id) {
-          $state.go('singleSockView', {id: id})
-        }
+        scope.singleSockView = function(id) { $state.go('singleSockView', {id: id}) }
+        scope.toCheckout = function() { $state.go('checkout') }
 
         scope.calcTotal = function() {
           return OrderFactory.calculateTotal('current')
-          .then(function(cartTotal) { scope.total = cartTotal })
+          .then(function(cartTotal) {
+            scope.total = cartTotal
+            return cartTotal
+          })
         }
 
         scope.calcTotal()
-        .then(function() {
-          console.log(scope.total)
-        })
 
         return OrderFactory.showCart('current')
         .then(function(current) { scope.currentCart = current })
