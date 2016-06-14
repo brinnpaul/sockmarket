@@ -107,36 +107,26 @@
             })
           })
         </script>
-      <!-- </form> -->
-
-      <form action="" method="" id="payment-form">
-        <span class="payment-errors"></span>
-
-        <div class="form-row">
-          <label>
-            <span>Card Number</span>
-            <input type="text" size="20" data-stripe="number">
-          </label>
-        </div>
-
-        <div class="form-row">
-          <label>
-            <span>Expiration (MM/YY)</span>
-            <input type="text" size="2" data-stripe="exp_month">
-          </label>
-          <span> / </span>
-          <input type="text" size="2" data-stripe="exp_year">
-        </div>
-
-        <div class="form-row">
-          <label>
-            <span>CVC</span>
-            <input type="text" size="4" data-stripe="cvc">
-          </label>
-        </div>
-
-        <button class="btn" type="submit" class="submit" value="">Submit Payment</button>
-      </form>
+      
+			<form id="payment-form" role="form" autocomplete="on" action="/stripe" method="POST" style="max-width: 300px;">
+				<div id="charge-error" class="alert alert-danger payment-errors"></div>
+				<div class="form-group">
+					<label>Credit Card Info</label>
+					<input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
+				</div>
+				<div class="form-group">
+					<input type="tel" class="form-control cc-cvc card-cvc" data-stripe="cvc" autocomplete="off" placeholder="CVC" required>
+				</div>
+				<div class="form-group">
+					<label>Card Expiration Date</label>
+					<input type="text" data-stripe="exp-month" placeholder="MM" class="card-expiry-month form-control" required>
+					<input type="text" data-stripe="exp-year" placeholder="YYYY" class="card-expiry-year form-control" required>
+				</div>
+				<!-- <input style="display:none" name="productAmount" value="{{product.amount}}">
+				<input style="display:none" name="productName" value="{{product.name}}">
+				<input style="display:none" name="productID" value="{{product._id.toString()}}"> -->
+				<button type="submit" class="btn btn-default submit-button btn-block">Submit</button>
+			</form>
     </div>
   </div>
 </div>
