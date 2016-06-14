@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('sockmarket', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('sockmarket', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'stripe']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -10,6 +10,7 @@ app.config(function ($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.when('/auth/:provider', function () {
         window.location.reload();
     });
+    Stripe.setPublishableKey('pk_test_Rd7nMpSZMqRNuB4zjEeZHt1d');
 });
 
 // This app.run is for controlling access to specific states.

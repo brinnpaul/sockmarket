@@ -3,7 +3,6 @@ var router = require('express').Router();
 
 var db = require("../../../db")
 var Sock = db.model("sock");
-var User = db.model("user")
 
 module.exports = router;
 
