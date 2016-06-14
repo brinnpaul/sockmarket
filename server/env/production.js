@@ -23,5 +23,10 @@ module.exports = {
         "clientID": process.env.GOOGLE_CLIENT_ID,
         "clientSecret": process.env.GOOGLE_CLIENT_SECRET,
         "callbackURL": process.env.GOOGLE_CALLBACK_URL
+    },
+    "AWS": {
+      "accessKeyId": process.env.AWS_ACCESS_KEY_ID,
+      "secretAccessKey": process.env.AWS_SECRET_ACCESS_KEY
     }
 };
+
