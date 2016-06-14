@@ -1,7 +1,7 @@
 'use strict';
 
 var Sequelize = require('sequelize');
-var db = require('../_db');
+// var db = require('../_db');
 var math = require('math');
 var moment = require('moment');
 

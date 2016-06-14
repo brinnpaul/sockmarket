@@ -49,6 +49,12 @@ app.factory('SockFactory', function ($http, $state) {
       })
     },
 
+    getUnsignedURL: function () {
+      return $http.get('/api/sock/unsignedURL')
+        .then(function (res) {
+          return res.data;
+        })
+    },
     delete: function (id) {
       return $http.post('/api/sock/delete/' + id)
       .then($state.go('home'))
