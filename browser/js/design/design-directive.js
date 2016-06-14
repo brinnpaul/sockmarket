@@ -8,6 +8,15 @@ app.directive('designView', function (SockFactory, $state, $http) {
 			var description = scope.description;
 			var tags = scope.tags;
 			var canvas = element.find('canvas')[0];
+			var displayError = false;
+
+			scope.preventSubmission = function (){
+				return displayError;
+			}
+
+			console.log(scope.preventSubmission());
+
+			scope.errorMessage;
 
 			scope.saveDesign = function (title, description, tags) {
 
