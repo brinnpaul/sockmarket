@@ -11,11 +11,13 @@ module.exports = function (db) {
 
         email: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+
         },
         username: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
+          unique: true
         },
         password: {
             type: Sequelize.STRING,
@@ -52,7 +54,7 @@ module.exports = function (db) {
         },
         profile_pic: {
             type: Sequelize.STRING,
-            defaultValue: "http://api.randomuser.me/portraits/men/59.jpg"
+            defaultValue: "https://s3.amazonaws.com/sockmarket/users/profile-placeholder.jpg"
         },
         salt: {
             type: Sequelize.STRING
