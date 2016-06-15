@@ -36,7 +36,7 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state) {
        isAdmin: false,
        newUser: true
      }).then(function(response){
-        // response.newUser = true;
+        console.log("AM I WHAT YOU THINK I AM?", response)
         return $state.go('personal', {id: response.id});
      })
     } else {
