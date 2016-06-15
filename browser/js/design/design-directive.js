@@ -44,35 +44,40 @@ app.directive('designView', function (SockFactory, $state, $http) {
           tags: tagsArr
         };
 
-        function dataURItoBlob(dataURI) {
-          var binary = atob(dataURI.split(',')[1]);
-          var array = [];
-          for(var i = 0; i < binary.length; i++) {
-            array.push(binary.charCodeAt(i));
-          }
-          return new Blob([new Uint8Array(array)], {type: 'image/png'});
-        }
+        return SockFactory.saveDesign(newSockDataObj)
+        .then(function(result) {
+        	$state.go('user', {userId: result.data.userId})
+        })
 
-        var dataUrl = canvas.toDataURL("image/png");
-        var blobData = dataURItoBlob(dataUrl);
+        // function dataURItoBlob(dataURI) {
+        //   var binary = atob(dataURI.split(',')[1]);
+        //   var array = [];
+        //   for(var i = 0; i < binary.length; i++) {
+        //     array.push(binary.charCodeAt(i));
+        //   }
+        //   return new Blob([new Uint8Array(array)], {type: 'image/png'});
+        // }
 
-        SockFactory.getUnsignedURL()
-          .then(function(res){
-            var imageUrl = res.url.split('?')[0];
+        // var dataUrl = canvas.toDataURL("image/png");
+        // var blobData = dataURItoBlob(dataUrl);
 
-            $http.put(res.url, blobData,
-              {headers: {
-              'Content-Type': 'image/png',
-                Key : 'ani_ben.png'
-            }})
-              .then(function(res){
-                newSockDataObj.image = imageUrl;
-                SockFactory.saveDesign(newSockDataObj)
-                .then(function (result) {
-                  $state.go('user', {userId: result.data.userId})
-                })
-              })
-          })
+        // SockFactory.getUnsignedURL()
+        //   .then(function(res){
+        //     var imageUrl = res.url.split('?')[0];
+
+        //     $http.put(res.url, blobData,
+        //       {headers: {
+        //       'Content-Type': 'image/png',
+        //         Key : 'ani_ben.png'
+        //     }})
+        //       .then(function(res){
+        //         newSockDataObj.image = imageUrl;
+        //         SockFactory.saveDesign(newSockDataObj)
+        //         .then(function (result) {
+        //           $state.go('user', {userId: result.data.userId})
+        //         })
+        //       })
+        //   })
 			 };
 
 
