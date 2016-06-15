@@ -46,10 +46,24 @@ router.get('/recent', function(req, res, next) {
     }
   )
   .then(function(sock) {
-    res.json(sock)
+    res.json(sock);
   })
-  .catch(next)
-})
+  .catch(next);
+});
+
+router.get('/popular', function(req, res, next) {
+  return Sock.findAll({
+    limit: 10,
+    order: [
+      ['upvotes', 'DESC']
+    ]
+    }
+  )
+  .then(function(sock) {
+    res.json(sock);
+  })
+  .catch(next);
+});
 
 router.get('/:id', function(req, res, next) {
   var sockId = req.params.id

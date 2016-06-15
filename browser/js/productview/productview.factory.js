@@ -2,24 +2,32 @@ app.factory('SockFactory', function ($http, $state) {
 
   return {
     singleSock: function(sockId) {
-      return $http.get('/api/sock/'+sockId)
+      return $http.get('/api/sock/' + sockId)
       .then(function(res) {
-        return res.data
+        return res.data;
       })
     },
 
     sockByUserId: function(userId) {
       return $http.get('/api/sock/byUser/' + userId)
       .then(function(res) {
-        return res.data
+        return res.data;
       })
     },
 
     mostRecentSocks: function () {
     	return $http.get('/api/sock/recent')
     	.then(function(res) {
-    		return res.data
+    		return res.data;
     	})
+    },
+
+    mostPopularSocks: function () {
+      return $http.get('/api/sock/popular')
+      .then(function(res) {
+        console.log(res.data);
+        return res.data;
+      })
     },
 
     saveDesign: function (newSockDataObj) {
@@ -30,7 +38,7 @@ app.factory('SockFactory', function ($http, $state) {
       return tagInput.split(' ').map(function(e) {
         e = e.replace(/,/i, "");
         e = e.substring(1);
-        return e
+        return e;
       });
     },
 

@@ -107,6 +107,27 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="titlebar">
+						<h3>Most Popular Socks</h3>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<div class="sock-thumbnail" ng-repeat="sock in mostPopularSocks" ng-click="seeSock(sock.id)">
+							<img ng-src="{{sock.image}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
 						<h3>Most Purchased Socks</h3>
 						<!-- <hr> -->
 					</div>
