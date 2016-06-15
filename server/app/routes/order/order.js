@@ -57,28 +57,49 @@ router.get('/createcart', function(req, res, next) {
 })
 
 router.get('/current', function(req, res, next) {
-  var id = req.user.id === undefined ? {sessionId:req.session.id, date_paid: null} : {userId:req.user.id, date_paid: null};
+  var id = req.user === undefined ? {sessionId:req.session.id, date_paid: null} : {userId:req.user.id, date_paid: null};
   Order.findOne({where:id})
   .then(function(order) {
-    return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
+    if (order.userId) {
+      if (order.userId === req.user.id || req.user.isAdmin) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
+      else res.sendStatus(403)
+    } else if (order.sessionId) {
+      if (order.sessionId === req.session.id || req.user.isAdmin) return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
+      else res.sendStatus(403)
+    }
+    else throw new Error()
   })
   .then(function(items) {
-    // console.log()
     res.json(items)
   })
   .catch(next)
 })
 
 router.get('/history', function(req, res, next) {
-  var id = req.session.passport.user+'' === 'undefined' ? {sessionId:req.session.id+'', date_paid: {$ne:null}} : {userId:req.session.passport.user+'', date_paid: {$ne:null}};
+  var id = req.user === undefined ? {sessionId:req.session.id+'', date_paid: {$ne:null}} : {userId:req.user.id, date_paid: {$ne:null}};
   Order.findAll({where:id})
   .then(function(order) {
     var ids = order.map(function(ord) { return ord.id })
-    if (order) {
-      return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
-      .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
-    }
-    else return "No Order History"
+
+    return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
+    .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
+
+    // if (order.userId) {
+    //   if (order.userId === req.user.id || req.user.isAdmin) {
+    //     return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
+    //     .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
+    //   }
+    //   else res.sendStatus(403)
+    // } else if (order.sessionId) {
+    //   if (order.sessionId === req.session.id || req.user.isAdmin) {
+    //     return OrderDetail.findAll({where:{orderId:ids}, include:[{model:Sock}, {model:Order}]})
+    //     .then(function(cartHistory) { return splitItemsByOrderId(cartHistory) })
+    //   }
+    //   else res.sendStatus(403)
+    // } else {
+    //   throw new Error()
+    // }
+
   })
   .then(function(items) {
     res.json(items)
