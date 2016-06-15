@@ -2,11 +2,10 @@
 
 body {
 	background: white;
-	font-family: sans-serif;
 }
 
 .title-background {
-	background-color: lime;
+	background-color: #5cb85c;
 	border-radius: 5px;
 }
 
@@ -270,9 +269,9 @@ body {
 									</div>
 								</div>
 							</div>
-							<button class="btn btn-primary" ng-click="saveDesign(title, description, tags)" id="submit" ng-disabled="designForm.$invalid">Submit Your Design!</button>
-							<div id="error">
-								<p>(Error messages)</p>
+							<button class="btn btn-primary" ng-click="saveDesign(title, description, tags)" id="submit">Submit Your Design!</button>
+							<div id="error" ng-Show="preventSubmission()">
+								<p>{{errorMessage}}</p>
 							</div>
 						</div>
 					</div>
