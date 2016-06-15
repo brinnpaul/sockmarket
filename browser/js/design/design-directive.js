@@ -8,8 +8,33 @@ app.directive('designView', function (SockFactory, $state, $http) {
 			var description = scope.description;
 			var tags = scope.tags;
 			var canvas = element.find('canvas')[0];
+			var displayError = false;
+
+			scope.preventSubmission = function (){
+				return displayError;
+			}
+
+			var invalidSubmission = function(title, description, tags) {
+				if (title === undefined) {
+					displayError = true;
+					scope.errorMessage = "Your socks need a title!";
+					return true;
+				} else if (description === undefined) {
+					displayError = true;
+					scope.errorMessage = "Your socks need a description!";
+					return true;
+				} else if (tags === undefined) {
+					displayError = true;
+					scope.errorMessage = "Your socks need some tags!";
+					return true;
+				}
+			}
 
 			scope.saveDesign = function (title, description, tags) {
+
+				if (invalidSubmission(title, description, tags)) {
+					return invalidSubmission(title, description, tags);
+				}
 
 				var tagsArr = SockFactory.prepareTags(tags);
 
@@ -18,6 +43,11 @@ app.directive('designView', function (SockFactory, $state, $http) {
           description: description,
           tags: tagsArr
         };
+
+        // return SockFactory.saveDesign(newSockDataObj)
+        // .then(function(result) {
+        // 	$state.go('user', {userId: result.data.userId})
+        // })
 
         function dataURItoBlob(dataURI) {
           var binary = atob(dataURI.split(',')[1]);
@@ -48,7 +78,7 @@ app.directive('designView', function (SockFactory, $state, $http) {
                 })
               })
           })
-			};
+			 };
 
 
 			var color = $(".selected").css("background-color");

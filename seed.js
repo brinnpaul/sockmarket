@@ -36,9 +36,11 @@ var seedUsers = function () {
         {
             email: 'obama@gmail.com',
             password: 'potus',
-            username: '@obama',
-            first_name: "barack",
-            last_name: "obama",
+            username: '@BarryO',
+            first_name: "Barack",
+            last_name: "Obama",
+            profile_pic: "http://texwillerblog.com/wordpress/wp-content/uploads/2012/01/Barack-Obama-200x200.jpg",
+            city: "Chicago, IL"
 
         }
 
