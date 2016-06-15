@@ -60,7 +60,7 @@ router.get('/createcart', function(req, res, next) {
 })
 
 router.get('/current', function(req, res, next) {
-  var id = req.user.id === undefined ? {sessionId:req.session.id, date_paid: null} : {userId:req.user.id, date_paid: null};
+  var id = req.user === undefined ? {sessionId:req.session.id, date_paid: null} : {userId:req.user.id, date_paid: null};
   Order.findOne({where:id})
   .then(function(order) {
     return OrderDetail.findAll({where:{orderId:order.id}, include:[{model:Sock}]})
