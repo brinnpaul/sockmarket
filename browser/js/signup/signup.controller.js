@@ -1,4 +1,4 @@
-app.controller('SignupCtrl', function ($scope, SignupFactory, $state) {
+app.controller('SignupCtrl', function ($scope, SignupFactory, $state, AuthService) {
 
   function passwordValid (password) {
     if (password.length < 6) {
@@ -26,7 +26,6 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state) {
 
   $scope.submitSignup = function () {
     if (passwordValid($scope.password)){
-      console.log("now I don't work!");
       return SignupFactory.submit({
        email: $scope.email,
        username: $scope.username,
@@ -36,8 +35,13 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state) {
        isAdmin: false,
        newUser: true
      }).then(function(response){
-        // response.newUser = true;
-        return $state.go('personal', {id: response.id});
+        var loginObj = {};
+        loginObj.email = $scope.email;
+        loginObj.password = $scope.password;
+        AuthService.login(loginObj)
+        .then(function(response){
+          return $state.go('personal', {id: response.id});
+        })
      })
     } else {
       return;

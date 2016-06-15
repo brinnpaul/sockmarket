@@ -46,10 +46,24 @@ router.get('/recent', function(req, res, next) {
     }
   )
   .then(function(sock) {
-    res.json(sock)
+    res.json(sock);
   })
-  .catch(next)
-})
+  .catch(next);
+});
+
+router.get('/popular', function(req, res, next) {
+  return Sock.findAll({
+    limit: 10,
+    order: [
+      ['upvotes', 'DESC']
+    ]
+    }
+  )
+  .then(function(sock) {
+    res.json(sock);
+  })
+  .catch(next);
+});
 
 router.get('/:id', function(req, res, next) {
   var sockId = req.params.id
@@ -119,18 +133,19 @@ router.post('/delete/:id', function (req, res, next) {
 
 router.post('/', function(req, res, next) {
   req.body.userId = req.user.id;
-
+  req.body.tags.push(req.user.first_name);
+  req.body.tags.push(req.user.last_name);
   User.findOne({
     where: {
       id: req.user.id
     }
   })
   .then(function (result) {
-    console.log(result)
+    console.log('FIRST SAVE RESULT', result)
     return Sock.create(req.body)
    })
-  .then(function(newSock) {
-      res.json(newSock);
+  .then(function (newSock) {
+    res.json(newSock);
   })
   .catch(next);
 })

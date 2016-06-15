@@ -6,6 +6,28 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   $scope.sock = theSock;
   $scope.reviews = theReviews;
 
+  $scope.dateParser = function (rawDate) {
+    var rawDate = theSock.createdAt.split("T")[0].split("-");
+    var rawYear = rawDate[0];
+    var rawMonth = rawDate[1];
+    var rawDay = rawDate[2];
+    var monthObj = {
+        "01":"January",
+        "02":"February",
+        "03":"March",
+        "04":"April",
+        "05":"May",
+        "06":"June",
+        "07":"July",
+        "08":"August",
+        "09":"September",
+        "10":"October",
+        "11":"November",
+        "12":"December"
+    }
+    return rawDay + " " + monthObj[rawMonth] + " " + rawYear;
+  }
+
   $scope.alert = function(message) {
     $scope.message = message;
     $scope.alerting = !$scope.alerting;
@@ -56,6 +78,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   }
 
   $scope.getLoggedInUserId();
+  $scope.currentUserReviewedSock = false;
 
   $scope.userCannotPostReview = function () {
     return $scope.reviewNotAllowed;
@@ -73,7 +96,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
     if ($scope.loggedInUserId === 'none') {
       $scope.reviewErrorMessage = "You must be logged in to review a sock!";
       $scope.reviewNotAllowed = true;
-    } else if (usersWhoReviewedSock.indexOf($scope.loggedInUserId) !== -1) {
+    } else if (usersWhoReviewedSock.indexOf($scope.loggedInUserId) !== -1 || $scope.userCannotPostReview()) {
       $scope.reviewErrorMessage = "You've already reviewed this sock! You can't review it again!";
       $scope.reviewNotAllowed = true;
   //if sock id matches user id, user don't allow user to post a review
@@ -99,6 +122,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
 
         $scope.reviews.push(review);
         $scope.reviewText = null;
+        $scope.reviewNotAllowed = true;
       })
     }
   }
@@ -106,14 +130,14 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   $scope.upvote = function(sockId) {
     return SockFactory.upvote(sockId)
     .then(function (res) {
-      $scope.sock.upvotes++
+      $scope.sock.upvotes++;
     })
   }
 
   $scope.downvote = function (sockId) {
     return SockFactory.downvote(sockId)
     .then(function (res) {
-      $scope.sock.downvotes++
+      $scope.sock.downvotes++;
     })
   }
 
@@ -121,35 +145,27 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
         return user.id == $scope.sock.UserId || user.isAdmin? true : false
     })
     .then(function (result) {
-      console.log(result)
-      $scope.verifyUser = result
+      $scope.verifyUser = result;
     });
 
-  $scope.delete = SockFactory.delete
+  $scope.delete = SockFactory.delete;
 
 });
 
 app.config(function ($stateProvider) {
 
-    // Register our *about* state.
-    // $stateProvider.state('socks', {
-    //     url: '/socks',
-    //     controller: 'sockViewController',
-    //     templateUrl: 'js/productview/productview.html'
-    // });
-
-    $stateProvider.state('singleSockView', {
-      url:'/socks/:id',
-      controller: 'sockIdController',
-      templateUrl: 'js/productview/productview.html',
-      resolve: {
-        theSock: function ($stateParams, SockFactory) {
-          return SockFactory.singleSock($stateParams.id)
-        },
-        theReviews: function ($stateParams, ReviewFactory) {
-          return ReviewFactory.productReviews($stateParams.id)
-        }
+  $stateProvider.state('singleSockView', {
+    url:'/socks/:id',
+    controller: 'sockIdController',
+    templateUrl: 'js/productview/productview.html',
+    resolve: {
+      theSock: function ($stateParams, SockFactory) {
+        return SockFactory.singleSock($stateParams.id)
+      },
+      theReviews: function ($stateParams, ReviewFactory) {
+        return ReviewFactory.productReviews($stateParams.id)
       }
-    })
+    }
+  })
 
 });

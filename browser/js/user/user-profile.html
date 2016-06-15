@@ -1,5 +1,9 @@
 <style>
 
+#socks-posted-count {
+	font-weight: bold;
+}
+
 .btn-shipping {
   color: white;
   background-color: #FF9912;
@@ -29,22 +33,22 @@
 			<hr>
 			<ul>
 				<li id="username-text">@{{user.first_name}}</li>
-				<li>Member since {{user.createdAt}}</li>
+				<li>Member since:<br> 
+				{{dateParser(user.createdAt)}}</li>
 				<li>Hometown: {{user.city}}</li>
-				<li>{{socks.length}} socks posted</li>
-                <li ng-show="isAdmin">Admin Status: {{user.isAdmin}}</li>
+				<li><span id="socks-posted-count">{{socks.length}} socks posted</span></li>
+                <li ng-show="user.isAdmin">Admin Status: {{user.isAdmin}}</li>
                 <li><button ng-show="verifyUser" ng-click="toShippingInfo(user.id)" class="btn btn-shipping">Edit Shipping Info</button></li>
                 <li><button ui-sref="currentCart" class="btn btn-success">My Cart</button></li>
                 <li><button ui-sref="cartHistory" class="btn btn-success">Order History</button></li>
                 <li><button ng-show="verifyUser" ng-click="delete(user.id)" class="btn btn-danger">Delete Your Account</button></li>
-                <li><button ng-show="isAdmin" ng-click="makeAdmin(user.id)" class="btn btn-success">{{adminButton}}</button></li>
+                <li><button ng-show="user.isAdmin" ng-click="makeAdmin(user.id)" class="btn btn-success">{{adminButton}}</button></li>
 			</ul>
 			<hr>
 			</div>
 
 		</div>
-		<div class="col-md-9" >
-			<!-- <h2>Socks</h2> -->
+		<div class="col-md-9">
 			<div class="sock-thumbnail" ng-repeat="sock in socks">
 				<img ng-click="toSockView(sock.id)" ng-src="{{sock.image}}">
 			</div>

@@ -80,6 +80,10 @@ module.exports = function (db) {
             },
             correctPassword: function (candidatePassword) {
                 return this.Model.encryptPassword(candidatePassword, this.salt) === this.password;
+            },
+            takeoutPassword: function () {
+                this.password = "";
+                return this
             }
         },
         classMethods: {

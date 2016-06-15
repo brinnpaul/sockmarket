@@ -1,4 +1,4 @@
-<section id="home">
+<!-- <section id="home"> -->
 
 <style>
 
@@ -16,7 +16,7 @@
 }
 
 .sock-section {
-	/*background-color: #FAFAFA;*/ /* gray 98*/
+
 	background-color: #F5F5F5;
 	margin-bottom: 10px;
 	border-radius: 5px;
@@ -29,7 +29,6 @@
 
 .sock-section .col-md-3 {
 	min-height: 100%;
-	/*background-color: #D9D9D9;*/
 	border-right: 3px solid #878787;
 }
 
@@ -93,6 +92,27 @@
 					<div class="content">
 						<!-- hardcoded -->
 						<div class="sock-thumbnail"ng-repeat="sock in mostRecentSocks" ng-click="seeSock(sock.id)">
+							<img ng-src="{{sock.image}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="sock-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="titlebar">
+						<h3>Most Popular Socks</h3>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="content">
+						<div class="sock-thumbnail" ng-repeat="sock in mostPopularSocks" ng-click="seeSock(sock.id)">
 							<img ng-src="{{sock.image}}">
 						</div>
 					</div>
@@ -285,4 +305,4 @@
     	<img ng-src={{mostRecentSock.image}}>
     </div>
     <rando-greeting></rando-greeting> -->
-</section>
+<!-- </section> -->

@@ -14,14 +14,33 @@
 	padding: 4px;
 }
 
+.item-in-cart {
+	width: 60%;
+	display: block;
+	margin: 0 auto;
+}
+
 .results-content {
 	background-color: #FAFAFA;
 	min-height: 100px;
 	padding: 4px;
 	margin: 4px;
-	border: 1px solid black;
+    border: 1px solid gainsboro;
 	border-radius: 5px;
-	border-color: #000000;
+    background-color: #F8F8F8;
+}
+
+.results-content img {
+	width: 180px;
+	height: 180px;
+}
+
+.results-content button {
+	margin-top: 4px;
+}
+
+.results-content span {
+	font-weight: bold;
 }
 
 .thumbnail {
@@ -46,30 +65,79 @@
 	padding-left: 20px;
 }
 
+#checkout-submit-box {
+	margin-top: 30px;
+	width: 25%;
+}
+
+.checkout-total-box {
+	background-color: white;
+	display: block;
+	border-radius: 5px;
+	width: 240px;
+	margin: 10px auto 10px auto;
+	/*padding: 20px;*/
+}
+
+.checkout-total-box p {
+	font-size: 18px;
+	display: block;
+	margin: auto auto;
+	text-align: center;
+}
+
+#order-total {
+	color: #B0171F;
+}
+
+#checkout-button {
+	display: block;
+	margin: 0 auto 10px;
+}
+
+
+
 </style>
 
 <div class="container">
   <div ng-repeat="item in currentCart">
-		<div class="row results-content">
-	    <h3 class="sock-title">{{item.sock.title}}</h3>
-			<div class="col-md-4">
-		    <img src="{{item.sock.image}}" class="thumbnail" ng-click="singleSockView(item.sock.id)"/>
-			</div>
-			<div class="col-md-8">
-		    <div>Description: {{item.sock.description}}</div>
-				<div>Pairs: {{item.quantity}}</div>
-				<div>Price/Pair: {{item.sock.price}}</div>
-				<div>Item Total: {{item.sock.price * item.quantity}}</div>
-		    <form>
-		      <input type="text" ng-model="item.newAmount"/>
-		      <button type="submit" class="btn" ng-click="update(item)">Change Item Quantity</button>
-					<button type="submit" class="btn" ng-click="delete(item)">Delete Item</button>
-		    </form>
+  		<div class="item-in-cart">
+			<div class="row results-content">
+		    <h3 class="sock-title">{{item.sock.title}}</h3>
+		    	<hr>
+				<div class="col-md-4">
+			    <img src="{{item.sock.image}}" class="thumbnail" ng-click="singleSockView(item.sock.id)"/>
+				</div>
+				<div class="col-md-8">
+					<fieldset>
+				    	<p><span>Description:</span> {{item.sock.description}}</p>
+						<p><span>Pairs:</span> {{item.quantity}}</p>
+						<p><span>Price/Pair:</span> ${{item.sock.price}}</p>
+						<p><span>Item Total:</span> ${{item.sock.price * item.quantity}}
+				    <form>
+				    	<label>Quantity:</label>
+				    	<select ng-model="item.newAmount">
+				          <option value="1">1</option>
+				          <option value="2">2</option>
+				          <option value="3">3</option>
+				          <option value="4">4</option>
+				          <option value="5">5</option>
+				          <option value="6">6</option>
+				          <option value="7">7</option>
+				        </select>
+					    <button type="submit" class="btn btn-danger" ng-click="update(item)">Change</button>
+						<button type="submit" class="btn btn-danger" ng-click="delete(item)">Delete Item</button>
+				    </form>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="results-content">
-		<div>Order Total: {{total}}</div>
-		<button class="btn" ng-click="toCheckout()">Check Out</button>
-	</div>
+		<div class="item-in-cart" id="checkout-submit-box">
+			<div class="results-content">
+				<div class="checkout-total-box">
+					<p>Order Total: <span id="order-total">${{total}}</span></p></div>
+				<br>
+				<button id="checkout-button" class="btn btn-success" ng-click="toCheckout()">Check Out</button>
+			</div>
+		</div>
 </div>

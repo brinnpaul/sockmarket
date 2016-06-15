@@ -1,12 +1,3 @@
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
 <style>
 
 /*the big sock in a big box and the smaller box next to it on the single sock page*/
@@ -292,7 +283,7 @@
         <div id="sock-info-stats">
           <p><span>Description:</span> {{sock.description}}</p>
           <p><span>Tags:</span> {{displayTags()}}</p>
-          <p><span>Posted on:</span> {{sock.createdAt}}</p>
+          <p><span>Posted on:</span> {{dateParser(sock.createdAt)}}</p>
           <p><span>Upvotes:</span> {{sock.upvotes}}</p>
           <p><span>Downvotes:</span> {{sock.downvotes}}</p>
           <p><button ng-click="editSockInfo()">Edit Sock Info</button></p>
@@ -300,11 +291,9 @@
         </div>
         </fieldset>
         <hr>
-        <label>Quantity:</label>
-        <!-- replace quantity input with a dropdown menu -->
-        <!-- <input ng-model="quantity" placeholder="Always buy more than you need!"/> -->
+        <label id="quantity-label">Quantity:</label>
+
         <select ng-model="quantity">
-          <option ng-repeat="i in 1 .. 15" value="{{i}}">{{i}}</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
