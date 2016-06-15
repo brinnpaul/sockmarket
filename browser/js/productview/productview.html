@@ -283,18 +283,16 @@
         <div id="sock-info-stats">
           <p><span>Description:</span> {{sock.description}}</p>
           <p><span>Tags:</span> {{displayTags()}}</p>
-          <p><span>Posted on:</span> {{sock.createdAt}}</p>
+          <p><span>Posted on:</span> {{dateParser(sock.createdAt)}}</p>
           <p><span>Upvotes:</span> {{sock.upvotes}}</p>
           <p><span>Downvotes:</span> {{sock.downvotes}}</p>
 
         </div>
         </fieldset>
         <hr>
-        <label>Quantity:</label>
-        <!-- replace quantity input with a dropdown menu -->
-        <!-- <input ng-model="quantity" placeholder="Always buy more than you need!"/> -->
+        <label id="quantity-label">Quantity:</label>
+
         <select ng-model="quantity">
-          <option ng-repeat="i in 1 .. 15" value="{{i}}">{{i}}</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

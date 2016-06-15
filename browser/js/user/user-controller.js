@@ -3,6 +3,29 @@ app.controller('UserCtrl', function ($scope, $state, theUser, theUserSocks, Auth
 	$scope.user = theUser;
 	$scope.socks = theUserSocks;
 
+    $scope.dateParser = function () {
+        var rawDate = $scope.user.createdAt.split("T")[0].split("-");
+        var rawYear = rawDate[0];
+        var rawMonth = rawDate[1];
+        var rawDay = rawDate[2];
+
+        var monthObj = {
+            "01":"January",
+            "02":"February",
+            "03":"March",
+            "04":"April",
+            "05":"May",
+            "06":"June",
+            "07":"July",
+            "08":"August",
+            "09":"September",
+            "10":"October",
+            "11":"November",
+            "12":"December"
+        }
+        return rawDay + " " + monthObj[rawMonth] + " " + rawYear;
+    }
+
 	$scope.toShippingInfo = function(id){
 		$state.go('personal', {id: id});
 	};

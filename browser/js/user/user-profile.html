@@ -33,7 +33,8 @@
 			<hr>
 			<ul>
 				<li id="username-text">@{{user.first_name}}</li>
-				<li>Member since {{user.createdAt}}</li>
+				<li>Member since:<br> 
+				{{dateParser(user.createdAt)}}</li>
 				<li>Hometown: {{user.city}}</li>
 				<li><span id="socks-posted-count">{{socks.length}} socks posted</span></li>
                 <li ng-show="isAdmin">Admin Status: {{user.isAdmin}}</li>
