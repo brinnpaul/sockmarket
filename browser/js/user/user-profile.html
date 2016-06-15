@@ -36,12 +36,12 @@
 				<li>Member since {{user.createdAt}}</li>
 				<li>Hometown: {{user.city}}</li>
 				<li><span id="socks-posted-count">{{socks.length}} socks posted</span></li>
-                <li ng-show="isAdmin">Admin Status: {{user.isAdmin}}</li>
+                <li ng-show="user.isAdmin">Admin Status: {{user.isAdmin}}</li>
                 <li><button ng-show="verifyUser" ng-click="toShippingInfo(user.id)" class="btn btn-shipping">Edit Shipping Info</button></li>
                 <li><button ui-sref="currentCart" class="btn btn-success">My Cart</button></li>
                 <li><button ui-sref="cartHistory" class="btn btn-success">Order History</button></li>
                 <li><button ng-show="verifyUser" ng-click="delete(user.id)" class="btn btn-danger">Delete Your Account</button></li>
-                <li><button ng-show="isAdmin" ng-click="makeAdmin(user.id)" class="btn btn-success">{{adminButton}}</button></li>
+                <li><button ng-show="user.isAdmin" ng-click="makeAdmin(user.id)" class="btn btn-success">{{adminButton}}</button></li>
 			</ul>
 			<hr>
 			</div>
