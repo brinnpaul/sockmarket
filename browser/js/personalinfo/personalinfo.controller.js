@@ -9,20 +9,6 @@ app.controller('PersonalInfoCtrl', function ($scope, $state, AuthService, theUse
 	$scope.phone = theUser.phone;
 	$scope.displayError = false;
 
-	//only a temporary solution -- checks to see if user is a new user by seeing if they're logged in
-
-	// $scope.currentUserIsNew = function() {
- //   		 return AuthService.getLoggedInUser()
- //   		.then(function(user){
- //    		if (!user) return $scope.newUser = true;
- //  			else return $scope.newUser = false;
- //    	})
- // 	}
-
- // 	$scope.currentUserIsNew();
-
- 	console.log("heeeeeeeey");
-
 	$scope.submitPersonal = function (id) {
 		if (($scope.country === "United States" || $scope.country === "Canada") && $scope.state === "") {
 			$scope.displayError = true;
@@ -40,9 +26,7 @@ app.controller('PersonalInfoCtrl', function ($scope, $state, AuthService, theUse
 
 		return PersonalInfoFactory.submit($scope.userId, userInfo)
 		.then(function(response){
-			// if ($scope.newUser) 
-			return $state.go('home');
-			// else return $state.go('user', {userId: $scope.userId});
+			return $state.go('user', {userId: $scope.userId});
 		})
 	}
 

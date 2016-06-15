@@ -4,7 +4,6 @@ app.factory('UserFactory', function ($http, $state) {
 	UserFactory.fetchById = function (id) {
 		return $http.get('/api/user/' + id)
 		.then(function (response) {
-            console.log("factory", response.data)
 			return response.data
 		})
 	}
