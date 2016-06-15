@@ -1,74 +1,3 @@
-// app.controller('sockViewController', function ($scope, SockFactory, ReviewFactory) {
-
-//   $scope.setSock = function(sockId) {
-//     return SockFactory.singleSock(sockId) // return?
-//     .then(function(sock) {
-//       $scope.sock = sock
-//     })
-//   }
-
-//   $scope.setReviews = function(sockId) {
-//     return ReviewFactory.productReviews(sockId)
-//     .then(function(reviews) {
-//       $scope.reviews = reviews
-//     })
-//   }
-
-//   $scope.setSock(1);
-//   $scope.setReviews(1);
-
-//   $scope.newReview = function() {
-//     var newReview = {
-//       text: $scope.reviewText,
-//       sockId: $scope.sock.id
-//     }
-//     return ReviewFactory.postReview(newReview)
-//     .then(function(newReview){
-//       var review = {};
-//       review.user = {};
-
-//         review.user.first_name = newReview.user.first_name;
-//         review.user.last_name = newReview.user.last_name;
-//         review.user.profile_pic = newReview.user.profile_pic;
-//         review.user.username = newReview.user.username;
-//         review.text = newReview.review.text;
-
-//       $scope.reviews.push(review);
-//       $scope.reviewText = null;
-//     })
-//   }
-
-//   $scope.alreadyPosted = function() {
-//     // add in after finishing other stuff
-//   }
-
-// });
-
-// app.controller('sockIdController', function ($scope, $state, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, AuthService) {
-
-//   // $scope.dateParser = function(date){
-
-//   //   //return to this later. Would be good if socks and reviews stated when they were posted
-
-  //   //should add it to a factory, because many pages can make use of it
-
-  //   var monthObj = {
-  //     '01': "January",
-  //     '02': "February",
-  //     '03': "March",
-  //     '04': "April",
-  //     '05': "May",
-  //     '06': "June",
-  //     '07': "July",
-  //     '08': "August",
-  //     '09': "September",
-  //     '10': "October",
-  //     '11': "November",
-  //     '12': "December"
-  //   }
-
-  // }
-
 app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory, UserFactory) {
 
 
@@ -180,7 +109,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       $scope.sock.upvotes++
     })
   }
-  
+
   $scope.downvote = function (sockId) {
     return SockFactory.downvote(sockId)
     .then(function (res) {
