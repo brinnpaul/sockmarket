@@ -78,6 +78,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   }
 
   $scope.getLoggedInUserId();
+  $scope.currentUserReviewedSock = false;
 
   $scope.userCannotPostReview = function () {
     return $scope.reviewNotAllowed;
@@ -95,7 +96,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
     if ($scope.loggedInUserId === 'none') {
       $scope.reviewErrorMessage = "You must be logged in to review a sock!";
       $scope.reviewNotAllowed = true;
-    } else if (usersWhoReviewedSock.indexOf($scope.loggedInUserId) !== -1) {
+    } else if (usersWhoReviewedSock.indexOf($scope.loggedInUserId) !== -1 || $scope.userCannotPostReview()) {
       $scope.reviewErrorMessage = "You've already reviewed this sock! You can't review it again!";
       $scope.reviewNotAllowed = true;
   //if sock id matches user id, user don't allow user to post a review
@@ -121,6 +122,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
 
         $scope.reviews.push(review);
         $scope.reviewText = null;
+        $scope.reviewNotAllowed = true;
       })
     }
   }
@@ -143,8 +145,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
         return user.id == $scope.sock.UserId || user.isAdmin? true : false
     })
     .then(function (result) {
-      console.log(result)
-      $scope.verifyUser = result
+      $scope.verifyUser = result;
     });
 
   $scope.delete = SockFactory.delete;

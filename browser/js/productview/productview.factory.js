@@ -25,7 +25,6 @@ app.factory('SockFactory', function ($http, $state) {
     mostPopularSocks: function () {
       return $http.get('/api/sock/popular')
       .then(function(res) {
-        console.log(res.data);
         return res.data;
       })
     },
