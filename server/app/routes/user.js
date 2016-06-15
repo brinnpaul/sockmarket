@@ -6,6 +6,9 @@ var User = db.model("user");
 
  router.param('userId', function (req, res, next, id) {
  	User.findById(id)
+  .then(function (user) {
+    return user.takeoutPassword()
+  })
  	.then(function (user) {
  		if (!user) res.status(404).send();
  		req.userById = user;
@@ -25,6 +28,9 @@ router.get('/all', function (req, res, next) {
 
 router.post('/matchId', function (req, res, next) {
     User.findById(req.user.id)
+    .then(function (user) {
+      user.takeoutPassword()
+    })
     .then(function (user) {
       if (user) res.send(true)
         else res.send(false)
@@ -48,6 +54,9 @@ router.put('/:id', function (req, res, next) {
   var id = req.params.id;
 
   User.findById(id)
+  .then(function (user) {
+    takeoutPassword()
+  })
   .then(function(user){
     if (user.id == req.user.id) return user.update(req.body)
     else throw error
@@ -62,6 +71,9 @@ router.put('/makeAdmin/:id', function (req, res, next) {
   var id = req.params.id;
 
   User.findById(id)
+  .then(function (user) {
+    takeoutPassword()
+  })
   .then(function(user){
     console.log('THE USER', user.isAdmin)
     if (req.user.isAdmin && !user.isAdmin) {
@@ -90,6 +102,9 @@ router.post('/delete/:id', function (req, res, next) {
   var id = req.params.id;
 
   User.findById(id)
+  .then(function (user) {
+    user.takeoutPassword()
+  })
   .then(function(user){
     // console.log('ISADMIN', req.user.isAdmin)
     if (user.id == req.user.id || req.user.isAdmin) return user.destroy()
