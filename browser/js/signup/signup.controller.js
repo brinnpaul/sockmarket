@@ -35,7 +35,6 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state, AuthServic
        isAdmin: false,
        newUser: true
      }).then(function(response){
-        // response.newUser = true;
         var loginObj = {};
         loginObj.email = $scope.email;
         loginObj.password = $scope.password;

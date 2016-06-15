@@ -44,6 +44,11 @@ app.directive('designView', function (SockFactory, $state, $http) {
           tags: tagsArr
         };
 
+        // return SockFactory.saveDesign(newSockDataObj)
+        // .then(function(result) {
+        // 	$state.go('user', {userId: result.data.userId})
+        // })
+
         function dataURItoBlob(dataURI) {
           var binary = atob(dataURI.split(',')[1]);
           var array = [];
