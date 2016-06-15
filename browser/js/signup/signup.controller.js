@@ -41,7 +41,6 @@ app.controller('SignupCtrl', function ($scope, SignupFactory, $state, AuthServic
         loginObj.password = $scope.password;
         AuthService.login(loginObj)
         .then(function(response){
-          console.log("AM I SIGNED IT?!", response);
           return $state.go('personal', {id: response.id});
         })
      })

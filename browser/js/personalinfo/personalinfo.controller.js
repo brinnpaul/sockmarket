@@ -26,9 +26,7 @@ app.controller('PersonalInfoCtrl', function ($scope, $state, AuthService, theUse
 
 		return PersonalInfoFactory.submit($scope.userId, userInfo)
 		.then(function(response){
-			// if ($scope.newUser) 
-			return $state.go('home');
-			// else return $state.go('user', {userId: $scope.userId});
+			return $state.go('user', {userId: $scope.userId});
 		})
 	}
 
