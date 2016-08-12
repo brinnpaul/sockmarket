@@ -1,6 +1,13 @@
 app.factory('SockFactory', function ($http, $state) {
 
   return {
+    allSocks: function() {
+      return $http.get('api/sock')
+      .then(function(res) {
+        return res.data;
+      })
+    },
+
     singleSock: function(sockId) {
       return $http.get('/api/sock/' + sockId)
       .then(function(res) {

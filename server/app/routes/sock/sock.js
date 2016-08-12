@@ -36,7 +36,6 @@ router.get('/unsignedURL', function(req, res, next){
   });
 })
 
-
 router.get('/recent', function(req, res, next) {
   return Sock.findAll({
     limit: 10,
@@ -87,6 +86,14 @@ router.get('/byUser/:id', function(req, res, next) {
     res.json(sock)
   })
   .catch(next)
+})
+
+router.get('/', function(req, res, next) {
+  return Sock.findAll()
+  .then(function(socks) {
+    res.json(socks);
+  })
+  .catch(next);
 })
 
 router.post('/upvote', function (req, res, next) {
