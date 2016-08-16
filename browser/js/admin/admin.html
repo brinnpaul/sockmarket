@@ -1,11 +1,44 @@
 <style>
-  img {
-    height: 150px;
-    width: 150px;
+  .admin-panel-title {
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+  }
+  .admin-sock-thumb {
+    height: 40px;
+    width: 40px;
+    margin: 1.5px;
+  }
+  .odd {
+    background-color: #EBEBEB;
+  }
+  .even {
+    background-color: #D9D9D9;
+  }
+  .admin-directive-row {
+    height: 45px;
+  }
+  table {
+    width: 80%;
+    margin: 25px auto;
+    display: block;
+    background-color: #F7F7F7;
+  }
+  th {
+    width: 120px;
+  }
+  #header-tags {
+    width: 30px;
   }
 </style>
-<div ui-sref="admin.socks">Socks</div>
-<div ui-sref="admin.users">Users</div>
+<div class="admin-panel-title">
+  <h1>Admin Panel</h1>
+  <div class="admin-nav nav nav-bar">
+    <a ui-sref="admin.socks">Socks</a>
+    <a ui-sref="admin.users">Users</a>
+  </div>
+</div>
 
 <div ui-view>
 </div>

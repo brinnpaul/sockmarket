@@ -1,7 +1,5 @@
 app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory, UserFactory) {
 
-
-
   $scope.reviewNotAllowed = false;
   $scope.sock = theSock;
   $scope.reviews = theReviews;
@@ -133,7 +131,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       $scope.sock.upvotes++;
     })
   }
-  
+
   $scope.downvote = function (sockId) {
     return SockFactory.downvote(sockId)
     .then(function (res) {
@@ -148,7 +146,13 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       $scope.verifyUser = result;
     });
 
-  $scope.delete = SockFactory.delete;
+  $scope.delete = function(id) {
+    return SockFactory.delete(id)
+    .then(function() {
+      $state.go('home')
+    })
+  }
+
 
 });
 

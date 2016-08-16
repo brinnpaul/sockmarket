@@ -11,9 +11,31 @@ app.config(function($stateProvider) {
         return SockFactory.allSocks();
       }
     },
-    controller: function($scope, socks) {
+    controller: function($scope, socks, SockFactory, ReviewFactory) {
       $scope.socks = socks;
-      // console.log($scope.socks);
+      console.log(socks);
+      $scope.deleteSock = function(id) {
+        console.log("deleteSock")
+        return SockFactory.delete(id)
+        .then(function() {
+          $scope.socks = $scope.socks.filter(function(sock) { if (sock.id !== id) return sock});
+        })
+      }
+
+      $scope.deleteReview = function(id) {
+        return ReviewFactory.delete(id)
+        .then(function(review) {
+          $scope.socks = $scope.socks.map(function(sock) {
+            if (sock.id !== review.sockId) {
+              return sock;
+            } else {
+              sock.reviews = sock.reviews.filter(function(reviewOnSock) { return reviewOnSock.id !== id })
+              return sock;
+            }
+          })
+        })
+      }
+
     }
   })
   .state('admin.users', {

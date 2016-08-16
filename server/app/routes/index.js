@@ -6,6 +6,7 @@ router.use('/members', require('./members'));
 router.use('/sock', require('./sock/sock'))
 router.use('/review', require('./review/review'))
 router.use('/order', require('./order/order'))
+router.use('/like', require('./like.js'))
 
 router.use('/user', require('./user.js'));
 

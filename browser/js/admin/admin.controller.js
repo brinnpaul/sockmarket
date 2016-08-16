@@ -1,3 +1,3 @@
-app.controller('AdminCtrl', function($scope) {
+app.controller('AdminCtrl', function($scope, $state) {
 
 })

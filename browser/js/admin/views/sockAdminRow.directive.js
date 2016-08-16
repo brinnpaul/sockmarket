@@ -1,10 +1,11 @@
-app.directive('sockAdminRow', () => {
+app.directive('sockAdminRow', function() {
   return {
-    restrict: 'EA',
-    scope: { sock: "=sockAdminRow" },
+    restrict: 'E',
+    scope: {
+      sock: "=sockAdminRow"
+    },
     templateUrl: 'js/admin/views/sockAdminRow.html',
-    link: (scope, element, attrs) => {
-      console.log(scope.sock)
+    link: function(scope) {
     }
   }
-})
+});
