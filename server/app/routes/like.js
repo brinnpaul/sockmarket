@@ -19,6 +19,19 @@ router.get('/sock/:sockId', function(req, res, next) {
   .catch(next);
 });
 
+router.get('/user/sock/:sockId', function(req, res, next) {
+  return Like.findOne({where:
+    {
+      sockId: req.params.sockId,
+      userId: req.user.id
+    }
+  })
+  .then(function(like) {
+    res.json(like)
+  })
+  .catch(next);
+})
+
 router.get('/user/:userId', function(req, res, next) {
   return Like.findAll({where: {userId: req.params.userId} })
   .then(function(like) {
@@ -57,8 +70,10 @@ router.post('/dislike/:sockId', function(req, res, next) {
   .catch(next);
 });
 
-router.put('/dislike/:likeId', function(req, res, next) {
-  return Like.findOne({where: {id: req.params.likeId}})
+router.put('/dislike/:sockId', function(req, res, next) {
+  var vote = {sockId: +req.params.sockId, userId: req.user.id};
+
+  return Like.findOne({where: vote})
   .then(function(like) {
     return like.update({like: false, dislike: true})
   })
@@ -68,8 +83,10 @@ router.put('/dislike/:likeId', function(req, res, next) {
   .catch(next);
 });
 
-router.put('/like/:likeId', function(req, res, next) {
-  return Like.findOne({where: {id: req.params.likeId}})
+router.put('/like/:sockId', function(req, res, next) {
+  var vote = {sockId: +req.params.sockId, userId: req.user.id};
+  
+  return Like.findOne({where: vote})
   .then(function(like) {
     return like.update({like: true, dislike: false})
   })
