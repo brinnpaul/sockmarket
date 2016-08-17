@@ -9,7 +9,7 @@ app.factory('UserFactory', function ($http, $state) {
 	}
 
 	UserFactory.fetchAll = function () {
-		return $http.get('/api/users')
+		return $http.get('/api/user/all')
 		.then(function (response) {
 			return response.data
 		})

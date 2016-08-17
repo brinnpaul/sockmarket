@@ -52,3 +52,24 @@ router.post('/', function(req, res, next) {
   })
   .catch(next)
 })
+
+router.delete('/delete/:reviewId', function(req, res, next) {
+  var reviewId = req.params.reviewId;
+
+  Review.findById(reviewId)
+  .then(function(review){
+    // console.log('ISADMIN', req.user.isAdmin)
+    if (req.user === undefined) throw new Error("not authenticated");
+    if (req.user.isAdmin) {
+      return review.destroy()
+      .then(function() {
+        return review;
+      })
+    }
+    else throw new Error("not authenticated");
+  })
+  .then(function(response){
+    res.send(response);
+  })
+  .catch(next);
+})

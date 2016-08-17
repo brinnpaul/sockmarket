@@ -1,10 +1,30 @@
-app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, ReviewFactory, OrderFactory, SockFactory, UserFactory) {
-
-
+app.controller('sockIdController', function ($scope, $state, AuthService, $stateParams, theSock, theReviews, currentUserLike, sockLikes, ReviewFactory, OrderFactory, SockFactory, UserFactory, LikeFactory) {
 
   $scope.reviewNotAllowed = false;
   $scope.sock = theSock;
   $scope.reviews = theReviews;
+  $scope.like = currentUserLike || {like:false, dislike:false};
+  $scope.currentUserReviewedSock = false;
+
+  function countLikes(votes) {
+    var likes = 0,
+        dislikes = 0;
+    votes.forEach(function(vote) {
+      if (vote.like) likes++;
+      if (vote.dislike) dislikes++;
+    });
+    return { likes: likes, dislikes: dislikes };
+  }
+
+  $scope.likes = countLikes(sockLikes);
+
+
+  $scope.updateLikes = function(sockId) {
+    return LikeFactory.getSockLikes(sockId)
+    .then(function(likes) {
+      $scope.likes = countLikes(likes);
+    })
+  };
 
   $scope.dateParser = function (rawDate) {
     var rawDate = theSock.createdAt.split("T")[0].split("-");
@@ -43,10 +63,11 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   }
 
   $scope.addItem = function() {
-    var item = {};
-    item.sockId = $scope.sock.id;
-    item.quantity = +$scope.quantity;
-    item.originalPrice = +$scope.sock.price;
+    var item = {
+      sockId = $scope.sock.id,
+      quantity = +$scope.quantity,
+      originalPrice = +$scope.sock.price
+    };
     if (item.quantity > 0) {
       OrderFactory.addToCart(item)
       .then(function(response) {
@@ -68,7 +89,6 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   $scope.getLoggedInUserId = function() {
     return AuthService.getLoggedInUser()
     .then(function(user){
-      console.log(user);
       if (!user) {
         $scope.loggedInUserId = 'none';
       } else {
@@ -78,7 +98,6 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
   }
 
   $scope.getLoggedInUserId();
-  $scope.currentUserReviewedSock = false;
 
   $scope.userCannotPostReview = function () {
     return $scope.reviewNotAllowed;
@@ -127,45 +146,41 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
     }
   }
 
-  $scope.upvote = function(sockId) {
-    return SockFactory.upvote(sockId)
-    .then(function (res) {
-      $scope.sock.upvotes++;
-    })
-  }
-  
-  $scope.downvote = function (sockId) {
-    return SockFactory.downvote(sockId)
-    .then(function (res) {
-      $scope.sock.downvotes++;
-    })
+  $scope.newLike = LikeFactory.newLike;
+  $scope.newDislike = LikeFactory.newDislike;
+  $scope.updateLike = LikeFactory.updateLike;
+  $scope.updateDislike = LikeFactory.updateDislike;
+
+  $scope.vote = function(sockId, nnew, update) {
+    if (!$scope.verifyUser) $scope.alert("Please log in to like a sock!");
+
+    if (!$scope.like.like && !$scope.like.dislike) {
+      nnew(sockId)
+      .then(function(vote) {
+        $scope.like = vote;
+        $scope.likes = $scope.updateLikes($scope.sock.id);
+      });
+    } else {
+      update(sockId)
+      .then(function(update) {
+        $scope.like = update;
+        $scope.likes = $scope.updateLikes($scope.sock.id);
+      });
+    }
   }
 
   AuthService.getLoggedInUser().then(function (user) {
-        return user.id == $scope.sock.UserId || user.isAdmin? true : false
-    })
-    .then(function (result) {
-      $scope.verifyUser = result;
-    });
-
-  $scope.delete = SockFactory.delete;
-
-});
-
-app.config(function ($stateProvider) {
-
-  $stateProvider.state('singleSockView', {
-    url:'/socks/:id',
-    controller: 'sockIdController',
-    templateUrl: 'js/productview/productview.html',
-    resolve: {
-      theSock: function ($stateParams, SockFactory) {
-        return SockFactory.singleSock($stateParams.id)
-      },
-      theReviews: function ($stateParams, ReviewFactory) {
-        return ReviewFactory.productReviews($stateParams.id)
-      }
-    }
+    return user.id == $scope.sock.UserId || user.isAdmin? true : false
   })
+  .then(function (result) {
+    $scope.verifyUser = result;
+  });
+
+  $scope.delete = function(id) {
+    return SockFactory.delete(id)
+    .then(function() {
+      $state.go('home')
+    })
+  }
 
 });

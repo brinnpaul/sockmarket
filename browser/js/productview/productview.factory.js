@@ -1,6 +1,13 @@
-app.factory('SockFactory', function ($http, $state) {
+app.factory('SockFactory', function ($http) {
 
   return {
+    allSocks: function() {
+      return $http.get('api/sock')
+      .then(function(res) {
+        return res.data;
+      })
+    },
+
     singleSock: function(sockId) {
       return $http.get('/api/sock/' + sockId)
       .then(function(res) {
@@ -44,7 +51,6 @@ app.factory('SockFactory', function ($http, $state) {
     upvote: function (sockId) {
       return $http.post('/api/sock/upvote', {id: sockId})
       .then(function(res) {
-        console.log(res.data)
         return res.data;
       })
     },
@@ -63,8 +69,11 @@ app.factory('SockFactory', function ($http, $state) {
         })
     },
     delete: function (id) {
-      return $http.post('/api/sock/delete/' + id)
-      .then($state.go('home'))
+      console.log(id)
+      return $http.delete('/api/sock/delete/' + id)
+      .then(function(res) {
+        return res.data;
+      })
     }
 
   }

@@ -5,6 +5,7 @@ var Sequelize = require('sequelize');
 var db = require("../../../db");
 var Sock = db.model("sock");
 var User = db.model("user");
+var Review = db.model("review");
 var AWS = require('aws-sdk');
 var Credentials = require('../../../env/production');
 
@@ -35,7 +36,6 @@ router.get('/unsignedURL', function(req, res, next){
     res.json({url: url});
   });
 })
-
 
 router.get('/recent', function(req, res, next) {
   return Sock.findAll({
@@ -89,6 +89,21 @@ router.get('/byUser/:id', function(req, res, next) {
   .catch(next)
 })
 
+router.get('/', function(req, res, next) {
+  return Sock.findAll({include: [{
+    model: Review,
+    include: {
+      model: User
+    }
+  },
+  { model: User}]
+  })
+  .then(function(socks) {
+    res.json(socks);
+  })
+  .catch(next);
+})
+
 router.post('/upvote', function (req, res, next) {
   return Sock.update(
     {upvotes: Sequelize.literal('upvotes +1')},
@@ -115,14 +130,16 @@ router.post('/downvote', function (req, res, next) {
   })
 })
 
-router.post('/delete/:id', function (req, res, next) {
+router.delete('/delete/:id', function (req, res, next) {
   var id = req.params.id;
+
 
   Sock.findById(id)
   .then(function(sock){
     // console.log('ISADMIN', req.user.isAdmin)
+    if (req.user === undefined) throw new Error("not authenticated");
     if (sock.UserId == req.user.id || req.user.isAdmin) return sock.destroy()
-    else throw error
+    else throw new Error("not authenticated");
   })
   .then(function(response){
     res.send(response);

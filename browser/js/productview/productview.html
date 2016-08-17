@@ -252,6 +252,14 @@
   font-size: 14px;
 }
 
+.like-button {
+  color: green;
+}
+
+.dislike-button {
+  color: red;
+}
+
 </style>
 
 <div class="container">
@@ -284,9 +292,8 @@
           <p><span>Description:</span> {{sock.description}}</p>
           <p><span>Tags:</span> {{displayTags()}}</p>
           <p><span>Posted on:</span> {{dateParser(sock.createdAt)}}</p>
-          <p><span>Upvotes:</span> {{sock.upvotes}}</p>
-          <p><span>Downvotes:</span> {{sock.downvotes}}</p>
-
+          <p><span>Likes:</span> {{likes.likes}}</p>
+          <p><span>Dislikes:</span> {{likes.dislikes}}</p>
         </div>
         </fieldset>
         <hr>
@@ -306,8 +313,12 @@
         <button ng-show="verifyUser" class="btn btn-primary" id="add-to-cart-button" ng-click="delete(sock.id)" >Delete Product</button>
         <table class="voting-table" id="voting-cart">
           <tr>
-            <td ng-click="upvote(sock.id)" class="upvote-cell">&#x1f44d;</td>
-            <td ng-click="downvote(sock.id)" class="downvote-cell">&#x1F44E;</td>
+            <td ng-click="vote(sock.id, newLike, updateLike)">
+              <button type="button" ng-class="like.like ? 'btn btn-success' : 'btn'"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+            </td>
+            <td ng-click="vote(sock.id, newDislike, updateDislike)">
+              <button type="button" ng-class="like.dislike ? 'btn btn-danger' : 'btn'"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
+            </td>
           </tr>
         </table>
       </div>

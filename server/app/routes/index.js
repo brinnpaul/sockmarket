@@ -8,6 +8,7 @@ router.use('/review', require('./review/review'))
 router.use('/order', require('./order/order'))
 
 router.use('/user', require('./user.js'));
+router.use('/like', require('./like.js'))
 
 router.use('/search', require('./search/search'))
 
