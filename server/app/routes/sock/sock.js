@@ -65,6 +65,53 @@ router.get('/popular', function(req, res, next) {
   .catch(next);
 });
 
+router.get('/browse/:id', function(req, res, next) {
+
+  var sockId;
+
+  req.params.id === 'null' ? sockId = null : sockId = req.params.id;
+
+  console.log("I am a sock Id", sockId);
+
+  if (sockId === null) {
+    return Sock.max('id')
+    .then(function(max) {
+      return Sock.findAll({
+        where:
+          {
+            id : {
+            $lte: max
+            }
+          },
+         limit: 10,
+         order: [
+           ['id', 'DESC']
+         ]
+      })
+    })
+    .then(function(socks) {
+      res.json(socks)
+    })
+    .catch(next);
+  } else {
+    return Sock.findAll({
+      where:
+        {
+          id: {
+            $lt: sockId
+          }
+        },
+       limit: 10,
+       order: [
+         ['id', 'DESC']
+       ]})
+    .then(function(socks) {
+      res.json(socks)
+    })
+    .catch(next);
+  }
+})
+
 router.get('/:id', function(req, res, next) {
   var sockId = req.params.id
   return Sock.findById(sockId,
@@ -99,6 +146,7 @@ router.get('/', function(req, res, next) {
   { model: User}]
   })
   .then(function(socks) {
+    console.log("IIIIII AAAAMMMMM YYYYOOOOUUUURRRRR RRREEEQQQUUUEEESSTTT", req);
     res.json(socks);
   })
   .catch(next);

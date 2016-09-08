@@ -3,7 +3,7 @@
 <style>
 
 .title-background {
-	background-color: #E3CF57; 
+	background-color: #E3CF57;
 /*	background-color: #00EE00;*/
 	border-radius: 5px;
 }
@@ -54,6 +54,33 @@
 	display: inline-block;
 	width: 230px;
 	height: 230px;
+}
+
+.browse-container {
+	display: flex;
+}
+
+.sock-thumbnail-browse {
+	background-color: #F0F0F0;
+	display: inline-block;
+	/*flex: auto;*/
+	/*flex-wrap: wrap;*/
+	width: 200px;
+	height: 200px;
+}
+
+.sock-thumbnail-browse img {
+	border-radius: 5px;
+	height: 210px;
+	width: 210px;
+	display: block;
+	margin: 10px auto auto auto;
+	background-color: white;
+}
+
+.sock-thumbnail-browse:hover {
+	background-color: #C6E2FF;
+	cursor: pointer;
 }
 
 .sock-thumbnail:hover {
@@ -165,144 +192,28 @@
 		</div>
 	</div>
 
+	<br>
+	<hr>
+	<h2>Browse:</h2>
 	<hr>
 
-	<div class="sock-section">
+	<div infinite-scroll="loadSocks(maxSockId)"
+			 infinite-scroll-disabled="busy"
+			 infinite-scroll-distance="1">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="titlebar">
-						<h3>Political Socks</h3>
-						<!-- <hr> -->
-					</div>
-				</div>
-				<div class="col-md-9">
-					<div class="content">
-						<!-- hardcoded -->
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
+				<div ng-repeat="sock in browseSocks" class="col-md-3">
+					<div ng-click="seeSock(sock.id)" class="sock-thumbnail-browse">
+						<img ng-src="{{sock.image}}">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<hr>
-	<div class="sock-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="titlebar">
-						<h3>Humorous Socks</h3>
-						<!-- <hr> -->
-					</div>
-				</div>
-				<div class="col-md-9">
-					<div class="content">
-						<!-- hardcoded -->
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="sock-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="titlebar">
-						<h3>90s Socks</h3>
-						<!-- <hr> -->
-					</div>
-				</div>
-				<div class="col-md-9">
-					<div class="content">
-						<!-- hardcoded -->
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-						<div class="sock-thumbnail">
-							<img src="socks.jpg">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<br>
 	<br>
 	<hr>
 	<hr>
 	<br>
 </div>
-
-<!-- 
-
-    <div ng-repeat="mostRecentSock in mostRecentSocks">	
-    	<img ng-src={{mostRecentSock.image}}>
-    </div>
-    <rando-greeting></rando-greeting> -->
-<!-- </section> -->

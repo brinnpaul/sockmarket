@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="/angular/angular.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
@@ -17,6 +18,7 @@
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.19.min.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="/stripe-angular/stripe-angular.js"></script>
+    <script type='text/javascript' src='/infinite-scroll/infinite-scroll.min.js'></script>
     <script type="text/javascript">
       Stripe.setPublishableKey('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
     </script>
@@ -24,6 +26,6 @@
 </head>
 <body ng-app="sockmarket">
     <navbar></navbar>
-    <div id="main" ui-view></div>
+    <div id="main" ui-view autoscroll="true"></div>
 </body>
 </html>

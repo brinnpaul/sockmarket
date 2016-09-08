@@ -43,9 +43,48 @@ var seedUsers = function () {
             last_name: "Obama",
             profile_pic: "http://texwillerblog.com/wordpress/wp-content/uploads/2012/01/Barack-Obama-200x200.jpg",
             city: "Chicago, IL"
-
+        },
+        {
+            email: 'bex@bex.com',
+            password: 'asldfkj',
+            username: '@Bex',
+            first_name: 'Bex',
+            last_name: 'Rosenblatt',
+            profile_pic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13700056_10207110079535082_4219144356567438027_n.jpg?oh=2ac1894e5c01e8cc53261e292ced1a60&oe=58395A1A',
+            city: "Jerusalem, Israel"
+        },
+        {
+            email: "Ben@Ben.com",
+            password: 'asdlfj',
+            username: "@Benny",
+            first_name: "Ben",
+            last_name: "Manson",
+            city: "Jerusalem, Israel"
+        },
+        {
+            email: "Brinn@B.com",
+            password: 'apsdfj',
+            username: "@Brinn",
+            first_name: "Brinn",
+            last_name: "Riordan",
+            city: "Wichita, KS"
+        },
+        {
+            email: "John@H.com",
+            password: 'alsdkfj',
+            username: "@JohnH",
+            first_name: "John",
+            last_name: "Humiston",
+            city: "New York, NY"
+        },
+        {
+            email: "John@B.com",
+            password: 'asldkfj',
+            username: "@JohnB",
+            first_name: "John",
+            last_name: "Backes",
+            city: "New York, NY"
         }
-
     ];
 
     var creatingUsers = users.map(function (userObj) {
@@ -87,230 +126,111 @@ var seedSocks = function () {
       image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
     },
     {
-        title: 'socks by obama1241235',
-        description: 'great socks41234123',
-        tags: 'change politics trumpin',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
+      title: 'sock',
+      description: 'The sockiest of all socks',
+      tags: 'sockington',
+      userId: 1,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/NhM44oiRug287GhOuB8A65cfo.png'
     },
     {
-      title: 'sockz: return of the socks 12321',
-      description: 'crazy drama about socks wearing socks123123',
-      tags: 'drama sockz dread',
+      title: 'Rudolph Socks',
+      description: 'A very shiny nose.',
+      tags: 'reindeer Rudolph',
       userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/J45633j39Nm5RZyk6IueBY17H.png'
     },
     {
-      title: 'hello socks!1231533',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz socking rocking rolling',
+      title: 'Non-Matching Socks',
+      description: 'non-matching',
+      tags: 'not-together',
       userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/YxelC6VUKTxRHzL3rKdaUjw8V.png'
     },
     {
-      title: 'socks socks socks 12312124 1',
-      description: 'made in usa made everywhere',
-      tags: 'blue red white blossom',
+      title: "Sorry, the Dog ate my Socks",
+      description: "You are what you eat...",
+      tags: "LameExcuses Sorry the Dog ate my Socks",
+      userId: 3,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/UotNOwUnY6VqXrVgRuCgz1U4Q.png'
+    },
+    {
+      title: "Socks with Soccer Ball",
+      description: "Soccer ball not included!",
+      tags: "white",
+      userId: 4,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/EOgvp358zIPjo4PKwt95pp6eQ.png',
+    },
+    {
+      title: "Brinn's Socks",
+      description: "They're great",
+      tags: "greatness",
+      userId: 5,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/wlz2BM8QhTf0p4m4YcbR72D26.png',
+    },
+    {
+      title: "JP is Terrible",
+      description: "ugh make it stop",
+      tags: "oaway",
+      userId: 6,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/673lS4TQ2k2gPS8e7wPC2HJGi.png',
+    },
+    {
+      title: "ruptestsock",
+      description: "rup test",
+      tags: "uptest",
+      userId: 1,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/UnNP7EGZnfL29B569CQ3ryGhS.png',
+    },
+    {
+      title: "Santa Socks",
+      description: "santa socks",
+      tags: "red green christmas",
+      userId: 7,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/N23zc8UsR8BeMLtTGqEBYqkBy.png',
+    },
+    {
+      title: "Pizza Socks!",
+      description: "Now in mushroom and pepperoni!",
+      tags: "Ohmnohmnohm",
+      userId: 3,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/QpC9d6J5gPeBe66gN18x23QNh.png',
+    },
+    {
+      title: "Arnav's Sock",
+      description: " Arnav thinks hes great at wingsuiting",
+      tags: "wingsuits",
+      userId: 5,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/xTVUOoZA6wSztsLi2bkff14Iq.png',
+    },
+    {
+      title: "Zorro Marconi",
+      description: "Amazing Italian",
+      tags: "zorro",
+      userId: 5,
+      image: 'https://s3.amazonaws.com/sockmarket%2Fsocks/JVuBFA1rGWRtciw9FNdeUjUkA.png',
+    },
+    {
+      title: "Patriotic American Flag",
+      description: "The socks are plain white socks, but they come with a flag so people will still know you're a patriot.",
+      tags: "usa",
       userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
+      image: "https://s3.amazonaws.com/sockmarket%2Fsocks/3CPDZHtrOZgL2l3g13QeZpoVI.png",
     },
     {
-        title: 'socks by obama 190241924',
-        description: 'great socks amazing blue',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
+      title: "Two pairs of socks, one glows in the dark",
+      description: "This is a pair of socks, but only one is currently visible.",
+      tags: "spooky",
+      userId: 4,
+      image: "https://s3.amazonaws.com/sockmarket%2Fsocks/7z35vT7MUu2RLDHn1ABh2jPEl.png",
     },
     {
-      title: 'sockz: return of the socks truthy',
-      description: 'crazy drama about socks wearing socks1231223',
-      tags: 'drama sockz glue',
+      title: "PRESIDENTIAL SOCKS",
+      description: "patriotic socks!!",
+      tags: "USA",
       userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks! 3eiq',
-      description: 'crazy drama about socks wearing socks qorih23',
-      tags: 'drama sockz magnificent',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks32u3hr',
-      description: 'made in usa house',
-      tags: 'blue red white groundhog day',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama12312',
-        description: 'great socks',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks123123',
-      description: 'crazy drama about socks wearing socks12312',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!12312',
-      description: 'crazy drama about socks wearing socks1231',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks12312',
-      description: 'made in usa1231',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama234234',
-        description: 'great socks23423',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks234234',
-      description: 'crazy drama about socks wearing socks234234',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!234234',
-      description: 'crazy drama about socks wearing socks234234',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks124124',
-      description: 'made in usa234234',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama',
-        description: 'great socks',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks',
-      description: 'made in usa',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama',
-        description: 'great socks',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks',
-      description: 'made in usa',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama',
-        description: 'great socks',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks',
-      description: 'made in usa',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
-    },
-    {
-        title: 'socks by obama',
-        description: 'great socks',
-        tags: 'change',
-        userId: 2,
-        image: 'http://www.wigglestatic.com/product-media/5360088900/1000m-ult-hw-sock-navy.jpg?w=2000&h=2000&a=7'
-    },
-    {
-      title: 'sockz: return of the socks',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://cdn3.volusion.com/uctgf.ukzte/v/vspfiles/photos/The-Water-2.jpg?1439196114'
-    },
-    {
-      title: 'hello socks!',
-      description: 'crazy drama about socks wearing socks',
-      tags: 'drama sockz',
-      userId: 2,
-      image: 'http://www.herringshoes.co.uk/_shop/imagelib/6/1527/5549/herring_cuthbert_sock_in_red_multi_1.jpg'
-    },
-    {
-      title: 'socks socks socks',
-      description: 'made in usa',
-      tags: 'blue red white',
-      userId: 2,
-      image: 'http://www.sweaterscapes.com/images/sock-ins.jpg'
+      image: "https://s3.amazonaws.com/sockmarket%2Fsocks/71BG8TZy0QA1Ao9iNbF5y35oz.png",
     }
-  ]
+  ];
 
   var creatingSocks = socks.map(function(sockObj) {
     return Sock.create(sockObj)

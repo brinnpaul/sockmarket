@@ -42,7 +42,7 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    var pipefirst = gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
@@ -51,6 +51,21 @@ gulp.task('buildJS', ['lintJS'], function () {
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public'));
+
+
+        // var filetext = ''
+        // pipefirst.on('data', function(chunk) {
+        //   filetext += chunk.contents
+        //   // console.log(filetext)
+        //   // console.log(chunk.inspect())
+        //   // console.log(chunk.contents.toString())
+        // })
+        // pipefirst.on('end', function() {
+        //   console.log(filetext.split('\n').slice(1020,1040).join('\n'))
+        //   // console.log("HELLO")
+        // })
+
+    return pipefirst
 });
 
 gulp.task('testServerJS', function () {
