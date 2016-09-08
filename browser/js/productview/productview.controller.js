@@ -64,9 +64,9 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
 
   $scope.addItem = function() {
     var item = {
-      sockId = $scope.sock.id,
-      quantity = +$scope.quantity,
-      originalPrice = +$scope.sock.price
+      sockId:$scope.sock.id,
+      quantity: +$scope.quantity,
+      originalPrice: +$scope.sock.price
     };
     if (item.quantity > 0) {
       OrderFactory.addToCart(item)
@@ -94,14 +94,14 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
       } else {
         $scope.loggedInUserId = user.id;
       }
-    })
-  }
+    });
+  };
 
   $scope.getLoggedInUserId();
 
   $scope.userCannotPostReview = function () {
     return $scope.reviewNotAllowed;
-  }
+  };
 
   $scope.userCannotPostReview();
 
@@ -142,9 +142,9 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
         $scope.reviews.push(review);
         $scope.reviewText = null;
         $scope.reviewNotAllowed = true;
-      })
+      });
     }
-  }
+  };
 
   $scope.newLike = LikeFactory.newLike;
   $scope.newDislike = LikeFactory.newDislike;
@@ -167,7 +167,7 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
         $scope.likes = $scope.updateLikes($scope.sock.id);
       });
     }
-  }
+  };
 
   AuthService.getLoggedInUser().then(function (user) {
     return user.id == $scope.sock.UserId || user.isAdmin? true : false
@@ -181,6 +181,6 @@ app.controller('sockIdController', function ($scope, $state, AuthService, $state
     .then(function() {
       $state.go('home')
     })
-  }
+  };
 
 });

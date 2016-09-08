@@ -1,8 +1,8 @@
-
 <div ng-repeat="sock in socks">
-     <table>
+     <table class="admin-table-sock">
        <tr ng-class-odd="'odd'"
-       ng-class-even="'even'">
+           ng-class-even="'even'"
+           class="">
          <th id="header-name">Name</th>
          <th>Description</th>
          <th id="header-tags">Tags</th>
@@ -11,21 +11,22 @@
          <th>Delete Sock</th>
        </tr>
         <tr>
-            <td>{{sock.title}}</td>
-            <td>{{sock.description}}</td>
-            <td>{{sock.tags.join(', ')}}</td>
-            <td>{{sock.user.username}}</td>
-            <td><img class="admin-sock-thumb" ng-src="{{sock.image}}"/></td>
-            <td><button ng-click="deleteSock(sock.id)">Delete</button></td>
+          <td>{{sock.title}}</td>
+          <td>{{sock.description}}</td>
+          <td>{{sock.tags.join(', ')}}</td>
+          <td>{{sock.user.username}}</td>
+          <td><img class="admin-sock-thumb" ng-src="{{sock.image}}"/></td>
+          <td><button ng-click="deleteSock(sock.id)">Delete</button></td>
         </tr>
       </table>
-      <table>
+      <table class="admin-table-sock">
         <tr ng-class-odd="'odd'"
         ng-class-even="'even'">
           <th>Username</th>
           <th>Review ID</th>
           <th>Review Text</th>
           <th>Date</th>
+          <th></th>
           <th>Delete Review</th>
         </tr>
         <tr ng-repeat="review in sock.reviews">
@@ -33,6 +34,7 @@
           <td>{{review.id}}</td>
           <td>{{review.text}}</td>
           <td>{{review.createdAt}}</td>
+          <td></td>
           <td><button ng-click="deleteReview(review.id)">Delete</button></td>
         </tr>
       </table>
