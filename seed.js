@@ -21,6 +21,8 @@ var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
 var Sock = db.model('sock');
+var Order = db.model('order');
+var OrderDetail = db.model('order_detail');
 var Review = db.model('review');
 var Promise = require('sequelize').Promise;
 
@@ -270,6 +272,68 @@ var seedReviews = function() {
   return Promise.all(creatingReview)
 }
 
+var seedOrders = function() {
+  var orders = [
+    { date_paid: '08-09-16',
+      userId: 1
+    },
+    { date_paid: '01-09-16',
+      userId: 2
+    },
+    { date_paid: '02-09-16',
+      userId: 3
+    },
+    { date_paid: '03-09-16',
+      userId: 4
+    },
+    { date_paid: '04-09-16',
+      userId: 5
+    }
+  ];
+
+  var creatingOrder = orders.map(function(order) {
+    return Order.create(order)
+  })
+
+  return Promise.all(creatingOrder)
+}
+
+var seedOrderDetail = function() {
+  var orderDetail = [
+    {
+      quantity: 1,
+      orderId: 2,
+      sockId: 11
+    },
+    {
+      quantity: 1,
+      orderId: 3,
+      sockId: 5
+    },
+    {
+      quantity: 1,
+      orderId: 4,
+      sockId: 6
+    },
+    {
+      quantity: 1,
+      orderId: 1,
+      sockId: 10
+    },
+    {
+      quantity: 1,
+      orderId: 5,
+      sockId: 8
+    }
+  ];
+
+  var creatingOrderDetail = orderDetail.map(function(orderdetail) {
+    return OrderDetail.create(orderdetail)
+  })
+
+  return Promise.all(creatingOrderDetail)
+}
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
@@ -279,6 +343,12 @@ db.sync({ force: true })
     })
     .then(function() {
       return seedReviews()
+    })
+    .then(function() {
+      return seedOrders()
+    })
+    .then(function() {
+      return seedOrderDetail()
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

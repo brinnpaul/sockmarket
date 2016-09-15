@@ -6,6 +6,8 @@ var db = require("../../../db");
 var Sock = db.model("sock");
 var User = db.model("user");
 var Review = db.model("review");
+var Order = db.model("order");
+var OrderDetails = db.model("order_detail");
 var AWS = require('aws-sdk');
 var Credentials = require('../../../env/production');
 
@@ -42,7 +44,10 @@ router.get('/recent', function(req, res, next) {
     limit: 10,
     order: [
       ['updatedAt', 'DESC']
-    ]
+    ],
+    include: {
+      model: User
+    }
     }
   )
   .then(function(sock) {
@@ -56,7 +61,10 @@ router.get('/popular', function(req, res, next) {
     limit: 10,
     order: [
       ['upvotes', 'DESC']
-    ]
+    ],
+    include: {
+      model: User
+    }
     }
   )
   .then(function(sock) {
@@ -64,6 +72,35 @@ router.get('/popular', function(req, res, next) {
   })
   .catch(next);
 });
+
+router.get('/recent-purchase', function(req, res, next) {
+  return Order.findAll({
+    limit: 10,
+    order: [
+      ['date_paid', 'DESC']
+    ],
+    include: [
+      {model: OrderDetails,
+      include: {model: Sock,
+                include: {
+                  model: User
+                }
+              }},
+    ]
+  })
+  .then(function(socks){
+    var returnedSocks = [];
+    socks.forEach(function (order) {
+      if (order['order_details']) {
+        order['order_details'].forEach(function (sock) {
+          returnedSocks.push(sock);
+        })
+      }
+    })
+    res.json(returnedSocks);
+  })
+  .catch(next);
+})
 
 router.get('/browse/:id', function(req, res, next) {
 
@@ -86,7 +123,10 @@ router.get('/browse/:id', function(req, res, next) {
          limit: 10,
          order: [
            ['id', 'DESC']
-         ]
+         ],
+         include: {
+           model: User
+         }
       })
     })
     .then(function(socks) {
@@ -104,7 +144,11 @@ router.get('/browse/:id', function(req, res, next) {
        limit: 10,
        order: [
          ['id', 'DESC']
-       ]})
+       ],
+       include: {
+         model: User
+       }
+    })
     .then(function(socks) {
       res.json(socks)
     })

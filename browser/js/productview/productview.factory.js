@@ -36,6 +36,13 @@ app.factory('SockFactory', function ($http) {
       })
     },
 
+    recentlyPurchasedSocks: function() {
+      return $http.get('/api/sock/recent-purchase')
+      .then(function (res) {
+        return res.data;
+      })
+    },
+
     browseSocks: function(id) {
       return $http.get('/api/sock/browse/'+id)
       .then(function(res) {

@@ -1,0 +1,14 @@
+<div class="sock-browse-container col-xs-4">
+  <div ng-click="seeSock(sock.id)" class="sock-thumbnail-browse">
+    <img ng-src="{{sock.image}}">
+  </div>
+  <div class="sock-info-browse">
+    <div ng-click="seeUser(sock.userId)" class="sock-browse-profile-pic-container">
+      <img class="sock-browse-profile-pic" ng-src="{{sock.user.profile_pic}}">
+    </div>
+    <div class="sock-browse-text-container">
+      <p class="sock-browse-text sock-browse-text-title">{{formatBrowseSockTitle(sock.title)}}</p>
+      <p class="sock-browse-text">{{sock.user.username}}</p>
+    </div>
+  </div>
+</div>
