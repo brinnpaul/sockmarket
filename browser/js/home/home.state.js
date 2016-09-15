@@ -9,6 +9,9 @@ app.config(function ($stateProvider) {
         	},
           mostPopularSocks: function(SockFactory) {
             return SockFactory.mostPopularSocks();
+          },
+          recentlyPurchasedSocks: function(SockFactory) {
+            return SockFactory.recentlyPurchasedSocks();
           }
         }
     });

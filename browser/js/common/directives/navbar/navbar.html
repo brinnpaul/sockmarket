@@ -4,7 +4,7 @@
     <nav class="navbar">
         <div class="container nav-classes">
             <div class="row nav-classes">
-                <div class="col-md-6 nav-classes">
+                <div class="col-xs-6 nav-classes">
                     <!-- original code : <ul class="nav navbar-nav"> -->
                     <ul div class="nav-items">
                         <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn() || user.isAdmin">
@@ -12,12 +12,12 @@
                         </li>
                         <li ng-repeat="item in adminItems" ng-show="user.isAdmin">
                             <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-                        </li>                        
+                        </li>
                     </ul>
                 </div>
             <!-- let's move the login with fb/google buttons to the login page -->
 
-             <div class="col-md-3">
+             <div class="col-xs-3">
                     <input type="text" class="search-query form-control" placeholder="search by hashtags" ng-model="searchText" onkeydown = "if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
                     <span class="input-group-btn">
                         <button id="btnSearch" class="btn btn-danger" type="button" ng-click="search(searchText)">
@@ -26,7 +26,7 @@
                     </span>
                 </div>
 
-                <div class="col-md-3 nav-right-side-buttons">
+                <div class="col-xs-3 nav-right-side-buttons">
                     <button ui-sref="currentCart" class="btn btn-success">My Cart</button>
                     <button ng-show="!user" ui-sref="signup" class="btn btn-warning">Sign up</button>
                     <button ng-show="!user" ui-sref="login" class="btn btn-info">Login</button>
