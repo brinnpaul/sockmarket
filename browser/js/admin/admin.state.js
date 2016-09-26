@@ -44,6 +44,13 @@ app.config(function($stateProvider) {
       users: function(UserFactory) {
         return UserFactory.fetchAll();
       }
+    },
+    controller: function($scope, $state, users, UserFactory) {
+      $scope.users = users;
+      console.log("Im USERS", users);
+      $scope.seeUserSock = function (id) {
+        $state.go('singleSockView', {id: id});
+      };
     }
   })
 })

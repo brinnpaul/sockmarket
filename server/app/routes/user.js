@@ -2,6 +2,7 @@ var router = require('express').Router();
 module.exports = router;
 var db = require("../../db")
 var User = db.model("user");
+var Sock = db.model("sock");
 //var User = models.user
 
  router.param('userId', function (req, res, next, id) {
@@ -18,7 +19,9 @@ var User = db.model("user");
  })
 
 router.get('/all', function (req, res, next) {
-    User.findAll()
+    User.findAll({include: {
+      model: Sock
+    }})
         .then(function (users) {
             if (!users) res.status(404).send();
             else res.send(users)

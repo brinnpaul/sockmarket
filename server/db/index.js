@@ -23,5 +23,6 @@ OrderDetail.belongsTo(Order)
 OrderDetail.belongsTo(Sock)
 Sock.hasMany(Like)
 User.hasMany(Like)
+User.hasMany(Sock)
 
 module.exports = db;

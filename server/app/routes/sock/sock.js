@@ -108,8 +108,6 @@ router.get('/browse/:id', function(req, res, next) {
 
   req.params.id === 'null' ? sockId = null : sockId = req.params.id;
 
-  console.log("I am a sock Id", sockId);
-
   if (sockId === null) {
     return Sock.max('id')
     .then(function(max) {
@@ -190,7 +188,6 @@ router.get('/', function(req, res, next) {
   { model: User}]
   })
   .then(function(socks) {
-    console.log("IIIIII AAAAMMMMM YYYYOOOOUUUURRRRR RRREEEQQQUUUEEESSTTT", req);
     res.json(socks);
   })
   .catch(next);
