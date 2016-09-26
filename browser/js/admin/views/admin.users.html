@@ -1,1 +1,22 @@
-<div>users</div>
+<div>
+  <table class="admin-table-user">
+    <tr ng-class-odd="'odd'"
+        ng-class-even="'even'"
+        class="">
+      <th id="">User ID</th>
+      <th>Username</th>
+      <th id="">Name</th>
+      <th>Socks</th>
+      <th>Delete User</th>
+    </tr>
+     <tr ng-repeat="user in users">
+       <td>{{user.id}}</td>
+       <td>{{user.username}}</td>
+       <td>{{user.name}}</td>
+       <td><p ng-repeat="sock in user.socks" ng-click="seeUserSock(sock.id)">{{sock.title}}</p></td>
+       <td>Delete</button></td>
+     </tr>
+   </table>
+</div>
+
+<!-- <button ng-click="deleteUser(user.id)" -->

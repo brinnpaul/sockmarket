@@ -33,7 +33,7 @@
 			<hr>
 			<ul>
 				<li id="username-text">@{{user.first_name}}</li>
-				<li>Member since:<br> 
+				<li>Member since:<br>
 				{{dateParser(user.createdAt)}}</li>
 				<li>Hometown: {{user.city}}</li>
 				<li><span id="socks-posted-count">{{socks.length}} socks posted</span></li>
@@ -49,7 +49,7 @@
 
 		</div>
 		<div class="col-md-9">
-			<div class="sock-thumbnail" ng-repeat="sock in socks">
+			<div class="sock-thumbnail-user" ng-repeat="sock in socks">
 				<img ng-click="toSockView(sock.id)" ng-src="{{sock.image}}">
 			</div>
 		</div>
